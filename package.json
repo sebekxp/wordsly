@@ -1,0 +1,24 @@
+{
+  "name": "wordsly",
+  "version": "1.0.0",
+  "description": "An application to learn the thousand most-used words in English",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "sebekxp",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^5.0.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.11"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}
