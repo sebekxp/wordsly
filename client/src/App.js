@@ -6,7 +6,7 @@ import WordsContainer from "./components/WordContainer";
 function App() {
   return (
     <div className="App">
-        <WordsContainer/>   
+        <WordsContainer/>
     </div>
   );
 }
