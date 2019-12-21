@@ -1,13 +1,12 @@
 import React from 'react';
 import BookmarksElement from "./BookmarksElement";
-import Colors from "../../../utils/Colors";
-
+import Colors from "../Colors";
 
 const bbStyle = {
     display: "flex",
-    width: '68.75rem',
-    padding: "0",
+    flexGrow: 1,
     backgroundColor: Colors.BOOKMARKS_BACKGROUND,
+    padding: "0",
     borderRadius: "0 10px 0 0",
 
 };
@@ -15,7 +14,7 @@ const bbStyle = {
 const BookmarksBar = (props) => {
     return (
         <div id="bookmarks-bar" className="bookmarks-bar" style={bbStyle}>
-            <BookmarksElement id={"examples"} className={"examples"} bbTitle={"Examples"}/>
+            <BookmarksElement id={"examples"} className={"examples"} bbTitle={"Examples"} selected={true}/>
             <BookmarksElement id={"flash-cards"} className={"flash-cards"} bbTitle={"Flash Cards"}/>
             <BookmarksElement id={"favorites"} className={"favorites"} bbTitle={"Favorites"}/>
         </div>

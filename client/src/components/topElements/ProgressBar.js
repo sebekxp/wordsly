@@ -1,15 +1,15 @@
 import React from 'react';
-import Colors from '../utils/Colors'
+import Colors from "./Colors";
 
 const wrapper = {
-    width: "255px",
-    height: "55.3px",
+    width: "275px",
     display: "flex",
     backgroundColor: Colors.DEFAULT_GREY,
+    color: Colors.PROGRESS_BAR_TEXT,
     flexDirection: "column",
     textAlign: "center",
     borderRadius: "10px 0 0 0",
-    flexBasis: "25%"
+    // flexBasis: "25%"
 };
 
 const progresBarStyle = {

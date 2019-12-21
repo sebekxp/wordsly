@@ -1,8 +1,9 @@
 import React from 'react';
 import {Container, Row, Col} from 'reactstrap';
-import ProgressBar from "./ProgressBar";
-import BookmarksBar from "./topElements/bookmarks/BookmarksBar";
 import TopElementsWrapper from "./topElements/TopElementsWrapper";
+import NavigationWordContainer from "./mediumElements/leftElements/NavigationWordContainer";
+import LeftElementsWrapper from "./mediumElements/leftElements/LeftElementsWrapper";
+import MediumElementsWrapper from "./mediumElements/MediumElementsWrapper";
 
 const wcStyle = {
     width: '68.75rem',
@@ -12,14 +13,13 @@ const wcStyle = {
     boxShadow: "0px 6px 10px",
     marginTop: "80px"
 };
-const style = {
-    display: "flex"
-};
+
 
 const WordsContainer = (props) => {
     return (
         <Container style={wcStyle}>
             <TopElementsWrapper/>
+            <MediumElementsWrapper/>
         </Container>
     );
 };

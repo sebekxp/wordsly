@@ -1,9 +1,10 @@
 import React from 'react';
-import ProgressBar from "../ProgressBar";
+import ProgressBar from "./ProgressBar";
 import BookmarksBar from "./bookmarks/BookmarksBar";
+import Colors from "./Colors";
 
 const style = {
-    display: "flex"
+    display: "flex",
 };
 
 const TopElementsWrapper = (props) => {
