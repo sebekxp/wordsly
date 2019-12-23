@@ -5,6 +5,7 @@ import NavigationWordContainer from "./mediumElements/leftElements/NavigationWor
 import LeftElementsWrapper from "./mediumElements/leftElements/LeftElementsWrapper";
 import MediumElementsWrapper from "./mediumElements/MediumElementsWrapper";
 
+
 const wcStyle = {
     width: '68.75rem',
     height: '35rem',

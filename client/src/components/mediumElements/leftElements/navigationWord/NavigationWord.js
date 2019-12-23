@@ -1,9 +1,10 @@
 import React from "react";
-import { faCircle, faStar } from '@fortawesome/free-regular-svg-icons'
+import {faCircle, faStar} from '@fortawesome/free-regular-svg-icons'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import styled from 'styled-components';
 import {Star} from "styled-icons/boxicons-solid/Star";
-
+import {Circle} from 'styled-icons/fa-regular/Circle';
+import {TimesCircle} from 'styled-icons/fa-regular/TimesCircle';
 
 class NavigationWord extends React.Component {
     constructor(props) {
@@ -23,6 +24,10 @@ class NavigationWord extends React.Component {
         }
         `;
 
+        const DeleteElementCircle = styled(TimesCircle)`
+            color: #dc3545;
+            padding: 20px;
+        `;
         const DeleteElem = styled.i`
             font-size: 15px;
             color: #dc3545;
@@ -44,10 +49,18 @@ class NavigationWord extends React.Component {
           &:hover {
                 background-color: #dc3545;
                 
-                ${DeleteElem} {
+                ${DeleteElementCircle} {
                     color: #cccccc;
                 }
             }
+        `;
+
+        const BlankCircle = styled(Circle)`
+            color: #28a745;
+            padding: 16px 16px;
+            margin-right: 1px;
+            border-radius: 5px;
+            background-color: rgb(215, 215, 215);
         `;
 
         const NavigationWord = styled.div`
@@ -67,12 +80,16 @@ class NavigationWord extends React.Component {
                 }
                 
                 ${FavElemIcon}  {
+                     display: block;
                     '&::before' {
-                       display: block;
                     }
                 }
                 
                 p {
+                    background-color: #a2a5a2;
+                }
+                
+                ${BlankCircle} {
                     background-color: #a2a5a2;
                 }                 
             } 
@@ -81,11 +98,20 @@ class NavigationWord extends React.Component {
         const blankCircleStyle = {
             color: "#28a745",
             borderRadius: "5px",
-            padding: "13px 13px",
+            padding: "26px 26px",
             marginRight: "1px",
             fontSize: "20px",
             backgroundColor: "rgb(215, 215, 215)"
-       };
+        };
+        // const BlankCircle = styled(Circle)`
+        //     color: #28a745;
+        //     borderRadius: 5px;
+        //     padding: 13px 13px;
+        //     marginRight: 1px";
+        //     fontSize: 20px;
+        //     backgroundColor: rgb(215, 215, 215)
+        // `;
+
 
         const WordName = styled.p`
             font-size: 20px;
@@ -97,26 +123,18 @@ class NavigationWord extends React.Component {
             padding: 11.8px 33px 11.8px 11.6px;
             background-color: rgb(215, 215, 215);
         `;
-    // .fa-star::before {
-    //         display: none;
-    //         color: #FFD700;
-    //     }
-    //
-    //
-    // .fa-star:hover {
-    //         font-family: "Font Awesome 5 Free";
-    //         font-weight: 900;
-    //     }
 
 
         return (
             <NavigationWord className={"navigation-word"}>
                 <CircleIcon className={"circle-icon"}>
-                    {/*<DeleteElem  />*/}
-                    <FontAwesomeIcon className={"deleteElem"} icon={faCircle} title={"Delete word"}/>
+                    {/*<DeleteElementCircle size="30"/>*/}
+                    {/*<FontAwesomeIcon className={"deleteElem"} icon={faCircle} title={"Delete word"}/>*/}
                 </CircleIcon>
                 {/*<BlankCircle className={"blank-circle far fa-circle"} title={"Mark as known word"}/>*/}
-                <FontAwesomeIcon className={"blank-circle"}  icon={faCircle} title={"Mark as known word"} style={blankCircleStyle}/>
+                {/*<FontAwesomeIcon className={"blank-circle"}  icon={faCircle} title={"Mark as known word"} style={blankCircleStyle}/>*/}
+
+                <BlankCircle size="53"/>
                 {/*{asd}*/}
                 <WordName className={"words"}>
                     "a"
