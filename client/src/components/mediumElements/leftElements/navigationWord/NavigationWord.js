@@ -5,10 +5,12 @@ import BlankCircleIcon from "./icons/BlankCircleIcon";
 import DeleteElemIcon from "./icons/DeleteElementIcon";
 import FavElementIcon from "./icons/FavElementIcon";
 
+
 class NavigationWord extends React.Component {
     constructor(props) {
         super(props);
     }
+
 
     render() {
 

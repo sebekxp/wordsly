@@ -1,5 +1,5 @@
 import React from 'react';
-import WordContent from "./WordContent";
+import WordContentContainer from "./wordContent/WordContentContainer";
 import LeftElementsWrapper from "./leftElements/LeftElementsWrapper";
 
 const style = {
@@ -11,7 +11,7 @@ const MediumElementsWrapper = (props) => {
     return (
         <div style={style}>
             <LeftElementsWrapper/>
-            <WordContent/>
+            <WordContentContainer/>
         </div>
     );
 };

@@ -7,6 +7,7 @@ import styled from "styled-components";
 class BlankCircleIcon extends React.Component {
     constructor(props) {
         super(props);
+        this.blankCircleRef = React.createRef();
         this.state = {
             isBlank: true
         }
@@ -38,8 +39,14 @@ class BlankCircleIcon extends React.Component {
         `;
 
         return (
-            this.state.isBlank ? <BlankCircleIcon onClick={this.handleClick} title={"Mark as known word"}/> :
-                <CheckCircleIcon onClick={this.handleClick} title={"Mark as known word"}/>
+            this.state.isBlank ?
+                <BlankCircleIcon className={"filled-circle"}
+                                 onClick={this.handleClick}
+                                 title={"Mark as known word"}
+                                 ref={this.blankCircleRef}/>
+                :
+                <CheckCircleIcon onClick={this.handleClick}
+                                 title={"Mark as known word"}/>
         );
     }
 }
