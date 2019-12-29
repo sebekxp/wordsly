@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Container} from 'reactstrap';
 import TopElementsWrapper from "./topElements/TopElementsWrapper";
 import MediumElementsWrapper from "./mediumElements/MediumElementsWrapper";
+
+export const ProgressBarContext = React.createContext(0);
 
 
 const wcStyle = {
@@ -15,10 +17,20 @@ const wcStyle = {
 
 
 const WordsContainer = (props) => {
+    const [knownWord, setKnownWord] = useState(0);
+    const [numWords, setNumWords] = useState(0);
+
     return (
         <Container style={wcStyle}>
-            <TopElementsWrapper/>
-            <MediumElementsWrapper/>
+            <ProgressBarContext.Provider value={{
+                numWords: numWords,
+                knownWord: knownWord,
+                setNumWords: (num) => setNumWords(num),
+                // setKnownWord: (known) => setKnownWord(known),
+            }}>
+                <TopElementsWrapper/>
+                <MediumElementsWrapper/>
+            </ProgressBarContext.Provider>
         </Container>
     );
 };

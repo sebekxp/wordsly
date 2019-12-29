@@ -3,6 +3,7 @@ import {Circle} from 'styled-icons/fa-regular/Circle';
 import {CheckCircle} from 'styled-icons/boxicons-solid/CheckCircle';
 
 import styled from "styled-components";
+import {ProgressBarContext} from "../../../../WordContainer";
 
 class BlankCircleIcon extends React.Component {
     constructor(props) {
@@ -39,15 +40,22 @@ class BlankCircleIcon extends React.Component {
         `;
 
         return (
+
+
             this.state.isBlank ?
+
                 <BlankCircleIcon className={"filled-circle"}
                                  onClick={this.handleClick}
                                  title={"Mark as known word"}
                                  ref={this.blankCircleRef}/>
+
                 :
                 <CheckCircleIcon onClick={this.handleClick}
                                  title={"Mark as known word"}/>
-        );
+
+
+        )
+            ;
     }
 }
 

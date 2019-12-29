@@ -1,6 +1,7 @@
 import React from "react";
 import NavigationWord from "./navigationWord/NavigationWord";
 import {OBJWORDS as words} from "../../words";
+import {ProgressBarContext} from "../../WordContainer";
 
 export const NavigationWordContext = React.createContext(0);
 
@@ -8,27 +9,12 @@ class NavigationWordContainer extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            KNOW_WORDS: 0,
-            NUM_OF_WORDS: 0
-        }
     }
 
     //
-    // componentDidMount() {
-    //     this.setState({
-    //         KNOW_WORDS: window.document.querySelectorAll(".filled-circle").length,
-    //         NUM_OF_WORDS: window.document.querySelectorAll('.navigation-word').length
-    //     });
-    //     console.log("elodidmount");
-    // }
-    //
-    // handleClick = () => {
-    //     this.setState({
-    //         KNOW_WORDS: this.state.KNOW_WORDS + 10,
-    //         NUM_OF_WORDS: this.state.NUM_OF_WORDS + 10
-    //     });
-    // };
+    handleClick = (ctx) => {
+        ctx.setNumWords(20);
+    };
 
 
 
@@ -46,16 +32,18 @@ class NavigationWordContainer extends React.Component {
         };
 
         return (
-            <NavigationWordContext.Provider value={this.state.NUM_OF_WORDS}>
-                <div id={this.props.id} className={this.props.className} style={style} onClick={this.handleClick}>
-                    {this.state.NUM_OF_WORDS}
-                    {
-                        words.map((word, index) =>
-                            <NavigationWord name={word.wordName} key={index}/>
-                        )
-                    }
-                </div>
-            </NavigationWordContext.Provider>
+            <ProgressBarContext.Consumer>
+                {ctx=>
+                    <div id={this.props.id} className={this.props.className} style={style}>
+                        {ctx.setNumWords(words.length)}
+                        {
+                            words.map((word, index) =>
+                                <NavigationWord name={word.wordName} key={index}/>)
+                        }
+
+                    </div>
+                }
+            </ProgressBarContext.Consumer>
 
         );
     }

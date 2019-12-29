@@ -1,6 +1,6 @@
 import React from 'react';
 import Colors from "../Colors";
-import {NavigationWordContext} from "../../mediumElements/leftElements/NavigationWordContainer";
+import {ProgressBarContext} from "../../WordContainer";
 import styled from "styled-components";
 
 
@@ -39,16 +39,16 @@ const completeStyle = {
 const ProgressBar = (props) => {
 
     return (
-        <NavigationWordContext.Consumer>
-            {value =>
+        <ProgressBarContext.Consumer>
+            {ctx =>
                 (<Wrapper>
                     <div className={"progresBar"} id="progresBar" style={progresBarStyle}>
                         <div className={"progBar"} id={"progBar"} style={progBarStyle}/>
                     </div>
-                    <span id={"complete"} style={completeStyle}>1 / {value}</span>
+                    <span id={"complete"} style={completeStyle}>{ctx.knownWord} / {ctx.numWords}</span>
                 </Wrapper>)
             }
-        </NavigationWordContext.Consumer>
+        </ProgressBarContext.Consumer>
     );
 };
 

@@ -61,7 +61,7 @@ const NavigationWord = (props) => {
         <ShowExampleContext.Consumer>
             {ctx =>
                 <NavigationWord className={"navigation-word"}
-                                onClick={(event) => hoverMouseAndDisplayWordContent(event, ctx)}>
+                                onMouseOver={(event) => hoverMouseAndDisplayWordContent(event, ctx)}>
                     <BlankCircleIcon/>
                     <WordName className={"words"}>
                         {props.name}
