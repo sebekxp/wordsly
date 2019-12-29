@@ -1,9 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Colors from "../Colors";
-import {getValueOfLastItem} from "./utils/UtilsFunction";
 import {NavigationWordContext} from "../../mediumElements/leftElements/NavigationWordContainer";
 import styled from "styled-components";
-// import {NavigationWordContext} from  "../../mediumElements/leftElements/NavigationWordCtx"
 
 
 const Wrapper = styled.div`
@@ -39,7 +37,7 @@ const completeStyle = {
 };
 
 const ProgressBar = (props) => {
-    {console.log("asd")}
+
     return (
         <NavigationWordContext.Consumer>
             {value =>
@@ -48,8 +46,8 @@ const ProgressBar = (props) => {
                         <div className={"progBar"} id={"progBar"} style={progBarStyle}/>
                     </div>
                     <span id={"complete"} style={completeStyle}>1 / {value}</span>
-                    {console.log("XDDD: ", value)}
-                </Wrapper>)}
+                </Wrapper>)
+            }
         </NavigationWordContext.Consumer>
     );
 };

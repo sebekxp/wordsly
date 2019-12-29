@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import WordContent from "./WordContent";
+import {ShowExampleContext} from "../MediumElementsWrapper";
 
 const WordContentContainer = (props) => {
 
@@ -13,10 +14,13 @@ const WordContentContainer = (props) => {
     `;
 
     return (
-
-        <WordContentContainer id={props.id} className={props.className} >
-            <WordContent/>
-        </WordContentContainer>
+        <ShowExampleContext.Consumer>
+            {ctx =>
+                <WordContentContainer id={props.id} className={props.className}>
+                    <WordContent obj={ctx.word}/>
+                </WordContentContainer>
+            }
+        </ShowExampleContext.Consumer>
     );
 };
 

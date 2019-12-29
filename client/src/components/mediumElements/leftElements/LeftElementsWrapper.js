@@ -5,7 +5,6 @@ import AddingWordsInput from "./AddingWordsInput";
 const style = {
     width: '275px',
     height: "calc(100% - (56.6px))",
-    backgroundColor: "red"
 };
 
 const LeftElementsWrapper = (props) => {

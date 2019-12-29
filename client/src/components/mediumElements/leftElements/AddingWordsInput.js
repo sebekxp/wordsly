@@ -1,27 +1,20 @@
 import React from "react";
 import Colors from "../../topElements/Colors";
+import styled from 'styled-components';
 
 
-class AddingWordsInput extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+const AddingWordsInput = (props) => {
 
-    render() {
+    const AddingWordsInput = styled.div`
+        display: flex;
+        width: 275px;
+        height: 56.6px;
+        flex-grow: 1;
+        border-bottom-left-radius: 10px;
+        background-color: ${Colors.DEFAULT_GREY};
+    `;
 
-        const style = {
-            display: "flex",
-            width: '275px',
-            height: "56.6px",
-            flexGrow: '1',
-            backgroundColor: Colors.DEFAULT_GREY
-        };
+    return <AddingWordsInput/>
 
-        return (
-            <div id={this.props.id} className={this.props.className} style={style}>
-            </div>
-        );
-    }
-}
-
+};
 export default AddingWordsInput;

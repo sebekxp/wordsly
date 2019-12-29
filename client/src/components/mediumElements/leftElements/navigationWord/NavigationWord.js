@@ -1,25 +1,19 @@
 import React from "react";
 import styled from 'styled-components';
-import {Star} from "styled-icons/boxicons-solid/Star";
 import BlankCircleIcon from "./icons/BlankCircleIcon";
 import DeleteElemIcon from "./icons/DeleteElementIcon";
 import FavElementIcon from "./icons/FavElementIcon";
+import {OBJWORDS as words} from "../../../words";
+import {ShowExampleContext} from "../../MediumElementsWrapper";
 
 
-class NavigationWord extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+const NavigationWord = (props) => {
 
-
-    render() {
-
-        const IconWrapper = styled.div`
+    const IconWrapper = styled.div`
             display: none;
         `;
 
-        const NavigationWord = styled.div`
-            // position: relative;
+    const NavigationWord = styled.div`
             display: flex;
             justify-content: center;
             align-items: center;
@@ -44,7 +38,7 @@ class NavigationWord extends React.Component {
             } 
             `;
 
-        const WordName = styled.div`
+    const WordName = styled.div`
             font-size: 20px;
             width: 100%;
             cursor: pointer;
@@ -55,20 +49,30 @@ class NavigationWord extends React.Component {
             background-color: rgb(215, 215, 215);
         `;
 
+    const hoverMouseAndDisplayWordContent = (evt, ctx) => {
+        for (let i = 0; i < words.length; i++) {
+            if (words[i].wordName === evt.target.innerText) {
+                ctx.setWord(words[i])
+            }
+        }
+    };
 
-        return (
-            <NavigationWord className={"navigation-word"}>
-                <BlankCircleIcon/>
-                <WordName className={"words"}>
-                    "a"
-                    <IconWrapper>
-                        <FavElementIcon/>
-                        <DeleteElemIcon/>
-                    </IconWrapper>
-                </WordName>
-            </NavigationWord>
-        );
-    }
-}
+    return (
+        <ShowExampleContext.Consumer>
+            {ctx =>
+                <NavigationWord className={"navigation-word"}
+                                onClick={(event) => hoverMouseAndDisplayWordContent(event, ctx)}>
+                    <BlankCircleIcon/>
+                    <WordName className={"words"}>
+                        {props.name}
+                        <IconWrapper>
+                            <FavElementIcon/>
+                            <DeleteElemIcon/>
+                        </IconWrapper>
+                    </WordName>
+                </NavigationWord>
+            }
+        </ShowExampleContext.Consumer>);
+};
 
 export default NavigationWord;

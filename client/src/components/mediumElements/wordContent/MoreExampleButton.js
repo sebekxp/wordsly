@@ -6,14 +6,24 @@ const MoreExampleButton = (props) => {
 
     const [isToggle, setToggle] = useState(false);
 
-    const toggleMoreExample = ()=> {
-        if(!isToggle)
-            props.setHeight(400);
+    const toggleMoreExample = () => {
+        if (!isToggle)
+            props.setHeight(1000);
         else
             props.setHeight(200);
 
         setToggle(!isToggle);
     };
+
+    // const calcHeightOfExamplesBox = () => {
+    //     let firstThreeExamples = props.height;
+    //     let heightExamples = 0;
+    //     heightExamples += firstThreeExamples[0].getBoundingClientRect().height + 30;
+    //     heightExamples += firstThreeExamples[1].getBoundingClientRect().height + 15;
+    //     heightExamples += firstThreeExamples[2].getBoundingClientRect().height + 15;
+    //
+    //     return heightExamples;
+    // };
 
     const MoreExamples = styled.div`
         display: flex;
@@ -30,9 +40,9 @@ const MoreExampleButton = (props) => {
     `;
 
     return (
-            <MoreExamples onClick={toggleMoreExample}>
-                More
-            </MoreExamples>
+        <MoreExamples onClick={toggleMoreExample}>
+            More
+        </MoreExamples>
     );
 };
 

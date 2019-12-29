@@ -1,7 +1,6 @@
 import React from 'react';
 import ProgressBar from "./progressBar/ProgressBar";
 import BookmarksBar from "./bookmarks/BookmarksBar";
-import Colors from "./Colors";
 
 const style = {
     display: "flex",

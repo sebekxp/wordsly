@@ -1,19 +1,16 @@
 import React, {useState} from 'react';
-import {NavigationWordContext} from "../../mediumElements/leftElements/NavigationWordContainer";
 import styled from "styled-components";
 import MoreExampleButton from "./MoreExampleButton";
-import FirstExampleWord from "./FirstExampleWord";
+import ExampleContent from "./ExampleContent";
 
-
-const toggleMoreExample = () => {
-
-};
 
 const WordContent = (props) => {
     const [feHeight, setFeHeight] = useState(200);
+    const wordObj = props.obj;
 
     const ExamplesContainer = styled.div`
         margin: 20px 20px;
+        width: 500px;
         border-radius: 10px;
         border: 1px solid gray;
     `;
@@ -35,10 +32,11 @@ const WordContent = (props) => {
     return (
         <ExamplesContainer className={"examples-container"}>
             <KeyWordHeader className={"key-word-header "}>
-                <h3 id={"key-word-header"} className={"key-word-header"}>WordName</h3>
+                <h3 id={"key-word-header"}
+                    className={"key-word-header"}>{wordObj.wordName} - {wordObj.wordTranslate}</h3>
             </KeyWordHeader>
-            <FirstExampleWord height={feHeight} />
-            <MoreExampleButton setHeight={setFeHeight}/>
+            <ExampleContent height={feHeight} examples={wordObj.examples} wordName={wordObj.wordName}/>
+            <MoreExampleButton height={feHeight} setHeight={setFeHeight}/>
         </ExamplesContainer>
     );
 };

@@ -1,8 +1,6 @@
 import React from 'react';
-import {Container, Row, Col} from 'reactstrap';
+import {Container} from 'reactstrap';
 import TopElementsWrapper from "./topElements/TopElementsWrapper";
-import NavigationWordContainer from "./mediumElements/leftElements/NavigationWordContainer";
-import LeftElementsWrapper from "./mediumElements/leftElements/LeftElementsWrapper";
 import MediumElementsWrapper from "./mediumElements/MediumElementsWrapper";
 
 
