@@ -1,20 +1,13 @@
 import React from "react";
 import NavigationWord from "./navigationWord/NavigationWord";
 import {OBJWORDS as words} from "../../words";
-import {ProgressBarContext} from "../../WordContainer";
 
-export const NavigationWordContext = React.createContext(0);
 
 class NavigationWordContainer extends React.Component {
 
     constructor(props) {
         super(props);
     }
-
-    //
-    handleClick = (ctx) => {
-        ctx.setNumWords(20);
-    };
 
 
 
@@ -32,19 +25,12 @@ class NavigationWordContainer extends React.Component {
         };
 
         return (
-            <ProgressBarContext.Consumer>
-                {ctx=>
-                    <div id={this.props.id} className={this.props.className} style={style}>
-                        {ctx.setNumWords(words.length)}
-                        {
-                            words.map((word, index) =>
-                                <NavigationWord name={word.wordName} key={index}/>)
-                        }
-
-                    </div>
+            <div id={this.props.id} className={this.props.className} style={style}>
+                {
+                    words.map((word, index) =>
+                        <NavigationWord name={word.wordName} key={index}/>)
                 }
-            </ProgressBarContext.Consumer>
-
+            </div>
         );
     }
 }

@@ -1,25 +1,32 @@
-import React from "react";
+import React, {useState, useContext, useEffect} from "react";
 import {Circle} from 'styled-icons/fa-regular/Circle';
 import {CheckCircle} from 'styled-icons/boxicons-solid/CheckCircle';
 
 import styled from "styled-components";
 import {ProgressBarContext} from "../../../../WordContainer";
 
-class BlankCircleIcon extends React.Component {
-    constructor(props) {
-        super(props);
-        this.blankCircleRef = React.createRef();
-        this.state = {
-            isBlank: true
-        }
-    }
+const BlankCircleIcon = (props) => {
 
-    handleClick = () => {
-        this.setState({isBlank: !this.state.isBlank});
+    const [blank, setBlank] = useState(true);
+    const ctx = useContext(ProgressBarContext);
+
+    // const handleClick = () => {
+    //     setBlank(!blank);
+    //     updateProgBar();
+    // };
+
+    useEffect(() => {
+        // updateProgBar();
+    }, []);
+
+    const updateProgBar = ()=> {
+        if (blank)
+            ctx.setKnownWord(ctx.knownWord + 1);
+        else
+            ctx.setKnownWord(ctx.knownWord - 1);
     };
 
-    render() {
-        const BlankCircleIcon = styled(Circle)`
+    const BlankCircleIcon = styled(Circle)`
             color: #28a745;
             padding: 12px 12px;
             width: 53.59px;
@@ -29,7 +36,7 @@ class BlankCircleIcon extends React.Component {
             background-color: rgb(215, 215, 215);
         `;
 
-        const CheckCircleIcon = styled(CheckCircle)`
+    const CheckCircleIcon = styled(CheckCircle)`
             color: #28a745;
             padding: 12px 12px;
             width: 53.59px;
@@ -39,24 +46,15 @@ class BlankCircleIcon extends React.Component {
             background-color: rgb(215, 215, 215);
         `;
 
-        return (
-
-
-            this.state.isBlank ?
-
-                <BlankCircleIcon className={"filled-circle"}
-                                 onClick={this.handleClick}
-                                 title={"Mark as known word"}
-                                 ref={this.blankCircleRef}/>
-
-                :
-                <CheckCircleIcon onClick={this.handleClick}
-                                 title={"Mark as known word"}/>
-
-
-        )
-            ;
-    }
-}
+    return (
+        blank ?
+            <BlankCircleIcon className={"filled-circle"}
+                             onClick={()=> {setBlank(!blank)}}
+                             title={"Mark as known word"}/>
+            :
+            <CheckCircleIcon onClick={()=> {setBlank(!blank)}}
+                             title={"Mark as known word"}/>
+    );
+};
 
 export default BlankCircleIcon;

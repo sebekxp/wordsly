@@ -2,7 +2,7 @@ import React from 'react';
 import Colors from "../Colors";
 import {ProgressBarContext} from "../../WordContainer";
 import styled from "styled-components";
-
+import {OBJWORDS as words} from "../../words";
 
 const Wrapper = styled.div`
     width: 275px;
@@ -45,7 +45,7 @@ const ProgressBar = (props) => {
                     <div className={"progresBar"} id="progresBar" style={progresBarStyle}>
                         <div className={"progBar"} id={"progBar"} style={progBarStyle}/>
                     </div>
-                    <span id={"complete"} style={completeStyle}>{ctx.knownWord} / {ctx.numWords}</span>
+                    <span id={"complete"} style={completeStyle}>{ctx.knownWord} / {words.length}</span>
                 </Wrapper>)
             }
         </ProgressBarContext.Consumer>

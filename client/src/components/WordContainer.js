@@ -18,15 +18,12 @@ const wcStyle = {
 
 const WordsContainer = (props) => {
     const [knownWord, setKnownWord] = useState(0);
-    const [numWords, setNumWords] = useState(0);
 
     return (
         <Container style={wcStyle}>
             <ProgressBarContext.Provider value={{
-                numWords: numWords,
                 knownWord: knownWord,
-                setNumWords: (num) => setNumWords(num),
-                // setKnownWord: (known) => setKnownWord(known),
+                setKnownWord: (num) => setKnownWord(num)
             }}>
                 <TopElementsWrapper/>
                 <MediumElementsWrapper/>
