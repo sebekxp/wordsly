@@ -11,7 +11,6 @@ class DeleteElementIcon extends React.Component {
         this.state = {
             isHover: false
         };
-
     }
 
     onMouseEnterHandler = () => {

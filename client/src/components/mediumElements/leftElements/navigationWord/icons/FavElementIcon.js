@@ -32,6 +32,7 @@ class FavElementIcon extends React.Component {
             display: flex;
             color: #FFD700;   
         `;
+
         const FavElemIconBlank = styled(BlankStar)`
             display: flex;
             color: #FFD700;   

@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useContext} from "react";
 import styled from "styled-components";
 import WordContent from "./WordContent";
 import {ShowExampleContext} from "../MediumElementsWrapper";
 
 const WordContentContainer = (props) => {
+    const ctx = useContext(ShowExampleContext);
 
     const WordContentContainer = styled.div`
         width: 100%;
@@ -14,13 +15,9 @@ const WordContentContainer = (props) => {
     `;
 
     return (
-        <ShowExampleContext.Consumer>
-            {ctx =>
-                <WordContentContainer id={props.id} className={props.className}>
-                    <WordContent obj={ctx.word}/>
-                </WordContentContainer>
-            }
-        </ShowExampleContext.Consumer>
+        <WordContentContainer id={props.id} className={props.className}>
+            <WordContent obj={ctx.word}/>
+        </WordContentContainer>
     );
 };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext, useState} from "react";
 import styled from 'styled-components';
 import BlankCircleIcon from "./icons/BlankCircleIcon";
 import DeleteElemIcon from "./icons/DeleteElementIcon";
@@ -6,8 +6,12 @@ import FavElementIcon from "./icons/FavElementIcon";
 import {OBJWORDS as words} from "../../../words";
 import {ShowExampleContext} from "../../MediumElementsWrapper";
 
+export const BlankCircleIconContext = React.createContext(true);
 
 const NavigationWord = (props) => {
+
+    const ctx = useContext(ShowExampleContext);
+    const [blank, setBlank] = useState(true);
 
     const IconWrapper = styled.div`
             display: none;
@@ -58,21 +62,27 @@ const NavigationWord = (props) => {
     };
 
     return (
-        <ShowExampleContext.Consumer>
-            {ctx =>
-                <NavigationWord className={"navigation-word"}
-                                onMouseOver={(event) => hoverMouseAndDisplayWordContent(event, ctx)}>
-                    <BlankCircleIcon/>
-                    <WordName className={"words"}>
-                        {props.name}
-                        <IconWrapper>
-                            <FavElementIcon/>
-                            <DeleteElemIcon/>
-                        </IconWrapper>
-                    </WordName>
-                </NavigationWord>
-            }
-        </ShowExampleContext.Consumer>);
+        <NavigationWord className={"navigation-word"}
+                        onMouseOver={(event) => hoverMouseAndDisplayWordContent(event, ctx)}>
+            <BlankCircleIconContext.Provider value={
+                {
+                    blank: blank,
+                    setBlank: ((b) => {
+                        setBlank(b)
+                    })
+                }
+            }>
+                <BlankCircleIcon/>
+            </BlankCircleIconContext.Provider>
+
+            <WordName className={"words"}>
+                {props.name}
+                <IconWrapper>
+                    <FavElementIcon/>
+                    <DeleteElemIcon/>
+                </IconWrapper>
+            </WordName>
+        </NavigationWord>);
 };
 
 export default NavigationWord;

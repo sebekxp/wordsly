@@ -23,7 +23,9 @@ const WordsContainer = (props) => {
         <Container style={wcStyle}>
             <ProgressBarContext.Provider value={{
                 knownWord: knownWord,
-                setKnownWord: (num) => setKnownWord(num)
+                setKnownWord: (num) => {
+                    setKnownWord(num)
+                },
             }}>
                 <TopElementsWrapper/>
                 <MediumElementsWrapper/>
