@@ -15,15 +15,15 @@ const MoreExampleButton = (props) => {
         setToggle(!isToggle);
     };
 
-    // const calcHeightOfExamplesBox = () => {
-    //     let firstThreeExamples = props.height;
-    //     let heightExamples = 0;
-    //     heightExamples += firstThreeExamples[0].getBoundingClientRect().height + 30;
-    //     heightExamples += firstThreeExamples[1].getBoundingClientRect().height + 15;
-    //     heightExamples += firstThreeExamples[2].getBoundingClientRect().height + 15;
-    //
-    //     return heightExamples;
-    // };
+    const calcHeightOfExamplesBox = () => {
+        let firstThreeExamples = props.height;
+        let heightExamples = 0;
+        heightExamples += firstThreeExamples[0].getBoundingClientRect().height + 30;
+        heightExamples += firstThreeExamples[1].getBoundingClientRect().height + 15;
+        heightExamples += firstThreeExamples[2].getBoundingClientRect().height + 15;
+
+        return heightExamples;
+    };
 
     const MoreExamples = styled.div`
         display: flex;
