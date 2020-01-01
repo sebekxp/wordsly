@@ -9,7 +9,6 @@ const WordContentContainer = (props) => {
     const WordContentContainer = styled.div`
         width: 100%;
         height: 503.9px;
-        background-color: pink;
         border-bottom-right-radius: 10px; 
         overflow: auto;
     `;

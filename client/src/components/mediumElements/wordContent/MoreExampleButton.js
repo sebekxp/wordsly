@@ -1,28 +1,16 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from "styled-components";
 
 
 const MoreExampleButton = (props) => {
 
-    const [isToggle, setToggle] = useState(false);
-
     const toggleMoreExample = () => {
-        if (!isToggle)
-            props.setHeight(1000);
+        if (!props.isToggle)
+            props.setHeight(props.fullHeight);
         else
-            props.setHeight(200);
+            props.setHeight(props.height);
 
-        setToggle(!isToggle);
-    };
-
-    const calcHeightOfExamplesBox = () => {
-        let firstThreeExamples = props.height;
-        let heightExamples = 0;
-        heightExamples += firstThreeExamples[0].getBoundingClientRect().height + 30;
-        heightExamples += firstThreeExamples[1].getBoundingClientRect().height + 15;
-        heightExamples += firstThreeExamples[2].getBoundingClientRect().height + 15;
-
-        return heightExamples;
+        props.setToggle(!props.isToggle);
     };
 
     const MoreExamples = styled.div`
@@ -32,7 +20,7 @@ const MoreExampleButton = (props) => {
         height: 51px;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
-        border-top: 1px solid grey;
+        // border-top: 1px solid grey;
         
         &:hover{
             text-decoration: underline;
@@ -41,7 +29,7 @@ const MoreExampleButton = (props) => {
 
     return (
         <MoreExamples onClick={toggleMoreExample}>
-            More
+            {!props.isToggle ? "More" : "Less"}
         </MoreExamples>
     );
 };

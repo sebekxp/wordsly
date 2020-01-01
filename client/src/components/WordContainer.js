@@ -11,7 +11,7 @@ const wcStyle = {
     height: '35rem',
     padding: "0",
     borderRadius: "10px",
-    boxShadow: "0px 6px 10px",
+    boxShadow: "0px 0px 10px",
     marginTop: "80px"
 };
 
