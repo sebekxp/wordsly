@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 
 const ParagraphWrapper = (props) => {
+
     const targetRef = props.inputRef;
 
     const Wrapper = styled.div`
@@ -9,9 +10,9 @@ const ParagraphWrapper = (props) => {
     `;
 
     return (
-    <Wrapper ref={targetRef}>
-        {props.children}
-    </Wrapper>);
+        <Wrapper ref={targetRef}>
+            {props.children}
+        </Wrapper>);
 };
 
 export default ParagraphWrapper;

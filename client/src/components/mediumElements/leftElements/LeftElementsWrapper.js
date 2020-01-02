@@ -1,18 +1,20 @@
 import React from 'react';
+import styled from 'styled-components';
 import NavigationWordContainer from "./NavigationWordContainer";
 import AddingWordsInput from "./AddingWordsInput";
 
-const style = {
-    width: '275px',
-    height: "calc(100% - (56.6px))",
-};
+const LeftElementsWrapper = () => {
 
-const LeftElementsWrapper = (props) => {
+    const Wrapper = styled.div`
+        width: 275px;
+        height: calc(100% - 56px);
+    `;
+
     return (
-        <div style={style}>
-            <NavigationWordContainer id={"navigation-word-container"} className={"navigation-word-container"}/>
+        <Wrapper>
+            <NavigationWordContainer/>
             <AddingWordsInput/>
-        </div>
+        </Wrapper>
     );
 };
 

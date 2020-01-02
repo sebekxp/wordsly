@@ -18,7 +18,7 @@ const ExampleContent = (props) => {
             setH(calcFullHeight(paragraphs));
         else
             setH(calcStartHeight(paragraphs));
-    });
+    }, [props.isToggle]);
 
     const calcStartHeight = (list) => {
         let h = 0;
@@ -55,21 +55,17 @@ const ExampleContent = (props) => {
          margin: 10px 5px;
     `;
 
-
     const makeHeaderWordBold = (str, wordName) => {
         return str.replace(" " + wordName + " ", ' <b>' + wordName + '</b> ')
     };
 
-
     return (
-        <ExampleContent id={"first-example-word"} className={"first-example-word"} ref={targetRef}>
+        <ExampleContent ref={targetRef}>
             {
                 examples.map((example, index) =>
-                    <ParagraphWrapper className={"wrapper"} key={index}>
+                    <ParagraphWrapper key={index}>
                         <Quote/>
-                        <p className={"exampleContents"}
-                           dangerouslySetInnerHTML={{__html: makeHeaderWordBold(example, props.wordName)}}>
-                        </p>
+                        <p dangerouslySetInnerHTML={{__html: makeHeaderWordBold(example, props.wordName)}}/>
                     </ParagraphWrapper>)
             }
         </ExampleContent>

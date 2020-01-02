@@ -3,7 +3,7 @@ import Colors from "../../topElements/Colors";
 import styled from 'styled-components';
 
 
-const AddingWordsInput = (props) => {
+const AddingWordsInput = () => {
 
     const AddingWordsInput = styled.div`
         display: flex;

@@ -9,49 +9,49 @@ import {ShowExampleContext} from "../../MediumElementsWrapper";
 export const BlankCircleIconContext = React.createContext(true);
 
 const NavigationWord = (props) => {
-
+    console.log("NavigationWord");
     const ctx = useContext(ShowExampleContext);
     const [blank, setBlank] = useState(true);
 
     const IconWrapper = styled.div`
-            display: none;
-        `;
+         display: none;
+    `;
 
     const NavigationWord = styled.div`
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 3px;            
-            
-            &:nth-of-type(1) {
-                margin-top: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 3px;
+                    
+        &:nth-of-type(1) {
+            margin-top: 5px;
+        }
+        
+        p {
+            margin: 0;
+        }
+        
+        &:hover {      
+            ${IconWrapper} {
+                 display: flex;
             }
             
-            p {
-                margin: 0;
+            div {
+                background-color: #a2a5a2;
             }
-            
-            &:hover {      
-                ${IconWrapper}  {
-                     display: flex;
-                }
-
-                div {
-                    background-color: #a2a5a2;
-                }
-            } 
-            `;
+        } 
+    `;
 
     const WordName = styled.div`
-            font-size: 20px;
-            width: 100%;
-            cursor: pointer;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            padding: 11.8px 11.8px 11.8px 11.8px;
-            background-color: rgb(215, 215, 215);
-        `;
+        font-size: 20px;
+        width: 100%;
+        cursor: pointer;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        padding: 11.8px 11.8px 11.8px 11.8px;
+        background-color: rgb(215, 215, 215);
+    `;
 
     const hoverMouseAndDisplayWordContent = (evt, ctx) => {
         for (let i = 0; i < words.length; i++) {
@@ -62,8 +62,7 @@ const NavigationWord = (props) => {
     };
 
     return (
-        <NavigationWord className={"navigation-word"}
-                        onMouseOver={(event) => hoverMouseAndDisplayWordContent(event, ctx)}>
+        <NavigationWord onMouseOver={(event) => hoverMouseAndDisplayWordContent(event, ctx)}>
             <BlankCircleIconContext.Provider value={
                 {
                     blank: blank,
@@ -75,7 +74,7 @@ const NavigationWord = (props) => {
                 <BlankCircleIcon/>
             </BlankCircleIconContext.Provider>
 
-            <WordName className={"words"}>
+            <WordName>
                 {props.name}
                 <IconWrapper>
                     <FavElementIcon/>

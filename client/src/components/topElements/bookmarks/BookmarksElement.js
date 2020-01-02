@@ -1,41 +1,34 @@
-import React from 'react';
+import React, {useState} from 'react';
+import styled from "styled-components";
 import Colors from "../Colors";
 
 
-class BookmarksElement extends React.Component {
-    constructor(props) {
-        super(props);
+const BookmarksElement = (props) => {
+    console.log("BookmarksElement");
+    const [selected, setSelected] = useState(props.selected);
 
-        this.state = {
-            selected: this.props.selected
-        };
-    }
-
-    handleClick = () => {
-        this.setState({
-            selected: !this.state.selected
-        })
+    const getColor = () => {
+        return selected ?
+            Colors.BOOKMARKS_ELEMENT_SELECTED_BACKGROUND :
+            Colors.BOOKMARKS_ELEMENT_BACKGROUND
     };
 
-    render() {
+    const Wrapper = styled.div`
+        width: 135px;
+        text-align: center;
+        line-height: 56.6px;
+        color: ${Colors.BOOKMARKS_TEXT};
+        background-color: ${getColor()}
+    `;
 
-        const style = {
-            width: '135px',
-            // height: '55.3px',
-            textAlign: "center",
-            lineHeight: "56.6px",
-            color: Colors.BOOKMARKS_TEXT,
-            backgroundColor: this.state.selected ?
-                Colors.BOOKMARKS_ELEMENT_SELECTED_BACKGROUND :
-                Colors.BOOKMARKS_ELEMENT_BACKGROUND
-        };
+    return (
+        <Wrapper onClick={() => {
+            setSelected(!selected);
+        }}>
+            {props.bbTitle}
+        </Wrapper>
+    );
 
-        return (
-            <div id={this.props.id} className={this.props.className} style={style} onClick={this.handleClick}>
-                {this.props.bbTitle}
-            </div>
-        );
-    }
 }
 
 export default BookmarksElement;

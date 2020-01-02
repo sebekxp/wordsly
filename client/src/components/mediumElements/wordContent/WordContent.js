@@ -3,8 +3,8 @@ import styled from "styled-components";
 import MoreExampleButton from "./MoreExampleButton";
 import ExampleContent from "./ExampleContent";
 
-
 const WordContent = (props) => {
+    console.log("WordContent");
     const [feHeight, setFeHeight] = useState();
     const [fullHeight, setFullHeight] = useState();
     const [isToggle, setToggle] = useState(false);
@@ -15,13 +15,11 @@ const WordContent = (props) => {
         margin: 50px 50px;
         width: 600px;
         border-radius: 10px;
-        // border: 1px solid gray;
         box-shadow: 0px 0px 10px;
     `;
 
     const KeyWordHeader = styled.div`
         display: flex;
-        // border-bottom: 1px solid grey;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         justify-content: center;
@@ -32,12 +30,10 @@ const WordContent = (props) => {
         }      
     `;
 
-
     return (
-        <ExamplesContainer className={"examples-container"}>
-            <KeyWordHeader className={"key-word-header "}>
-                <h3 id={"key-word-header"}
-                    className={"key-word-header"}>{wordObj.wordName} - {wordObj.wordTranslate}</h3>
+        <ExamplesContainer>
+            <KeyWordHeader>
+                <h3>{wordObj.wordName} - {wordObj.wordTranslate}</h3>
             </KeyWordHeader>
             <ExampleContent height={feHeight}
                             isToggle={isToggle}

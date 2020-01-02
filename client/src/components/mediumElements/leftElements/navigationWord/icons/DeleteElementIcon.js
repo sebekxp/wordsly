@@ -25,19 +25,14 @@ class DeleteElementIcon extends React.Component {
         });
     };
 
+
     render() {
 
-        const DeleteElementIcon = styled(XCircle)`
-          display: flex;
-          color: #dc3545;
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
-          right: 5px;
-          transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
-        `;
+        const selectIcon = () => {
+            return this.state.isHover ? XCircle : BlankCircle;
+        };
 
-        const DeleteElementIconBlank = styled(BlankCircle)`
+        const DeleteElementIcon = styled(selectIcon())`
           display: flex;
           color: #dc3545;
           width: 30px;
@@ -48,14 +43,9 @@ class DeleteElementIcon extends React.Component {
         `;
 
         return (
-            this.state.isHover ?
-                <DeleteElementIcon onMouseEnter={this.onMouseEnterHandler}
-                                   onMouseLeave={this.onMouseLeaveHandler}
-                                   title={"Delete word"}/>
-                :
-                <DeleteElementIconBlank onMouseEnter={this.onMouseEnterHandler}
-                                        onMouseLeave={this.onMouseLeaveHandler}
-                                        title={"Delete word"}/>
+            <DeleteElementIcon onMouseEnter={this.onMouseEnterHandler}
+                               onMouseLeave={this.onMouseLeaveHandler}
+                               title={"Delete word"}/>
         );
     }
 }

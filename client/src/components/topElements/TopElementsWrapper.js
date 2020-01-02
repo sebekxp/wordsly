@@ -1,17 +1,19 @@
 import React from 'react';
+import styled from "styled-components";
 import ProgressBar from "./progressBar/ProgressBar";
 import BookmarksBar from "./bookmarks/BookmarksBar";
 
-const style = {
-    display: "flex",
-};
+const TopElementsWrapper = () => {
 
-const TopElementsWrapper = (props) => {
+    const Wrapper = styled.div`
+        display: flex;
+    `;
+
     return (
-        <div style={style}>
+        <Wrapper>
             <ProgressBar/>
             <BookmarksBar/>
-        </div>
+        </Wrapper>
     );
 };
 

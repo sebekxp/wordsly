@@ -15,21 +15,22 @@ const Wrapper = styled.div`
     border-radius: 10px 0 0 0;
 `;
 
-const progresBarStyle = {
-    border: "1.5px solid black",
-    padding: "0.1px 0px",
-    borderRadius: "20px",
-    margin: "5px 10px",
-};
+const ProgressBarWrapper = styled.div`
+    border: 1.5px solid black;
+    padding: 0.1px 0px;
+    border-radius: 20px;
+    margin: 5px 10px;
+`;
 
-const completeStyle = {
-    fontSize: "12.5px",
-    fontWeight: "600",
-    cursor: "text",
-    padding: "5px 0"
-};
+const Counter = styled.div`
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: text;
+    padding: 5px 0;
+`;
 
-const ProgressBar = (props) => {
+const ProgressBar = () => {
+    console.log("ProgressBar");
     const ctx = useContext(ProgressBarContext);
 
     const getCurrentProgress = (knownWords) => {
@@ -39,20 +40,20 @@ const ProgressBar = (props) => {
         return numOfKnownWords * percentageValue;
     };
 
-    const progBarStyle = {
-        width:  getCurrentProgress(ctx.knownWord) + "%",
-        height: "15px",
-        backgroundColor: Colors.PROGRESS_BAR_BLUE,
-        borderRadius: "8px",
-        transition: "width 1.5s"
-    };
+    const ProgressBar = styled.div`
+        width: ${getCurrentProgress(ctx.knownWord)}%;
+        height: 15px;
+        background-color: ${Colors.PROGRESS_BAR_BLUE};
+        border-radius: 8px;
+        transition: width 1.5s;
+    `;
 
     return (
         (<Wrapper>
-            <div className={"progresBar"} id="progresBar" style={progresBarStyle}>
-                <div className={"progBar"} id={"progBar"} style={progBarStyle}/>
-            </div>
-            <span id={"complete"} style={completeStyle}>{ctx.knownWord} / {words.length}</span>
+            <ProgressBarWrapper>
+                <ProgressBar/>
+            </ProgressBarWrapper>
+            <Counter>{ctx.knownWord} / {words.length}</Counter>
         </Wrapper>)
     );
 };
