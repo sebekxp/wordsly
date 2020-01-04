@@ -6,7 +6,6 @@ import {Star as BlankStar} from 'styled-icons/boxicons-regular/Star';
 class FavElementIcon extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             isHover: false
         };

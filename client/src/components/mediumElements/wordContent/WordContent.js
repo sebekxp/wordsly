@@ -4,7 +4,6 @@ import MoreExampleButton from "./MoreExampleButton";
 import ExampleContent from "./ExampleContent";
 
 const WordContent = (props) => {
-    console.log("WordContent");
     const [feHeight, setFeHeight] = useState();
     const [fullHeight, setFullHeight] = useState();
     const [isToggle, setToggle] = useState(false);

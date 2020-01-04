@@ -4,7 +4,6 @@ import {ExpandMore} from "styled-icons/material/ExpandMore";
 import {ExpandLess} from "styled-icons/material/ExpandLess";
 
 const MoreExampleButton = (props) => {
-
     const toggleMoreExample = () => {
         if (!props.isToggle)
             props.setHeight(props.fullHeight);

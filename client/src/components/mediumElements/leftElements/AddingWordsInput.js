@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 
 const AddingWordsInput = () => {
-
     const AddingWordsInput = styled.div`
         display: flex;
         width: 275px;

@@ -4,7 +4,6 @@ import BookmarksElement from "./BookmarksElement";
 import Colors from "../Colors";
 
 const BookmarksBar = () => {
-    console.log("BookmarksBar");
     const Wrapper = styled.div`
         display: flex;
         flex-grow: 1;

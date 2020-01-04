@@ -4,7 +4,6 @@ import NavigationWordContainer from "./NavigationWordContainer";
 import AddingWordsInput from "./AddingWordsInput";
 
 const LeftElementsWrapper = () => {
-
     const Wrapper = styled.div`
         width: 275px;
         height: calc(100% - 56px);

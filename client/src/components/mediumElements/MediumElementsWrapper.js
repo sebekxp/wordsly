@@ -7,7 +7,7 @@ import {OBJWORDS as words} from "../words";
 export const ShowExampleContext = React.createContext();
 
 const MediumElementsWrapper = () => {
-    console.log("MediumElementsWrapper");
+
     const Wrapper = styled.div`
         display: flex;
         width: 100%;

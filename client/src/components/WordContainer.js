@@ -1,9 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from "styled-components";
 import TopElementsWrapper from "./topElements/TopElementsWrapper";
 import MediumElementsWrapper from "./mediumElements/MediumElementsWrapper";
-
-export const ProgressBarContext = React.createContext(0);
 
 const Container = styled.div`
     width: 68.75rem;
@@ -20,20 +18,11 @@ const Container = styled.div`
 
 
 const WordsContainer = () => {
-    console.log("WordsContainer");
-    const [knownWord, setKnownWord] = useState(0);
 
     return (
         <Container>
-            <ProgressBarContext.Provider value={{
-                knownWord: knownWord,
-                setKnownWord: (num) => {
-                    setKnownWord(num)
-                },
-            }}>
-                <TopElementsWrapper/>
-                <MediumElementsWrapper/>
-            </ProgressBarContext.Provider>
+            <TopElementsWrapper/>
+            <MediumElementsWrapper/>
         </Container>
     );
 };

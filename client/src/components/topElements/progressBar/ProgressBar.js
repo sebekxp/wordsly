@@ -1,8 +1,10 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import Colors from "../Colors";
-import {ProgressBarContext} from "../../WordContainer";
 import styled from "styled-components";
 import {OBJWORDS as words} from "../../words";
+import {useSelector} from "react-redux";
+import knownWordCounterSlice from "../../mediumElements/leftElements/navigationWord/icons/FavElementIcon";
+
 
 const Wrapper = styled.div`
     width: 275px;
@@ -30,8 +32,7 @@ const Counter = styled.div`
 `;
 
 const ProgressBar = () => {
-    console.log("ProgressBar");
-    const ctx = useContext(ProgressBarContext);
+    const knowWord = useSelector(state => state.knowWord);
 
     const getCurrentProgress = (knownWords) => {
         const numOfKnownWords = knownWords;
@@ -41,7 +42,7 @@ const ProgressBar = () => {
     };
 
     const ProgressBar = styled.div`
-        width: ${getCurrentProgress(ctx.knownWord)}%;
+        width: ${getCurrentProgress(knowWord)}%;
         height: 15px;
         background-color: ${Colors.PROGRESS_BAR_BLUE};
         border-radius: 8px;
@@ -53,7 +54,7 @@ const ProgressBar = () => {
             <ProgressBarWrapper>
                 <ProgressBar/>
             </ProgressBarWrapper>
-            <Counter>{ctx.knownWord} / {words.length}</Counter>
+            <Counter>{knowWord} / {words.length}</Counter>
         </Wrapper>)
     );
 };

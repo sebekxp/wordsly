@@ -1,28 +1,24 @@
-import React, {useContext} from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import {Circle} from 'styled-icons/fa-regular/Circle';
 import {CheckCircle} from 'styled-icons/boxicons-solid/CheckCircle';
-import {ProgressBarContext} from "../../../../WordContainer";
-import {BlankCircleIconContext} from "../NavigationWord";
+import {useDispatch} from "react-redux";
+import {decrementKnownWord, incrementKnownWord} from "../../../../../features/KnownWordCounterSlice";
 
 const BlankCircleIcon = () => {
-    console.log("BlankCircleIcon");
-    const ctx = useContext(ProgressBarContext);
-    const ctxBlank = useContext(BlankCircleIconContext);
+    const [blank, setBlank] = useState(true);
+    const dispatch = useDispatch();
 
     const updateProgBar = () => {
-
-        if (ctxBlank.blank)
-            ctx.setKnownWord(ctx.knownWord + 1);
-        else
-            ctx.setKnownWord(ctx.knownWord - 1);
-
-        ctxBlank.setBlank(!ctxBlank.blank);
+        blank ?
+            dispatch(incrementKnownWord())
+            :
+            decrementKnownWord();
+        setBlank(!blank);
     };
 
     const selectIcon = () => {
-        console.log(ctxBlank.blank);
-        return ctxBlank.blank ? Circle : CheckCircle
+        return blank ? Circle : CheckCircle
     };
 
     const GreenCircleIcon = styled(selectIcon())`

@@ -7,7 +7,6 @@ import styled from "styled-components";
 class DeleteElementIcon extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             isHover: false
         };

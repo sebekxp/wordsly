@@ -5,7 +5,6 @@ import {OBJWORDS as words} from "../../words";
 
 
 const NavigationWordContainer = (props) => {
-
     const Container = styled.div`
         display: flex;
         width: 275px;

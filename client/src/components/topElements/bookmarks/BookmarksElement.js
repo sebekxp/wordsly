@@ -4,7 +4,6 @@ import Colors from "../Colors";
 
 
 const BookmarksElement = (props) => {
-    console.log("BookmarksElement");
     const [selected, setSelected] = useState(props.selected);
 
     const getColor = () => {
@@ -29,6 +28,6 @@ const BookmarksElement = (props) => {
         </Wrapper>
     );
 
-}
+};
 
 export default BookmarksElement;
