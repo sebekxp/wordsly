@@ -3,7 +3,9 @@ import styled from "styled-components";
 import ProgressBar from "./progressBar/ProgressBar";
 import BookmarksBar from "./bookmarks/BookmarksBar";
 
+
 const TopElementsWrapper = () => {
+
     const Wrapper = styled.div`
         display: flex;
     `;

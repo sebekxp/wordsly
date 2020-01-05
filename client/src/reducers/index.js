@@ -1,8 +1,9 @@
-import { combineReducers } from 'redux'
-import knownWordCounterReducer from "../features/KnownWordCounterSlice";
-import showExampleContentReducer from "../features/ShowExampleContextSlice";
+import {combineReducers} from 'redux'
+import knownWordCounterReducer from "../components/topElements/progressBar/ProgressBarSlice";
+import showExampleContent from "../components/mediumElements/wordContent/WordContentSlice";
+
 
 export default combineReducers({
     knowWord: knownWordCounterReducer,
-    showExample: showExampleContentReducer
+    showContent: showExampleContent
 })

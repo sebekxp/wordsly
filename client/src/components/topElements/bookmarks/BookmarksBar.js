@@ -3,6 +3,7 @@ import styled from "styled-components";
 import BookmarksElement from "./BookmarksElement";
 import Colors from "../Colors";
 
+
 const BookmarksBar = () => {
     const Wrapper = styled.div`
         display: flex;

@@ -3,17 +3,15 @@ import styled from "styled-components";
 import {Circle} from 'styled-icons/fa-regular/Circle';
 import {CheckCircle} from 'styled-icons/boxicons-solid/CheckCircle';
 import {useDispatch} from "react-redux";
-import {decrementKnownWord, incrementKnownWord} from "../../../../../features/KnownWordCounterSlice";
+import {decrementKnownWord, incrementKnownWord} from "../../../../topElements/progressBar/ProgressBarSlice";
+
 
 const BlankCircleIcon = () => {
     const [blank, setBlank] = useState(true);
     const dispatch = useDispatch();
 
     const updateProgBar = () => {
-        blank ?
-            dispatch(incrementKnownWord())
-            :
-            decrementKnownWord();
+        blank ? dispatch(incrementKnownWord()) : dispatch(decrementKnownWord());
         setBlank(!blank);
     };
 

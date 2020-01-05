@@ -6,7 +6,6 @@ import ParagraphWrapper from "./ParagraphWrapper";
 
 const ExampleContent = (props) => {
     const [h, setH] = useState(props.height);
-
     const examples = props.examples;
     const targetRef = useRef();
 

@@ -3,7 +3,6 @@ import Colors from "../Colors";
 import styled from "styled-components";
 import {OBJWORDS as words} from "../../words";
 import {useSelector} from "react-redux";
-import knownWordCounterSlice from "../../mediumElements/leftElements/navigationWord/icons/FavElementIcon";
 
 
 const Wrapper = styled.div`
@@ -32,6 +31,7 @@ const Counter = styled.div`
 `;
 
 const ProgressBar = () => {
+
     const knowWord = useSelector(state => state.knowWord);
 
     const getCurrentProgress = (knownWords) => {

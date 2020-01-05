@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TopElementsWrapper from "./topElements/TopElementsWrapper";
 import MediumElementsWrapper from "./mediumElements/MediumElementsWrapper";
 
+
 const Container = styled.div`
     width: 68.75rem;
     height: 35rem;

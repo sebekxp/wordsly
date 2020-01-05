@@ -1,14 +1,21 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from "styled-components";
 import MoreExampleButton from "./MoreExampleButton";
 import ExampleContent from "./ExampleContent";
+import {useSelector} from "react-redux";
 
-const WordContent = (props) => {
+
+const WordContent = () => {
     const [feHeight, setFeHeight] = useState();
     const [fullHeight, setFullHeight] = useState();
     const [isToggle, setToggle] = useState(false);
+    const globalWord = useSelector(state => state.showContent);
+    const [word, setWord] = useState(globalWord);
 
-    const wordObj = props.obj;
+    useEffect(() => {
+        setWord(globalWord);
+    }, [globalWord]);
+
 
     const ExamplesContainer = styled.div`
         margin: 50px 50px;
@@ -32,13 +39,13 @@ const WordContent = (props) => {
     return (
         <ExamplesContainer>
             <KeyWordHeader>
-                <h3>{wordObj.wordName} - {wordObj.wordTranslate}</h3>
+                <h3>{word.wordName} - {word.wordTranslate}</h3>
             </KeyWordHeader>
             <ExampleContent height={feHeight}
                             isToggle={isToggle}
                             setFullHeight={setFullHeight}
-                            examples={wordObj.examples}
-                            wordName={wordObj.wordName}/>
+                            examples={word.examples}
+                            wordName={word.wordName}/>
             <MoreExampleButton height={feHeight}
                                isToggle={isToggle}
                                setToggle={setToggle}

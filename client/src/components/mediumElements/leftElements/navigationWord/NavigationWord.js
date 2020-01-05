@@ -1,13 +1,15 @@
-import React, {useContext} from "react";
+import React from "react";
 import styled from 'styled-components';
 import BlankCircleIcon from "./icons/BlankCircleIcon";
 import DeleteElemIcon from "./icons/DeleteElementIcon";
 import FavElementIcon from "./icons/FavElementIcon";
 import {OBJWORDS as words} from "../../../words";
-import {ShowExampleContext} from "../../MediumElementsWrapper";
+import {useDispatch} from "react-redux";
+import {setWordContent} from "../../wordContent/WordContentSlice";
+
 
 const NavigationWord = (props) => {
-    const ctx = useContext(ShowExampleContext);
+    const dispatch = useDispatch();
 
     const IconWrapper = styled.div`
          display: none;
@@ -49,17 +51,17 @@ const NavigationWord = (props) => {
         background-color: rgb(215, 215, 215);
     `;
 
-    const hoverMouseAndDisplayWordContent = (evt, ctx) => {
+    const hoverMouseAndDisplayWordContent = (evt) => {
         for (let i = 0; i < words.length; i++) {
             if (words[i].wordName === evt.target.innerText) {
-                ctx.setWord(words[i])
+                dispatch(setWordContent(words[i]));
             }
         }
     };
 
     return (
-        <NavigationWord onMouseOver={(event) => hoverMouseAndDisplayWordContent(event, ctx)}>
-                <BlankCircleIcon/>
+        <NavigationWord onMouseOver={(event) => hoverMouseAndDisplayWordContent(event)}>
+            <BlankCircleIcon/>
             <WordName>
                 {props.name}
                 <IconWrapper>

@@ -3,13 +3,13 @@ import styled from "styled-components";
 import {Star} from "styled-icons/boxicons-solid/Star";
 import {Star as BlankStar} from 'styled-icons/boxicons-regular/Star';
 
+
 class FavElementIcon extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             isHover: false
         };
-
     }
 
     onMouseEnterHandler = () => {

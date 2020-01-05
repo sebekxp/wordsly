@@ -1,8 +1,8 @@
 import React from "react";
 import {XCircle} from 'styled-icons/boxicons-solid/XCircle';
 import {XCircle as BlankCircle} from 'styled-icons/boxicons-regular/XCircle';
-
 import styled from "styled-components";
+
 
 class DeleteElementIcon extends React.Component {
     constructor(props) {
@@ -23,7 +23,6 @@ class DeleteElementIcon extends React.Component {
             isHover: false
         });
     };
-
 
     render() {
 
