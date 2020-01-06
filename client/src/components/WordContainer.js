@@ -9,10 +9,10 @@ const Container = styled.div`
     height: 35rem;
     padding: 0;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px;
+    box-shadow: 0px 0px 5px;
     margin: auto;
     position: fixed;
-    top: 100px;
+    top: 180px;
     left: 0;
     right: 0;
 `;

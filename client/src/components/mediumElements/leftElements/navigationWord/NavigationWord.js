@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from 'styled-components';
 import BlankCircleIcon from "./icons/BlankCircleIcon";
 import DeleteElemIcon from "./icons/DeleteElementIcon";
@@ -7,16 +7,28 @@ import {OBJWORDS as words} from "../../../words";
 import {useDispatch} from "react-redux";
 import {setWordContent} from "../../wordContent/WordContentSlice";
 
-
 const NavigationWord = (props) => {
+    // const [isHover, setHover] = useState(false);
     const dispatch = useDispatch();
+
+    const onMouseEnterHandler = () => {
+        // setHover(true);
+    };
+
+    const onMouseLeaveHandler = () => {
+        // setHover(false);
+    };
 
     const IconWrapper = styled.div`
          display: none;
     `;
 
+    const shouldBeHide = () => {
+        return props.shouldBeHide ? "none" : "flex"
+    };
+
     const NavigationWord = styled.div`
-        display: flex;
+        display: ${shouldBeHide()};
         justify-content: center;
         align-items: center;
         margin-bottom: 3px;
@@ -51,6 +63,7 @@ const NavigationWord = (props) => {
         background-color: rgb(215, 215, 215);
     `;
 
+
     const hoverMouseAndDisplayWordContent = (evt) => {
         for (let i = 0; i < words.length; i++) {
             if (words[i].wordName === evt.target.innerText) {
@@ -59,9 +72,13 @@ const NavigationWord = (props) => {
         }
     };
 
+
     return (
-        <NavigationWord onMouseOver={(event) => hoverMouseAndDisplayWordContent(event)}>
-            <BlankCircleIcon/>
+        <NavigationWord onMouseOver={(event) => hoverMouseAndDisplayWordContent(event)}
+                        className={"navigation-word"}
+                        onMouseEnter={onMouseEnterHandler}
+                        onMouseLeave={onMouseLeaveHandler}>
+            <BlankCircleIcon />
             <WordName>
                 {props.name}
                 <IconWrapper>

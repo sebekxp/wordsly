@@ -7,8 +7,9 @@ const WordContentContainer = () => {
 
     const WordContentContainer = styled.div`
         width: 100%;
-        height: 503.9px;
+        height: 493.9px;
         border-bottom-right-radius: 10px; 
+        padding-bottom: 10px;
         overflow: auto;
     `;
 

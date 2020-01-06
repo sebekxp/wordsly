@@ -6,7 +6,7 @@ import {useDispatch} from "react-redux";
 import {decrementKnownWord, incrementKnownWord} from "../../../../topElements/progressBar/ProgressBarSlice";
 
 
-const BlankCircleIcon = () => {
+const BlankCircleIcon = (props) => {
     const [blank, setBlank] = useState(true);
     const dispatch = useDispatch();
 
@@ -19,6 +19,9 @@ const BlankCircleIcon = () => {
         return blank ? Circle : CheckCircle
     };
 
+    const setColor = () => {
+        return props.hover ? "#a2a5a2" : "rgb(215, 215, 215)";
+    };
     const GreenCircleIcon = styled(selectIcon())`
         color: #28a745;
         padding: 12px 12px;
@@ -26,7 +29,7 @@ const BlankCircleIcon = () => {
         height: 53.9px;
         margin-right: 3px;
         border-radius: 5px;
-        background-color: rgb(215, 215, 215);
+        background-color: ${setColor()}
     `;
 
     return (

@@ -3,8 +3,8 @@ import styled from "styled-components";
 import NavigationWord from "./navigationWord/NavigationWord";
 import {OBJWORDS as words} from "../../words";
 
-
 const NavigationWordContainer = (props) => {
+
     const Container = styled.div`
         display: flex;
         width: 275px;
@@ -17,7 +17,7 @@ const NavigationWordContainer = (props) => {
     `;
 
     return (
-        <Container id={props.id} className={props.className}>
+        <Container id={props.id} className={"words"}>
             {
                 words.map((word, index) =>
                     <NavigationWord name={word.wordName} key={index}/>)

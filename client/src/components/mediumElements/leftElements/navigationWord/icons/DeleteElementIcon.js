@@ -3,13 +3,13 @@ import {XCircle} from 'styled-icons/boxicons-solid/XCircle';
 import {XCircle as BlankCircle} from 'styled-icons/boxicons-regular/XCircle';
 import styled from "styled-components";
 
-
 class DeleteElementIcon extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             isHover: false
         };
+
     }
 
     onMouseEnterHandler = () => {
@@ -23,6 +23,11 @@ class DeleteElementIcon extends React.Component {
             isHover: false
         });
     };
+
+    deleteNavigationWord = (e) => {
+        e.currentTarget.parentElement.parentElement.parentElement.remove();
+    };
+
 
     render() {
 
@@ -43,9 +48,10 @@ class DeleteElementIcon extends React.Component {
         return (
             <DeleteElementIcon onMouseEnter={this.onMouseEnterHandler}
                                onMouseLeave={this.onMouseLeaveHandler}
+                               onClick={e => this.deleteNavigationWord(e)}
                                title={"Delete word"}/>
         );
     }
 }
 
-export default DeleteElementIcon;
+export default DeleteElementIcon

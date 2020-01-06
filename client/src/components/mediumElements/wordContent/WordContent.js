@@ -6,7 +6,7 @@ import {useSelector} from "react-redux";
 
 
 const WordContent = () => {
-    const [feHeight, setFeHeight] = useState();
+    const [feHeight, setFeHeight] = useState(200);
     const [fullHeight, setFullHeight] = useState();
     const [isToggle, setToggle] = useState(false);
     const globalWord = useSelector(state => state.showContent);
