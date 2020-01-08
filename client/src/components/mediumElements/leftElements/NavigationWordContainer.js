@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import NavigationWord from "./navigationWord/NavigationWord";
 import {OBJWORDS as words} from "../../words";
+import uuid from 'uuid';
+
 
 const NavigationWordContainer = (props) => {
 
@@ -19,8 +21,8 @@ const NavigationWordContainer = (props) => {
     return (
         <Container id={props.id} className={"words"}>
             {
-                words.map((word, index) =>
-                    <NavigationWord name={word.wordName} key={index}/>)
+                words.map((word) =>
+                    <NavigationWord name={word.wordName} key={uuid()}/>)
             }
         </Container>
     );

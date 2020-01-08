@@ -3,19 +3,14 @@ import styled from "styled-components";
 import {ExpandMore} from "styled-icons/material/ExpandMore";
 import {ExpandLess} from "styled-icons/material/ExpandLess";
 
-
 const MoreExampleButton = (props) => {
-    const toggleMoreExample = () => {
-        if (!props.isToggle)
-            props.setHeight(props.fullHeight);
-        else
-            props.setHeight(props.height);
 
-        props.setToggle(!props.isToggle);
+    const toggleMoreExample = () => {
+        props.setExpand(!props.expand)
     };
 
     const selectIcon = () => {
-        return !props.isToggle ? ExpandMore : ExpandLess
+        return !props.expand ? ExpandMore : ExpandLess
     };
 
     const ExpandHideIcon = styled(selectIcon())`
@@ -52,14 +47,14 @@ const MoreExampleButton = (props) => {
             text-decoration: underline;
             
             ${ExpandHideIcon} {
-                     display: block;
+              display: block;
             }
         }
     `;
 
     return (
         <MoreExamples onClick={toggleMoreExample}>
-            {!props.isToggle ? "More" : "Less"}
+            {!props.expand ? "More" : "Less"}
             <ExpandHideIcon/>
         </MoreExamples>
     );

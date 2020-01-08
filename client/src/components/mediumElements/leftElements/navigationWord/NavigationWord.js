@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import styled from 'styled-components';
 import BlankCircleIcon from "./icons/BlankCircleIcon";
 import DeleteElemIcon from "./icons/DeleteElementIcon";
@@ -41,7 +41,7 @@ const NavigationWord = (props) => {
             margin: 0;
         }
         
-        &:hover {      
+        &:hover {
             ${IconWrapper} {
                  display: flex;
             }
@@ -65,6 +65,7 @@ const NavigationWord = (props) => {
 
 
     const hoverMouseAndDisplayWordContent = (evt) => {
+
         for (let i = 0; i < words.length; i++) {
             if (words[i].wordName === evt.target.innerText) {
                 dispatch(setWordContent(words[i]));
@@ -78,7 +79,7 @@ const NavigationWord = (props) => {
                         className={"navigation-word"}
                         onMouseEnter={onMouseEnterHandler}
                         onMouseLeave={onMouseLeaveHandler}>
-            <BlankCircleIcon />
+            <BlankCircleIcon className={"blank-circle-icon"}/>
             <WordName>
                 {props.name}
                 <IconWrapper>

@@ -1,16 +1,19 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {OBJWORDS as words} from "../../words";
 
+const initialState = {
+    word: words[0]
+};
 
 const showExampleContent = createSlice({
     name: 'ShowExampleContent',
-    initialState: words[0],
+    initialState,
     reducers: {
         setWordContent(state, action) {
-            return action.payload;
-        }
+            state.word = action.payload;
+        },
     }
 });
 
-export const {setWordContent} = showExampleContent.actions;
+export const {setWordContent, setExpand} = showExampleContent.actions;
 export default showExampleContent.reducer;
