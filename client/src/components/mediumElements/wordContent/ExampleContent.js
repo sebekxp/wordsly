@@ -3,49 +3,22 @@ import styled from "styled-components";
 import {FormatQuote} from "styled-icons/material/FormatQuote"
 import ParagraphWrapper from "./ParagraphWrapper";
 import MoreExampleButton from "./MoreExampleButton";
-import uuid from 'uuid';
-import {useSelector} from "react-redux";
+import {connect} from "react-redux";
 
 
 const ExampleContent = (props) => {
-    const globalWord = useSelector(state => state.showContent.word);
+    const word = props.word;
     const [expand, setExpand] = useState(false);
-    const [word, setWord] = useState(globalWord);
-    const [h, setH] = useState(200);
     const examples = word.examples;
     const targetRef = useRef();
 
-
     useEffect(() => {
-        setWord(globalWord);
-        const paragraphs = targetRef.current.childNodes;
+        setExpand(false);
+    }, [word]);
 
-        if (expand)
-            setH(calcFullHeight(paragraphs));
-        else
-            setH(calcMintHeight(paragraphs));
-    }, [expand, globalWord]);
-
-    const calcMintHeight = (list) => {
-        let h = 0;
-        h += list[0].offsetHeight;
-        h += list[1].offsetHeight;
-        h += list[2].offsetHeight;
-
-        return h;
-    };
-
-    const calcFullHeight = (list) => {
-        let fullH = 0;
-        for (let i = 0; i < list.length; i++) {
-            fullH += list[i].offsetHeight;
-        }
-
-        return fullH;
-    };
 
     const ExampleContent = styled.div`
-        height: ${h}px;
+        height: auto;
         overflow: hidden;
         
         p {
@@ -77,6 +50,7 @@ const ExampleContent = (props) => {
         return str.replace(" " + wordName + " ", ' <b>' + wordName + '</b> ')
     };
 
+
     return (
         <>
             <KeyWordHeader>
@@ -84,8 +58,9 @@ const ExampleContent = (props) => {
             </KeyWordHeader>
             <ExampleContent ref={targetRef}>
                 {
-                    examples.map((example) =>
-                        <ParagraphWrapper key={uuid()}>
+                    examples.filter((elem, index) =>
+                        index < (expand ? examples.length : 3)).map((example, index) =>
+                        <ParagraphWrapper key={index}>
                             <Quote/>
                             <p dangerouslySetInnerHTML={{__html: makeHeaderWordBold(example, props.wordName)}}/>
                         </ParagraphWrapper>)
@@ -96,4 +71,9 @@ const ExampleContent = (props) => {
     );
 };
 
-export default ExampleContent
+const mapStateToProps = (state) => {
+    const {showContent} = state;
+    return {word: showContent.word}
+};
+
+export default connect(mapStateToProps)(ExampleContent);

@@ -2,7 +2,6 @@ import React from "react";
 import Colors from "../../topElements/Colors";
 import styled from 'styled-components';
 
-
 const AddingWordsInput = () => {
     const AddingWordsInput = styled.div`
         display: flex;
@@ -12,10 +11,14 @@ const AddingWordsInput = () => {
         border-bottom-left-radius: 10px;
         background-color: ${Colors.DEFAULT_GREY};
     `;
+    const handleChange = () => {
+    };
 
-    return <AddingWordsInput>
-        <h2>Add word</h2>
-    </AddingWordsInput>
+    return (
+        <AddingWordsInput>
+
+        </AddingWordsInput>
+    );
 
 };
 export default AddingWordsInput;

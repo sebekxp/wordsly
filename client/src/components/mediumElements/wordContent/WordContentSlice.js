@@ -2,7 +2,8 @@ import {createSlice} from "@reduxjs/toolkit";
 import {OBJWORDS as words} from "../../words";
 
 const initialState = {
-    word: words[0]
+    word: words[0],
+    expand: false
 };
 
 const showExampleContent = createSlice({
@@ -12,6 +13,9 @@ const showExampleContent = createSlice({
         setWordContent(state, action) {
             state.word = action.payload;
         },
+        setExpand(state, action) {
+            state.expand = action.payload;
+        }
     }
 });
 

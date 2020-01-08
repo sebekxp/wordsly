@@ -5,19 +5,10 @@ import DeleteElemIcon from "./icons/DeleteElementIcon";
 import FavElementIcon from "./icons/FavElementIcon";
 import {OBJWORDS as words} from "../../../words";
 import {useDispatch} from "react-redux";
-import {setWordContent} from "../../wordContent/WordContentSlice";
+import {setWordContent } from "../../wordContent/WordContentSlice";
 
 const NavigationWord = (props) => {
-    // const [isHover, setHover] = useState(false);
     const dispatch = useDispatch();
-
-    const onMouseEnterHandler = () => {
-        // setHover(true);
-    };
-
-    const onMouseLeaveHandler = () => {
-        // setHover(false);
-    };
 
     const IconWrapper = styled.div`
          display: none;
@@ -65,7 +56,6 @@ const NavigationWord = (props) => {
 
 
     const hoverMouseAndDisplayWordContent = (evt) => {
-
         for (let i = 0; i < words.length; i++) {
             if (words[i].wordName === evt.target.innerText) {
                 dispatch(setWordContent(words[i]));
@@ -76,9 +66,7 @@ const NavigationWord = (props) => {
 
     return (
         <NavigationWord onMouseOver={(event) => hoverMouseAndDisplayWordContent(event)}
-                        className={"navigation-word"}
-                        onMouseEnter={onMouseEnterHandler}
-                        onMouseLeave={onMouseLeaveHandler}>
+                        className={"navigation-word"}>
             <BlankCircleIcon className={"blank-circle-icon"}/>
             <WordName>
                 {props.name}
