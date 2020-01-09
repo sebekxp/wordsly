@@ -10,7 +10,7 @@ const BlankCircleIcon = (props) => {
     const [blank, setBlank] = useState(true);
     const dispatch = useDispatch();
 
-    const updateProgBar = () => {
+    const updateProgBar = (e) => {
         blank ? dispatch(incrementKnownWord()) : dispatch(decrementKnownWord());
         setBlank(!blank);
     };
@@ -34,9 +34,11 @@ const BlankCircleIcon = (props) => {
     `;
 
     return (
-        <GreenCircleIcon
-            onClick={updateProgBar}
-            title={"Mark as known word"}/>
+        <>
+            <GreenCircleIcon
+                onClick={e => updateProgBar(e)}
+                title={"Mark as known word"}/>
+        </>
     );
 };
 
