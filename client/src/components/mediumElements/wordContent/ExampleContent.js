@@ -62,7 +62,7 @@ const ExampleContent = (props) => {
                         index < (expand ? examples.length : 3)).map((example, index) =>
                         <ParagraphWrapper key={index}>
                             <Quote/>
-                            <p dangerouslySetInnerHTML={{__html: makeHeaderWordBold(example, props.wordName)}}/>
+                            <p dangerouslySetInnerHTML={{__html: makeHeaderWordBold(example, word.wordName)}}/>
                         </ParagraphWrapper>)
                 }
             </ExampleContent>

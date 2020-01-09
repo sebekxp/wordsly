@@ -8,7 +8,7 @@ import {configureStore} from "@reduxjs/toolkit";
 import Search from "./components/Search";
 
 
-const store = configureStore({
+export const store = configureStore({
     reducer: rootReducer
 });
 

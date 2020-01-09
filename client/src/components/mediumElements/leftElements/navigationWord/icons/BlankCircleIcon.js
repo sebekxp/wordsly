@@ -22,6 +22,7 @@ const BlankCircleIcon = (props) => {
     const setColor = () => {
         return props.hover ? "#a2a5a2" : "rgb(215, 215, 215)";
     };
+
     const GreenCircleIcon = styled(selectIcon())`
         color: #28a745;
         padding: 12px 12px;

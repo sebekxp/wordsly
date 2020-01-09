@@ -1,8 +1,7 @@
 import React from 'react';
 import Colors from "../Colors";
 import styled from "styled-components";
-import {OBJWORDS as words} from "../../words";
-import {useSelector} from "react-redux";
+import {connect, useSelector} from "react-redux";
 
 
 const Wrapper = styled.div`
@@ -30,9 +29,10 @@ const Counter = styled.div`
     padding: 5px 0;
 `;
 
-const ProgressBar = () => {
+const ProgressBar = (props) => {
 
     const knowWord = useSelector(state => state.knowWord);
+    const words = props.words;
 
     const getCurrentProgress = (knownWords) => {
         const numOfKnownWords = knownWords;
@@ -59,4 +59,9 @@ const ProgressBar = () => {
     );
 };
 
-export default ProgressBar
+const mapStateToProps = (state) => {
+    const {wordsToRender} = state;
+    return {words: wordsToRender.words}
+};
+
+export default connect(mapStateToProps)(ProgressBar);

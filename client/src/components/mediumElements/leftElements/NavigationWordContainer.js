@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import NavigationWord from "./navigationWord/NavigationWord";
-import {OBJWORDS as words} from "../../words";
-import uuid from 'uuid';
+import {connect} from "react-redux";
 
 
 const NavigationWordContainer = (props) => {
+    const words = props.words;
 
     const Container = styled.div`
         display: flex;
         width: 275px;
         flex-direction: column;
-        height: 446.8px;
+        height: 436.8px;
         border: 1px solid black;
         box-sizing: border-box;
         background-color: #f1f1f1;
@@ -19,14 +19,20 @@ const NavigationWordContainer = (props) => {
     `;
 
     return (
-        <Container id={props.id} className={"words"}>
+        <Container id={"navigation-word-container"} className={"words"}>
             {
-                words.map((word) =>
-                    <NavigationWord name={word.wordName} key={uuid()}/>)
+                words.map((word, index) =>
+                    <NavigationWord name={word.wordName} key={index}/>)
             }
+
         </Container>
     );
 
 };
 
-export default NavigationWordContainer;
+const mapStateToProps = (state) => {
+    const {wordsToRender} = state;
+    return {words: wordsToRender.words}
+};
+
+export default connect(mapStateToProps)(NavigationWordContainer);

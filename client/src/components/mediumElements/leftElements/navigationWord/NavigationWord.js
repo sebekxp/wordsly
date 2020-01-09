@@ -3,13 +3,12 @@ import styled from 'styled-components';
 import BlankCircleIcon from "./icons/BlankCircleIcon";
 import DeleteElemIcon from "./icons/DeleteElementIcon";
 import FavElementIcon from "./icons/FavElementIcon";
-import {OBJWORDS as words} from "../../../words";
-import {useDispatch} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import {setWordContent } from "../../wordContent/WordContentSlice";
 
 const NavigationWord = (props) => {
     const dispatch = useDispatch();
-
+    const words = props.words;
     const IconWrapper = styled.div`
          display: none;
     `;
@@ -78,4 +77,9 @@ const NavigationWord = (props) => {
         </NavigationWord>);
 };
 
-export default NavigationWord;
+const mapStateToProps = (state) => {
+    const {wordsToRender} = state;
+    return {words: wordsToRender.words}
+};
+
+export default connect(mapStateToProps)(NavigationWord);

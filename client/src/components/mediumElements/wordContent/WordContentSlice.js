@@ -3,7 +3,6 @@ import {OBJWORDS as words} from "../../words";
 
 const initialState = {
     word: words[0],
-    expand: false
 };
 
 const showExampleContent = createSlice({
@@ -12,12 +11,9 @@ const showExampleContent = createSlice({
     reducers: {
         setWordContent(state, action) {
             state.word = action.payload;
-        },
-        setExpand(state, action) {
-            state.expand = action.payload;
         }
     }
 });
 
-export const {setWordContent, setExpand} = showExampleContent.actions;
+export const {setWordContent, setAdded} = showExampleContent.actions;
 export default showExampleContent.reducer;
