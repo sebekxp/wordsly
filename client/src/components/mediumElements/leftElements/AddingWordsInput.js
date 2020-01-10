@@ -84,6 +84,10 @@ const AddingWordsInput = () => {
 
     const createAndAddWordToRepo = () => {
         const inputValue = getInputValue();
+        if(inputValue.length > 11){
+            alert("Name is to long use shorthand");
+            return;
+        }
         const nav = createNavWord(inputValue, inputValue);
         dispatch(addWord(nav));
     };

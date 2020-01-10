@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import WordContent from "./WordContent";
+import Examples from "./Examples";
+import {connect} from "react-redux";
+import FlashCards from "../flashCards/FlashCard";
 
 
-const WordContentContainer = () => {
-
+const WordContentContainer = (props) => {
     const WordContentContainer = styled.div`
         width: 100%;
         height: 493.9px;
@@ -12,12 +13,28 @@ const WordContentContainer = () => {
         padding-bottom: 10px;
         overflow: auto;
     `;
+    const selectBookmark = () => {
+        switch (props.bookmark) {
+            case "Examples":
+                console.log();
+                return <Examples/>;
+            case "Flash Cards":
+                return <FlashCards/>;
+            case "Favorites":
+                return null
+        }
+    };
 
     return (
         <WordContentContainer>
-            <WordContent/>
+            {selectBookmark()}
         </WordContentContainer>
     );
 };
 
-export default WordContentContainer;
+const mapStateToProps = (state) => {
+    const {bookmark} = state;
+    return {bookmark: bookmark}
+};
+
+export default connect(mapStateToProps)(WordContentContainer);

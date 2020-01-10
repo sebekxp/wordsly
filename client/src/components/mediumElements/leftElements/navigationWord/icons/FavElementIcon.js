@@ -24,6 +24,10 @@ class FavElementIcon extends React.Component {
         });
     };
 
+    handleClick = (e) => {
+       e.stopPropagation();
+    };
+
     render() {
 
         const selectIcon = () => {
@@ -31,6 +35,9 @@ class FavElementIcon extends React.Component {
         };
 
         const FavElemIcon = styled(selectIcon())`
+            position: ${this.props.position};
+            top: 0;
+            right: 0;
             display: flex;
             color: #FFD700;   
         `;
@@ -38,6 +45,7 @@ class FavElementIcon extends React.Component {
         return (
             <FavElemIcon onMouseEnter={this.onMouseEnterHandler}
                          onMouseLeave={this.onMouseLeaveHandler}
+                         onClick={e=>this.handleClick(e)}
                          title={"Add to favorites word"}
                          size={30}/>
         );

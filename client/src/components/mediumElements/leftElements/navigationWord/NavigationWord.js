@@ -70,7 +70,7 @@ const NavigationWord = (props) => {
             <WordName>
                 {props.name}
                 <IconWrapper>
-                    <FavElementIcon/>
+                    <FavElementIcon position={"relative"}/>
                     <DeleteElemIcon/>
                 </IconWrapper>
             </WordName>

@@ -1,17 +1,23 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useRef, useState} from "react";
+import ReactDOM from "react-dom";
 import styled from "styled-components";
+import uuid from 'uuid'
 
-const Popup = (props) => {
-    const target = React.createRef();
+const Popup = ({open, children, x, y}) => {
+    const target = useRef();
+    const [shouldRender, setShouldRender] = useState(true);
+    const id = uuid();
 
     useEffect(() => {
-        setTimeout(() => {
+        let timer = setTimeout(() => {
+            if (open)
+                setShouldRender(false);
+        }, 800);
 
-            const popup = document.getElementById("popup");
-            if (popup !== null)
-                popup.remove();
-        }, 800)
-    });
+        return () => {
+            clearTimeout(timer);
+        }
+    }, [open]);
 
 
     const Popup = styled.div`
@@ -21,6 +27,8 @@ const Popup = (props) => {
        border-radius: 6px;
        animation: fadeIn 0.6s;
        color: #ffffff;
+       top: ${y}px;
+       left: ${x}px;
 
           &::after {
             content: "";
@@ -35,9 +43,11 @@ const Popup = (props) => {
      `;
 
     return (
-        <Popup id={"popup"} ref={target}>
-            {props.text}
-        </Popup>
+        open && shouldRender ?
+            ReactDOM.createPortal(
+                <Popup id={id} ref={target}>
+                    {children}
+                </Popup>, document.body) : null
     );
 };
 

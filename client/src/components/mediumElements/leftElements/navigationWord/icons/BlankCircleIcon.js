@@ -4,13 +4,22 @@ import {Circle} from 'styled-icons/fa-regular/Circle';
 import {CheckCircle} from 'styled-icons/boxicons-solid/CheckCircle';
 import {useDispatch} from "react-redux";
 import {decrementKnownWord, incrementKnownWord} from "../../../../topElements/progressBar/ProgressBarSlice";
+import Popup from "../../../../Popup/Popup";
 
 
 const BlankCircleIcon = (props) => {
     const [blank, setBlank] = useState(true);
+    const [openPopup, setOpenPopup] = useState(false);
+    const [cords, setCords] = useState({x: 0, y: 0});
     const dispatch = useDispatch();
 
+    const selectText = () => {
+        return blank ? "Set as known word" : "Set as unknown word";
+    };
+
     const updateProgBar = (e) => {
+        setOpenPopup(true);
+        setCords({x: e.screenX, y: e.screenY});
         blank ? dispatch(incrementKnownWord()) : dispatch(decrementKnownWord());
         setBlank(!blank);
     };
@@ -38,6 +47,9 @@ const BlankCircleIcon = (props) => {
             <GreenCircleIcon
                 onClick={e => updateProgBar(e)}
                 title={"Mark as known word"}/>
+            {/*<Popup open={openPopup} x={cords.x} y={cords.y}>*/}
+            {/*    {selectText()}*/}
+            {/*</Popup>*/}
         </>
     );
 };

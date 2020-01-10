@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ExampleContent from "./ExampleContent";
 
 
-const WordContent = () => {
+const Examples = () => {
 
     const ExamplesContainer = styled.div`
         margin: 50px 50px;
@@ -19,4 +19,4 @@ const WordContent = () => {
     );
 };
 
-export default WordContent
+export default Examples
