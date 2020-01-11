@@ -1,7 +1,7 @@
 import React from 'react';
 import Flippy, {FrontSide, BackSide} from 'react-flippy';
 import {connect} from "react-redux";
-import FavElementIcon from "../leftElements/navigationWord/icons/FavElementIcon";
+import FavElementIcon from "../../../mediumElements/leftElements/navigationWord/icons/FavElementIcon";
 
 const FlashCards = (props) => {
     const word = props.word;

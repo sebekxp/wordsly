@@ -21,8 +21,8 @@ const NavigationWordContainer = (props) => {
     return (
         <Container id={"navigation-word-container"} className={"words"}>
             {
-                words.map((word, index) =>
-                    <NavigationWord name={word.wordName} key={index}/>)
+                words !== null ? words.map((word, index) =>
+                    <NavigationWord name={word.wordName} key={index}/>) : null
             }
 
         </Container>

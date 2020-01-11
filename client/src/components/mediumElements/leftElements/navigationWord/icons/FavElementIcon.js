@@ -1,55 +1,52 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import {Star} from "styled-icons/boxicons-solid/Star";
 import {Star as BlankStar} from 'styled-icons/boxicons-regular/Star';
+import {connect, useDispatch} from "react-redux";
+import {addFavWord} from "../../../../topElements/bookmarks/favorites/FavoritesWordSlice";
 
 
-class FavElementIcon extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isHover: false
-        };
-    }
+const FavElementIcon = (props) => {
+    const [hover, setHover] = useState(false);
+    const dispatch = useDispatch();
 
-    onMouseEnterHandler = () => {
-        this.setState({
-            isHover: true
-        });
+    const onMouseEnterHandler = () => {
+        setHover(true);
     };
 
-    onMouseLeaveHandler = () => {
-        this.setState({
-            isHover: false
-        });
+    const onMouseLeaveHandler = () => {
+        setHover(false);
     };
 
-    handleClick = (e) => {
-       e.stopPropagation();
+    const handleClick = (e) => {
+        dispatch(addFavWord(props.word));
+        e.stopPropagation();
     };
 
-    render() {
+    const selectIcon = () => {
+        return hover ? Star : BlankStar;
+    };
 
-        const selectIcon = () => {
-            return this.state.isHover ? Star : BlankStar;
-        };
-
-        const FavElemIcon = styled(selectIcon())`
-            position: ${this.props.position};
+    const FavElemIcon = styled(selectIcon())`
+            position: ${props.position};
             top: 0;
             right: 0;
             display: flex;
             color: #FFD700;   
-        `;
+    `;
 
-        return (
-            <FavElemIcon onMouseEnter={this.onMouseEnterHandler}
-                         onMouseLeave={this.onMouseLeaveHandler}
-                         onClick={e=>this.handleClick(e)}
-                         title={"Add to favorites word"}
-                         size={30}/>
-        );
-    }
-}
+    return (
+        <FavElemIcon onMouseEnter={onMouseEnterHandler}
+                     onMouseLeave={onMouseLeaveHandler}
+                     onClick={e => handleClick(e)}
+                     title={"Add to favorites word"}
+                     size={30}/>
+    );
+};
 
-export default FavElementIcon;
+const mapStateToProps = (state) => {
+    const {favWordsToRender} = state;
+    return {favWords: favWordsToRender.favWords}
+};
+
+export default connect(mapStateToProps)(FavElementIcon);

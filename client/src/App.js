@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import WordsContainer from "./components/WordContainer";
 import {Provider} from 'react-redux'

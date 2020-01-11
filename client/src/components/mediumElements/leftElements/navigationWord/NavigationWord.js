@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from 'styled-components';
 import BlankCircleIcon from "./icons/BlankCircleIcon";
 import DeleteElemIcon from "./icons/DeleteElementIcon";
@@ -7,6 +7,7 @@ import {connect, useDispatch} from "react-redux";
 import {setWordContent } from "../../wordContent/WordContentSlice";
 
 const NavigationWord = (props) => {
+    const [word, setWord] = useState({});
     const dispatch = useDispatch();
     const words = props.words;
     const IconWrapper = styled.div`
@@ -57,6 +58,7 @@ const NavigationWord = (props) => {
     const hoverMouseAndDisplayWordContent = (evt) => {
         for (let i = 0; i < words.length; i++) {
             if (words[i].wordName === evt.target.innerText) {
+                setWord(words[i]);
                 dispatch(setWordContent(words[i]));
             }
         }
@@ -70,7 +72,7 @@ const NavigationWord = (props) => {
             <WordName>
                 {props.name}
                 <IconWrapper>
-                    <FavElementIcon position={"relative"}/>
+                    <FavElementIcon word={word} position={"relative"}/>
                     <DeleteElemIcon/>
                 </IconWrapper>
             </WordName>

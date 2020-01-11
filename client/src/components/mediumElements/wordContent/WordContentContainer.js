@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Examples from "./Examples";
 import {connect} from "react-redux";
-import FlashCards from "../flashCards/FlashCard";
+import FlashCards from "../../topElements/bookmarks/flashCards/FlashCard";
+import Favorites from "../../topElements/bookmarks/favorites/Favorites";
 
 
 const WordContentContainer = (props) => {
@@ -21,7 +22,7 @@ const WordContentContainer = (props) => {
             case "Flash Cards":
                 return <FlashCards/>;
             case "Favorites":
-                return null
+                return <Favorites/>
         }
     };
 

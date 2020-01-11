@@ -11,9 +11,12 @@ const wordsToRender = createSlice({
     reducers: {
         addWord(state, action) {
             state.words.push(action.payload);
+        },
+        setWords(state, action) {
+            state.words = action.payload;
         }
     }
 });
 
-export const {addWord} = wordsToRender.actions;
+export const {addWord, setWords} = wordsToRender.actions;
 export default wordsToRender.reducer;
