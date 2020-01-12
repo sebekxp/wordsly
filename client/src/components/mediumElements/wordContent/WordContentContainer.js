@@ -22,7 +22,9 @@ const WordContentContainer = (props) => {
             case "Flash Cards":
                 return <FlashCards/>;
             case "Favorites":
-                return <Favorites/>
+                return <Favorites/>;
+            default:
+                return
         }
     };
 

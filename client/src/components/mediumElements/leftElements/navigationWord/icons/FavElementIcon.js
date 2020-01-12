@@ -2,8 +2,8 @@ import React, {useState} from "react";
 import styled from "styled-components";
 import {Star} from "styled-icons/boxicons-solid/Star";
 import {Star as BlankStar} from 'styled-icons/boxicons-regular/Star';
-import {connect, useDispatch} from "react-redux";
-import {addFavWord} from "../../../../topElements/bookmarks/favorites/FavoritesWordSlice";
+import {useDispatch} from "react-redux";
+import {setActive} from "../../../WordsToRenderSlice";
 
 
 const FavElementIcon = (props) => {
@@ -19,7 +19,7 @@ const FavElementIcon = (props) => {
     };
 
     const handleClick = (e) => {
-        dispatch(addFavWord(props.word));
+        dispatch(setActive({word: props.word, active: true}));
         e.stopPropagation();
     };
 
@@ -44,9 +44,5 @@ const FavElementIcon = (props) => {
     );
 };
 
-const mapStateToProps = (state) => {
-    const {favWordsToRender} = state;
-    return {favWords: favWordsToRender.favWords}
-};
 
-export default connect(mapStateToProps)(FavElementIcon);
+export default FavElementIcon;

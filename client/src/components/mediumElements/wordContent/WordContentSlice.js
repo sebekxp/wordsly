@@ -15,5 +15,5 @@ const showExampleContent = createSlice({
     }
 });
 
-export const {setWordContent, setAdded} = showExampleContent.actions;
+export const {setWordContent} = showExampleContent.actions;
 export default showExampleContent.reducer;

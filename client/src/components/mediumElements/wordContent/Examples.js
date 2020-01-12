@@ -4,7 +4,7 @@ import ExampleContent from "./ExampleContent";
 
 
 const Examples = () => {
-
+    
     const ExamplesContainer = styled.div`
         margin: 50px 50px;
         width: 600px;
