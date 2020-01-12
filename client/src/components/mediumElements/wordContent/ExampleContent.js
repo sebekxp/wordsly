@@ -13,11 +13,12 @@ const ExampleContent = (props) => {
     const targetRef = useRef();
 
     useEffect(() => {
-        const navigationWord = window.document.getElementsByClassName("navigation-word");
-        [...navigationWord].forEach(obj=>{
-           obj.style.display = "flex";
-        });
-
+        if (props.activeBookmark === 'Examples') {
+            const navigationWord = window.document.getElementsByClassName("navigation-word");
+            [...navigationWord].forEach(obj => {
+                obj.style.display = "flex";
+            });
+        }
         setExpand(false);
     }, [word]);
 
@@ -64,11 +65,11 @@ const ExampleContent = (props) => {
             <ExampleContent ref={targetRef}>
                 {
                     examples.filter((elem, index) =>
-                    index < (expand ? examples.length : 3)).map((example, index) =>
-                    <ParagraphWrapper key={index}>
-                    <Quote/>
-                    <p dangerouslySetInnerHTML={{__html: makeHeaderWordBold(example, word.wordName)}}/>
-                    </ParagraphWrapper>)
+                        index < (expand ? examples.length : 3)).map((example, index) =>
+                        <ParagraphWrapper key={index}>
+                            <Quote/>
+                            <p dangerouslySetInnerHTML={{__html: makeHeaderWordBold(example, word.wordName)}}/>
+                        </ParagraphWrapper>)
                 }
             </ExampleContent>
             <MoreExampleButton expand={expand} setExpand={setExpand}/>
@@ -78,7 +79,11 @@ const ExampleContent = (props) => {
 
 const mapStateToProps = (state) => {
     const {showContent} = state;
-    return {word: showContent.word}
+    const {bookmark} = state;
+    return {
+        word: showContent.word,
+        activeBookmark: bookmark
+    }
 };
 
 export default connect(mapStateToProps)(ExampleContent);

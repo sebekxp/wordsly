@@ -1,41 +1,35 @@
-import React from "react";
+import React, {useState} from "react";
 import {XCircle} from 'styled-icons/boxicons-solid/XCircle';
 import {XCircle as BlankCircle} from 'styled-icons/boxicons-regular/XCircle';
 import styled from "styled-components";
+import {useDispatch} from "react-redux";
+import {removeWord} from "../../../WordsToRenderSlice";
 
-class DeleteElementIcon extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isHover: false
-        };
+const DeleteElementIcon = (props) => {
+    const [hover, setHover] = useState(false);
+    const wordName = props.word.wordName;
+    const dispatch = useDispatch();
 
-    }
-
-    onMouseEnterHandler = () => {
-        this.setState({
-            isHover: true
-        });
+    const onMouseEnterHandler = () => {
+        setHover(true);
     };
 
-    onMouseLeaveHandler = () => {
-        this.setState({
-            isHover: false
-        });
+    const onMouseLeaveHandler = () => {
+        setHover(false);
+
     };
 
-    deleteNavigationWord = (e) => {
+    const deleteNavigationWord = (e) => {
+        dispatch(removeWord(wordName));
         e.currentTarget.parentElement.parentElement.parentElement.remove();
     };
 
 
-    render() {
+    const selectIcon = () => {
+        return hover ? XCircle : BlankCircle;
+    };
 
-        const selectIcon = () => {
-            return this.state.isHover ? XCircle : BlankCircle;
-        };
-
-        const DeleteElementIcon = styled(selectIcon())`
+    const DeleteElementIcon = styled(selectIcon())`
           display: flex;
           color: #dc3545;
           width: 30px;
@@ -45,13 +39,13 @@ class DeleteElementIcon extends React.Component {
           transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
         `;
 
-        return (
-            <DeleteElementIcon onMouseEnter={this.onMouseEnterHandler}
-                               onMouseLeave={this.onMouseLeaveHandler}
-                               onClick={e => this.deleteNavigationWord(e)}
-                               title={"Delete word"}/>
-        );
-    }
-}
+    return (
+        <DeleteElementIcon onMouseEnter={onMouseEnterHandler}
+                           onMouseLeave={onMouseLeaveHandler}
+                           onClick={e => deleteNavigationWord(e)}
+                           title={"Delete word"}/>
+    );
+
+};
 
 export default DeleteElementIcon

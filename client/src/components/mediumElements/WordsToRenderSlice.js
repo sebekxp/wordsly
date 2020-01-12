@@ -12,6 +12,15 @@ const wordsToRender = createSlice({
         addWord(state, action) {
             state.words.push(action.payload);
         },
+        removeWord(state, action) {
+            const wordName = action.payload;
+            const index = state.words.findIndex(obj => obj.wordName === wordName);
+
+            state.words = state.words.filter((obj, i) => {
+                return i !== index
+            });
+
+        },
         setActive(state, action) {
             const {word, active} = action.payload;
             const index = state.words.findIndex(obj => obj.wordName === word.wordName);
@@ -20,5 +29,5 @@ const wordsToRender = createSlice({
     }
 });
 
-export const {addWord, setActive} = wordsToRender.actions;
+export const {addWord, setActive, removeWord} = wordsToRender.actions;
 export default wordsToRender.reducer;

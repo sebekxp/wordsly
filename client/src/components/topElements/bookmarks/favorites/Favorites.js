@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import {connect} from "react-redux";
+import Examples from "../../../mediumElements/wordContent/Examples";
 
 
 const Favorites = (props) => {
@@ -8,6 +9,7 @@ const Favorites = (props) => {
 
     useEffect(() => {
         const navigationWord = window.document.getElementsByClassName("navigation-word");
+
         words.forEach((word, index) => {
             const isActive = word.active;
             if (!isActive) {
@@ -16,7 +18,7 @@ const Favorites = (props) => {
         });
     });
 
-    return <></>
+    return <Examples/>
 };
 
 const mapStateToProps = (state) => {
