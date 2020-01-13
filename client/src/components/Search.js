@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from "styled-components";
-import {OBJWORDS as words} from "./words";
 import {Search as searchIcon} from 'styled-icons/icomoon/Search'
 import Colors from '../components/topElements/Colors'
-const Search = () => {
+import {connect} from "react-redux";
+
+const Search = (props) => {
+    const words = props.words;
 
     const handleInputChange = (e) => {
         let inputValue = e.target.value.toLowerCase().trim();
-
         const navigationWord = window.document.getElementsByClassName("navigation-word");
         const navWordToArray = [...navigationWord];
 
@@ -62,4 +63,9 @@ const Search = () => {
     );
 };
 
-export default Search
+const mapStateToProps = (state) => {
+    const {wordsToRender} = state;
+    return {words: wordsToRender.words}
+};
+
+export default connect(mapStateToProps)(Search);

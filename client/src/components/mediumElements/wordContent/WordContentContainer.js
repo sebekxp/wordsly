@@ -17,7 +17,6 @@ const WordContentContainer = (props) => {
     const selectBookmark = () => {
         switch (props.bookmark) {
             case "Examples":
-                console.log();
                 return <Examples/>;
             case "Flash Cards":
                 return <FlashCards/>;

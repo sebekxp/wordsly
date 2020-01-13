@@ -21,7 +21,6 @@ const DeleteElementIcon = (props) => {
 
     const deleteNavigationWord = (e) => {
         dispatch(removeWord(wordName));
-        e.currentTarget.parentElement.parentElement.parentElement.remove();
     };
 
 

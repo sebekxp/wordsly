@@ -20,11 +20,6 @@ const wordsToRender = createSlice({
                 return i !== index
             });
 
-        },
-        setActive(state, action) {
-            const {word, active} = action.payload;
-            const index = state.words.findIndex(obj => obj.wordName === word.wordName);
-            state.words[index].active = active;
         }
     }
 });

@@ -1,20 +1,28 @@
 import React, {useEffect} from 'react';
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import Examples from "../../../mediumElements/wordContent/Examples";
 
 
 const Favorites = (props) => {
-    const words = props.wordsToRender;
-
+    const words = props.favWords;
 
     useEffect(() => {
+
         const navigationWord = window.document.getElementsByClassName("navigation-word");
 
-        words.forEach((word, index) => {
-            const isActive = word.active;
-            if (!isActive) {
-                navigationWord[index].style.display = "none";
-            }
+        const array = [...navigationWord];
+        const navWordToArrayOfName = [];
+        for (let i = 0; i < array.length; i++) {
+            navWordToArrayOfName.push(array[i].innerText);
+        }
+        // console.log(words);
+        // console.log(navWordToArrayOfName);
+        words.forEach((word) => {
+            console.log(word.wordName);
+            const index = navWordToArrayOfName.indexOf(word.wordName);
+            console.log(index);
+            // navigationWord[index].style.display = "none";
+
         });
     });
 
@@ -22,9 +30,10 @@ const Favorites = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    const {wordsToRender} = state;
+    const {favWordsToRender} = state;
+
     return {
-        wordsToRender: wordsToRender.words,
+        favWords: favWordsToRender.favWords,
     }
 };
 
