@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 import styled from 'styled-components';
 import BlankCircleIcon from "./icons/BlankCircleIcon";
 import DeleteElemIcon from "./icons/DeleteElementIcon";
@@ -8,6 +8,7 @@ import {setWordToShow} from "../../WordsToRenderSlice";
 
 const NavigationWord = (props) => {
     const [word, setWord] = useState({});
+    const targetRef = useRef();
     const dispatch = useDispatch();
     const words = props.words;
     const IconWrapper = styled.div`
@@ -31,7 +32,7 @@ const NavigationWord = (props) => {
         p {
             margin: 0;
         }
-        
+
         &:hover {
             ${IconWrapper} {
                  display: flex;
@@ -59,18 +60,23 @@ const NavigationWord = (props) => {
         for (let i = 0; i < words.length; i++) {
             if (words[i].wordName === evt.target.innerText) {
                 setWord(words[i]);
-                // dispatch(setWordContent(words[i]));
                 dispatch(setWordToShow(words[i]));
             }
         }
     };
 
+    const handleClick = () => {
+        if (props.wordToShow.wordName === targetRef.current.innerText)
+            targetRef.current.style.backgroundColor = "#a2a5a2";
+    };
 
     return (
-        <NavigationWord onMouseOver={(event) => hoverMouseAndDisplayWordContent(event)}
-                        className={"navigation-word"}>
+        <NavigationWord
+            onMouseOver={(event) => hoverMouseAndDisplayWordContent(event)}
+            className={"navigation-word"}
+            onClick={handleClick}>
             <BlankCircleIcon className={"blank-circle-icon"}/>
-            <WordName>
+            <WordName ref={targetRef}>
                 <span>{props.name}</span>
                 <IconWrapper>
                     <FavElementIcon word={word} position={"relative"}/>
@@ -82,7 +88,10 @@ const NavigationWord = (props) => {
 
 const mapStateToProps = (state) => {
     const {wordsToRender} = state;
-    return {words: wordsToRender.words}
+    return {
+        words: wordsToRender.words,
+        wordToShow: wordsToRender.wordToShow,
+    }
 };
 
 export default connect(mapStateToProps)(NavigationWord);

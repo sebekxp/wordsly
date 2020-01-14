@@ -4,7 +4,7 @@ import {Circle} from 'styled-icons/fa-regular/Circle';
 import {CheckCircle} from 'styled-icons/boxicons-solid/CheckCircle';
 import {useDispatch} from "react-redux";
 import {decrementKnownWord, incrementKnownWord} from "../../../../topElements/progressBar/ProgressBarSlice";
-import Popup from "../../../../Popup/Popup";
+import Popup from "../../../../popup/Popup";
 
 
 const BlankCircleIcon = (props) => {
