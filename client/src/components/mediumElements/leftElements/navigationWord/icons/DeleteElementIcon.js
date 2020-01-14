@@ -2,12 +2,11 @@ import React, {useState} from "react";
 import {XCircle} from 'styled-icons/boxicons-solid/XCircle';
 import {XCircle as BlankCircle} from 'styled-icons/boxicons-regular/XCircle';
 import styled from "styled-components";
-import {useDispatch} from "react-redux";
-import {removeWord} from "../../../WordsToRenderSlice";
+import {connect, useDispatch} from "react-redux";
+import {setActive, setDeleted} from "../../../WordsToRenderSlice";
 
 const DeleteElementIcon = (props) => {
     const [hover, setHover] = useState(false);
-    const wordName = props.word.wordName;
     const dispatch = useDispatch();
 
     const onMouseEnterHandler = () => {
@@ -20,7 +19,14 @@ const DeleteElementIcon = (props) => {
     };
 
     const deleteNavigationWord = (e) => {
-        dispatch(removeWord(wordName));
+        // e.currentTarget.parentElement.parentElement.parentElement.remove();
+        // dispatch(removeWord(props.word.wordName));
+
+        if (props.bookmark === "Favorites")
+            dispatch(setActive({word: props.word, active: false}));
+
+        if (props.bookmark === "Examples")
+            dispatch(setDeleted({word: props.word, deleted: true}));
     };
 
 
@@ -41,10 +47,19 @@ const DeleteElementIcon = (props) => {
     return (
         <DeleteElementIcon onMouseEnter={onMouseEnterHandler}
                            onMouseLeave={onMouseLeaveHandler}
-                           onClick={e => deleteNavigationWord(e)}
+                           onClick={e=>deleteNavigationWord(e)}
                            title={"Delete word"}/>
     );
 
 };
 
-export default DeleteElementIcon
+const mapStateToProps = (state) => {
+    const {bookmark} = state;
+    const {wordsToRender} = state;
+    return {
+        bookmark: bookmark,
+        words: wordsToRender
+    }
+};
+
+export default connect(mapStateToProps)(DeleteElementIcon);

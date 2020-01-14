@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {Star} from "styled-icons/boxicons-solid/Star";
 import {Star as BlankStar} from 'styled-icons/boxicons-regular/Star';
 import {useDispatch} from "react-redux";
-import {addFavWord, setActive} from "../../../../topElements/bookmarks/favorites/FavoritesSlice";
+import {setActive} from "../../../WordsToRenderSlice";
 
 
 const FavElementIcon = (props) => {
@@ -19,8 +19,7 @@ const FavElementIcon = (props) => {
     };
 
     const handleClick = (e) => {
-        // dispatch(setActive({word: props.word, active: true}));
-        dispatch(addFavWord(props.word));
+        dispatch(setActive({word: props.word, active: true}));
         e.stopPropagation();
     };
 

@@ -20,7 +20,7 @@ const ExampleContent = (props) => {
             });
         }
         setExpand(false);
-    }, [word]);
+    }, [word, props.activeBookmark]);
 
 
     const ExampleContent = styled.div`

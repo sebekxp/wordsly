@@ -4,7 +4,7 @@ import BlankCircleIcon from "./icons/BlankCircleIcon";
 import DeleteElemIcon from "./icons/DeleteElementIcon";
 import FavElementIcon from "./icons/FavElementIcon";
 import {connect, useDispatch} from "react-redux";
-import {setWordContent } from "../../wordContent/WordContentSlice";
+import {setWordContent} from "../../wordContent/WordContentSlice";
 
 const NavigationWord = (props) => {
     const [word, setWord] = useState({});
@@ -70,7 +70,7 @@ const NavigationWord = (props) => {
                         className={"navigation-word"}>
             <BlankCircleIcon className={"blank-circle-icon"}/>
             <WordName>
-                {props.name}
+                <span>{props.name}</span>
                 <IconWrapper>
                     <FavElementIcon word={word} position={"relative"}/>
                     <DeleteElemIcon word={word}/>

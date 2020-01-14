@@ -14,6 +14,7 @@ const WordContentContainer = (props) => {
         padding-bottom: 10px;
         overflow: auto;
     `;
+
     const selectBookmark = () => {
         switch (props.bookmark) {
             case "Examples":

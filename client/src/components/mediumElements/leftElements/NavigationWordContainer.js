@@ -3,7 +3,6 @@ import styled from "styled-components";
 import NavigationWord from "./navigationWord/NavigationWord";
 import {connect} from "react-redux";
 
-
 const NavigationWordContainer = (props) => {
     const words = props.words;
 
@@ -18,13 +17,36 @@ const NavigationWordContainer = (props) => {
         overflow: auto;
     `;
 
+    const selectBookmark = () => {
+        switch (props.bookmark) {
+            case "Examples":
+                return renderExamples();
+            case "Flash Cards":
+                return renderExamples();
+            case "Favorites":
+                return renderFavorites();
+            default:
+                return
+        }
+    };
+
+    const renderExamples = () => {
+        return words.filter(word => {
+            return !word.deleted ? word : null
+        }).map((word, index) => <NavigationWord name={word.wordName} key={index}/>)
+    };
+
+    const renderFavorites = () => {
+        return words.filter(word => {
+            return word.active ? word : null
+        }).map((word, index) => <NavigationWord name={word.wordName} key={index}/>)
+    };
+
     return (
         <Container id={"navigation-word-container"} className={"words"}>
             {
-                words !== null ? words.map((word, index) =>
-                    <NavigationWord name={word.wordName} key={index}/>) : null
+                selectBookmark()
             }
-
         </Container>
     );
 
@@ -32,7 +54,12 @@ const NavigationWordContainer = (props) => {
 
 const mapStateToProps = (state) => {
     const {wordsToRender} = state;
-    return {words: wordsToRender.words}
+    const {bookmark} = state;
+
+    return {
+        words: wordsToRender.words,
+        bookmark: bookmark
+    }
 };
 
 export default connect(mapStateToProps)(NavigationWordContainer);
