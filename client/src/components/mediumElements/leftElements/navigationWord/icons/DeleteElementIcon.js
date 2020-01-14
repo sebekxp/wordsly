@@ -4,6 +4,7 @@ import {XCircle as BlankCircle} from 'styled-icons/boxicons-regular/XCircle';
 import styled from "styled-components";
 import {connect, useDispatch} from "react-redux";
 import {setActive, setDeleted} from "../../../WordsToRenderSlice";
+import {bookmarkType as Type} from "../../../../topElements/bookmarks/BookmarkType";
 
 const DeleteElementIcon = (props) => {
     const [hover, setHover] = useState(false);
@@ -22,10 +23,10 @@ const DeleteElementIcon = (props) => {
         // e.currentTarget.parentElement.parentElement.parentElement.remove();
         // dispatch(removeWord(props.word.wordName));
 
-        if (props.bookmark === "Favorites")
+        if (props.bookmark === Type.FAV)
             dispatch(setActive({word: props.word, active: false}));
 
-        if (props.bookmark === "Examples")
+        if (props.bookmark === Type.EXAMPLES)
             dispatch(setDeleted({word: props.word, deleted: true}));
     };
 
@@ -47,7 +48,7 @@ const DeleteElementIcon = (props) => {
     return (
         <DeleteElementIcon onMouseEnter={onMouseEnterHandler}
                            onMouseLeave={onMouseLeaveHandler}
-                           onClick={e=>deleteNavigationWord(e)}
+                           onClick={e => deleteNavigationWord(e)}
                            title={"Delete word"}/>
     );
 

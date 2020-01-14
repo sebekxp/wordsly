@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import NavigationWord from "./navigationWord/NavigationWord";
 import {connect} from "react-redux";
+import {bookmarkType as Type} from "../../topElements/bookmarks/BookmarkType";
 
 const NavigationWordContainer = (props) => {
     const words = props.words;
@@ -19,11 +20,11 @@ const NavigationWordContainer = (props) => {
 
     const selectBookmark = () => {
         switch (props.bookmark) {
-            case "Examples":
+            case Type.EXAMPLES:
                 return renderExamples();
-            case "Flash Cards":
+            case Type.FLASH_CARDS:
                 return renderExamples();
-            case "Favorites":
+            case Type.FAV:
                 return renderFavorites();
             default:
                 return

@@ -4,6 +4,7 @@ import Examples from "./Examples";
 import {connect} from "react-redux";
 import FlashCards from "../../topElements/bookmarks/flashCards/FlashCard";
 import Favorites from "../../topElements/bookmarks/favorites/Favorites";
+import {bookmarkType as Type} from "../../topElements/bookmarks/BookmarkType";
 
 
 const WordContentContainer = (props) => {
@@ -17,11 +18,11 @@ const WordContentContainer = (props) => {
 
     const selectBookmark = () => {
         switch (props.bookmark) {
-            case "Examples":
+            case Type.EXAMPLES:
                 return <Examples/>;
-            case "Flash Cards":
+            case Type.FLASH_CARDS:
                 return <FlashCards/>;
-            case "Favorites":
+            case Type.FAV:
                 return <Favorites/>;
             default:
                 return

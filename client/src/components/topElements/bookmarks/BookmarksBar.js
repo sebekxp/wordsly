@@ -3,6 +3,7 @@ import styled from "styled-components";
 import BookmarksElement from "./BookmarksElement";
 import Colors from "../Colors";
 import {useSelector} from "react-redux";
+import {bookmarkType as Type} from "./BookmarkType";
 
 
 const BookmarksBar = () => {
@@ -20,9 +21,9 @@ const BookmarksBar = () => {
         border-radius: 0 10px 0 0;
     `;
 
-    const example = "Examples";
-    const flashCards = "Flash Cards";
-    const fav = "Favorites";
+    const example = Type.EXAMPLES;
+    const flashCards = Type.FLASH_CARDS;
+    const fav = Type.FAV;
 
     return (
         <Wrapper>

@@ -2,7 +2,12 @@ import {createSlice} from "@reduxjs/toolkit";
 import {OBJWORDS as words} from "../../components/words";
 
 const initialState = {
-    words: [...words].map(obj => Object.assign(obj, {active: false, deleted: false}))
+    words: [...words].map(obj =>
+        Object.assign(obj, {
+            active: false,
+            deleted: false
+        })),
+    wordToShow: words[0],
 };
 
 const wordsToRender = createSlice({
@@ -24,6 +29,10 @@ const wordsToRender = createSlice({
             const {word, active} = action.payload;
             const index = state.words.findIndex(obj => obj.wordName === word.wordName);
             state.words[index].active = active;
+
+            // Update wordToShow if Match
+            if (state.words[index].wordName === state.wordToShow.wordName)
+                state.wordToShow.active = active;
         },
         findByName(state, action) {
             const {word} = action.payload;
@@ -35,7 +44,10 @@ const wordsToRender = createSlice({
             const {word, deleted} = action.payload;
             const index = state.words.findIndex(obj => obj.wordName === word.wordName);
             state.words[index].deleted = deleted;
-        }
+        },
+        setWordToShow(state, action) {
+            state.wordToShow = action.payload;
+        },
     }
 });
 
@@ -44,6 +56,7 @@ export const {
     setActive,
     removeWord,
     findByName,
-    setDeleted
+    setDeleted,
+    setWordToShow
 } = wordsToRender.actions;
 export default wordsToRender.reducer;

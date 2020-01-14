@@ -4,6 +4,7 @@ import {FormatQuote} from "styled-icons/material/FormatQuote"
 import ParagraphWrapper from "./ParagraphWrapper";
 import MoreExampleButton from "./MoreExampleButton";
 import {connect} from "react-redux";
+import {bookmarkType as Type} from "../../topElements/bookmarks/BookmarkType";
 
 
 const ExampleContent = (props) => {
@@ -13,14 +14,8 @@ const ExampleContent = (props) => {
     const targetRef = useRef();
 
     useEffect(() => {
-        if (props.activeBookmark === 'Examples') {
-            const navigationWord = window.document.getElementsByClassName("navigation-word");
-            [...navigationWord].forEach(obj => {
-                obj.style.display = "flex";
-            });
-        }
         setExpand(false);
-    }, [word, props.activeBookmark]);
+    }, [word]);
 
 
     const ExampleContent = styled.div`
@@ -56,32 +51,35 @@ const ExampleContent = (props) => {
         return str.replace(" " + wordName + " ", ' <b>' + wordName + '</b> ')
     };
 
+    const exampleContentToRender = () => {
+        return (
+            <>
+                <KeyWordHeader>
+                    <h3>{word.wordName} - {word.wordTranslate}</h3>
+                </KeyWordHeader>
+                <ExampleContent ref={targetRef}>
+                    {
+                        examples.filter((elem, index) =>
+                            index < (expand ? examples.length : 3)).map((example, index) =>
+                            <ParagraphWrapper key={index}>
+                                <Quote/>
+                                <p dangerouslySetInnerHTML={{__html: makeHeaderWordBold(example, word.wordName)}}/>
+                            </ParagraphWrapper>)
+                    }
+                </ExampleContent>
+                <MoreExampleButton expand={expand} setExpand={setExpand}/>
+            </>
+        )
+    };
 
-    return (
-        <>
-            <KeyWordHeader>
-                <h3>{word.wordName} - {word.wordTranslate}</h3>
-            </KeyWordHeader>
-            <ExampleContent ref={targetRef}>
-                {
-                    examples.filter((elem, index) =>
-                        index < (expand ? examples.length : 3)).map((example, index) =>
-                        <ParagraphWrapper key={index}>
-                            <Quote/>
-                            <p dangerouslySetInnerHTML={{__html: makeHeaderWordBold(example, word.wordName)}}/>
-                        </ParagraphWrapper>)
-                }
-            </ExampleContent>
-            <MoreExampleButton expand={expand} setExpand={setExpand}/>
-        </>
-    );
+    return (props.activeBookmark === Type.FAV && !word.active ? null : exampleContentToRender());
 };
 
 const mapStateToProps = (state) => {
-    const {showContent} = state;
+    const {wordsToRender} = state;
     const {bookmark} = state;
     return {
-        word: showContent.word,
+        word: wordsToRender.wordToShow,
         activeBookmark: bookmark
     }
 };

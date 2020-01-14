@@ -4,7 +4,7 @@ import BlankCircleIcon from "./icons/BlankCircleIcon";
 import DeleteElemIcon from "./icons/DeleteElementIcon";
 import FavElementIcon from "./icons/FavElementIcon";
 import {connect, useDispatch} from "react-redux";
-import {setWordContent} from "../../wordContent/WordContentSlice";
+import {setWordToShow} from "../../WordsToRenderSlice";
 
 const NavigationWord = (props) => {
     const [word, setWord] = useState({});
@@ -59,7 +59,8 @@ const NavigationWord = (props) => {
         for (let i = 0; i < words.length; i++) {
             if (words[i].wordName === evt.target.innerText) {
                 setWord(words[i]);
-                dispatch(setWordContent(words[i]));
+                // dispatch(setWordContent(words[i]));
+                dispatch(setWordToShow(words[i]));
             }
         }
     };

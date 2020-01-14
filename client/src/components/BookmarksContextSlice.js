@@ -1,6 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {bookmarkType as Type} from "./topElements/bookmarks/BookmarkType";
 
-const initialState ="Examples";
+const initialState =Type.EXAMPLES;
 
 
 const bookmarksContext = createSlice({

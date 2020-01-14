@@ -56,8 +56,10 @@ const FlashCards = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    const {showContent} = state;
-    return {word: showContent.word}
-};
+    const {wordsToRender} = state;
 
+    return {
+        word: wordsToRender.wordToShow,
+    }
+};
 export default connect(mapStateToProps)(FlashCards);
