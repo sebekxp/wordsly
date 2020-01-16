@@ -5,7 +5,6 @@ import FavElementIcon from "../../../mediumElements/leftElements/navigationWord/
 
 const FlashCards = (props) => {
     const word = props.word;
-
     const flippyStyle = {
         width: "600px",
         height: "300px",

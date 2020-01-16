@@ -1,24 +1,36 @@
 import React, {useEffect} from "react";
 import styled from "styled-components";
 import Examples from "./Examples";
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import FlashCards from "../../topElements/bookmarks/flashCards/FlashCard";
 import Favorites from "../../topElements/bookmarks/favorites/Favorites";
 import {bookmarkType as Type} from "../../topElements/bookmarks/BookmarkType";
 import {NavigateNext} from 'styled-icons/material/NavigateNext'
+import {setNextWordToShow, setPrevWordToShow} from "../WordsToRenderSlice";
 
 const WordContentContainer = (props) => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        document.addEventListener("keyup", handleKeyDown);
+    }, []);
+
+    const next = (bookmark) => {
+        console.log(bookmark);
+        dispatch(setNextWordToShow(bookmark));
+    };
+
+    const prev = (bookmark) => {
+        dispatch(setPrevWordToShow(bookmark));
+    };
 
     const handleKeyDown = (e) => {
         if (e.which === 39)
-            console.log("Next");
+            next();
         if (e.which === 37)
-            console.log("Prev");
-    };
+            prev();
 
-    useEffect(()=>{
-        document.addEventListener("keydown", handleKeyDown);
-    });
+    };
 
     const WordContentContainer = styled.div`
         display: flex;
@@ -32,6 +44,7 @@ const WordContentContainer = (props) => {
     `;
 
     const selectBookmark = () => {
+
         switch (props.bookmark) {
             case Type.EXAMPLES:
                 return <Examples/>;
@@ -47,12 +60,14 @@ const WordContentContainer = (props) => {
     const Next = styled(NavigateNext)`
         width: 50px;
         height: 50px;
+        user-select: none;
     `;
 
     const Prev = styled(NavigateNext)`
         width: 50px;
         height: 50px;
         transform: rotate(180deg);
+        user-select: none;
     `;
 
     const IconWrapper = styled.div`
@@ -61,19 +76,14 @@ const WordContentContainer = (props) => {
         align-items: center; 
     `;
 
-    const handleClick = () => {
-        console.log("elo");
-    };
-
-
-
+    const 
     return (
-        <WordContentContainer onKeyPress={e => handleKeyDown(e)}>
-            <IconWrapper onClick={handleClick}>
+        <WordContentContainer>
+            <IconWrapper onClick={() => prev(props.bookmark)}>
                 <Prev/>
             </IconWrapper>
             {selectBookmark()}
-            <IconWrapper onClick={handleClick}>
+            <IconWrapper onClick={next}>
                 <Next/>
             </IconWrapper>
         </WordContentContainer>
@@ -82,7 +92,9 @@ const WordContentContainer = (props) => {
 
 const mapStateToProps = (state) => {
     const {bookmark} = state;
-    return {bookmark: bookmark}
+    return {
+        bookmark: bookmark,
+    }
 };
 
 export default connect(mapStateToProps)(WordContentContainer);

@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react";
+import React, {useState, useRef,} from "react";
 import styled from 'styled-components';
 import BlankCircleIcon from "./icons/BlankCircleIcon";
 import DeleteElemIcon from "./icons/DeleteElementIcon";
@@ -7,8 +7,7 @@ import {connect, useDispatch} from "react-redux";
 import {setWordToShow} from "../../WordsToRenderSlice";
 
 const NavigationWord = (props) => {
-    const [word, setWord] = useState({});
-    const targetRef = useRef();
+    const [word, setWord] = useState(props.wordToShow);
     const dispatch = useDispatch();
     const words = props.words;
     const IconWrapper = styled.div`
@@ -44,6 +43,10 @@ const NavigationWord = (props) => {
         } 
     `;
 
+    const selectColor = () => {
+        return props.name === props.wordToShow.wordName ? "#a2a5a2" : "rgb(215, 215, 215)";
+    };
+
     const WordName = styled.div`
         font-size: 20px;
         width: 100%;
@@ -52,11 +55,10 @@ const NavigationWord = (props) => {
         display: flex;
         justify-content: space-between;
         padding: 11.8px 11.8px 11.8px 11.8px;
-        background-color: rgb(215, 215, 215);
+        background-color: ${selectColor()};
     `;
 
-
-    const hoverMouseAndDisplayWordContent = (evt) => {
+    const clickMouseAndDisplayWordContent = (evt) => {
         for (let i = 0; i < words.length; i++) {
             if (words[i].wordName === evt.target.innerText) {
                 setWord(words[i]);
@@ -65,18 +67,12 @@ const NavigationWord = (props) => {
         }
     };
 
-    const handleClick = () => {
-        if (props.wordToShow.wordName === targetRef.current.innerText)
-            targetRef.current.style.backgroundColor = "#a2a5a2";
-    };
-
     return (
         <NavigationWord
-            onMouseOver={(event) => hoverMouseAndDisplayWordContent(event)}
-            className={"navigation-word"}
-            onClick={handleClick}>
+            onClick={(event) => clickMouseAndDisplayWordContent(event)}
+            className={"navigation-word"}>
             <BlankCircleIcon className={"blank-circle-icon"}/>
-            <WordName ref={targetRef}>
+            <WordName>
                 <span>{props.name}</span>
                 <IconWrapper>
                     <FavElementIcon word={word} position={"relative"}/>
@@ -90,7 +86,7 @@ const mapStateToProps = (state) => {
     const {wordsToRender} = state;
     return {
         words: wordsToRender.words,
-        wordToShow: wordsToRender.wordToShow,
+        wordToShow: wordsToRender.wordToShow
     }
 };
 

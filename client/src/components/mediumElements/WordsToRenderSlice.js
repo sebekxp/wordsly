@@ -5,7 +5,7 @@ const initialState = {
     words: [...words].map(obj =>
         Object.assign(obj, {
             active: false,
-            deleted: false
+            deleted: false,
         })),
     wordToShow: words[0],
 };
@@ -48,6 +48,21 @@ const wordsToRender = createSlice({
         setWordToShow(state, action) {
             state.wordToShow = action.payload;
         },
+        setNextWordToShow(state, action) {
+            console.log(action.payload);
+            const index = state.words.findIndex(obj => obj.wordName === state.wordToShow.wordName);
+            if (index + 1 < words.length) {
+                state.wordToShow = words[index + 1];
+            }
+        },
+        setPrevWordToShow(state, action) {
+            console.log(action.payload);
+            const index = state.words.findIndex(obj => obj.wordName === state.wordToShow.wordName);
+
+            if (index - 1 >= 0) {
+                state.wordToShow = words[index - 1];
+            }
+        }
     }
 });
 
@@ -57,6 +72,8 @@ export const {
     removeWord,
     findByName,
     setDeleted,
-    setWordToShow
+    setWordToShow,
+    setNextWordToShow,
+    setPrevWordToShow,
 } = wordsToRender.actions;
 export default wordsToRender.reducer;
