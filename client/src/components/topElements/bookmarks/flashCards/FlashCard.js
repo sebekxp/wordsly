@@ -2,6 +2,7 @@ import React, {useState, useEffect, useCallback} from 'react';
 import Flippy, {FrontSide, BackSide} from 'react-flippy';
 import {connect} from "react-redux";
 import FavElementIcon from "../../../mediumElements/leftElements/navigationWord/icons/FavElementIcon";
+import Colors from "../../../Colors";
 
 const FlashCards = (props) => {
     const [flippy, changeFlip] = useState(false);
@@ -45,7 +46,8 @@ const FlashCards = (props) => {
         fontWeight: "500",
         fontSize: "45px",
         borderRadius: "10px",
-        boxShadow: "0px 0px 5px"
+        boxShadow: Colors.BOX_SHADOW,
+        backgroundColor: Colors.EXAMPLES_BACKGROUND
     };
 
     const backSideStyle = {
@@ -55,8 +57,8 @@ const FlashCards = (props) => {
         fontWeight: "500",
         fontSize: "45px",
         borderRadius: "10px",
-        boxShadow: "0px 0p" +
-            "x 5px",
+        boxShadow: Colors.BOX_SHADOW,
+        backgroundColor: Colors.EXAMPLES_BACKGROUND
     };
 
 

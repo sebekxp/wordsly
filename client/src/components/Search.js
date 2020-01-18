@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import {Search as searchIcon} from 'styled-icons/icomoon/Search'
-import Colors from '../components/topElements/Colors'
+import Colors from './Colors'
 import {connect} from "react-redux";
 
 const Search = (props) => {
@@ -27,7 +27,7 @@ const Search = (props) => {
         justify-content: flex-end;
         align-items: center;
         border-radius: 10px;
-        box-shadow: 0px 0px 5px;
+        box-shadow: ${Colors.BOX_SHADOW};
         height: 50px;
         width: 360px;
         margin: auto;

@@ -1,5 +1,5 @@
 import React from 'react';
-import Colors from "../Colors";
+import Colors from "../../Colors";
 import styled from "styled-components";
 import {connect, useSelector} from "react-redux";
 

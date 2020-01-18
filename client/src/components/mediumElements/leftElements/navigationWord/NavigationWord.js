@@ -5,11 +5,13 @@ import DeleteElemIcon from "./icons/DeleteElementIcon";
 import FavElementIcon from "./icons/FavElementIcon";
 import {connect, useDispatch} from "react-redux";
 import {setWordToShow} from "../../WordsToRenderSlice";
+import Colors from "../../../Colors";
 
 const NavigationWord = (props) => {
     const [word, setWord] = useState(props.word);
     const dispatch = useDispatch();
     const words = props.words;
+
     const IconWrapper = styled.div`
          display: none;
     `;
@@ -38,13 +40,15 @@ const NavigationWord = (props) => {
             }
             
             div {
-                background-color: #a2a5a2;
+                background-color: ${Colors.NAVIGATION_WORD_BACKGROUND_HOVER};
             }
         } 
     `;
 
     const selectColor = () => {
-        return props.name === props.wordToShow.wordName ? "#a2a5a2" : "rgb(215, 215, 215)";
+        // return props.name === props.wordToShow.wordName ? Colors.NAVIGATION_WORD_BACKGROUND_HOVER :
+        //     Colors.NAVIGATION_WORD_BACKGROUND;
+        return Colors.NAVIGATION_WORD_BACKGROUND;
     };
 
     const WordName = styled.div`
@@ -62,6 +66,7 @@ const NavigationWord = (props) => {
         for (let i = 0; i < words.length; i++) {
             if (words[i].wordName === evt.target.innerText) {
                 dispatch(setWordToShow(words[i]));
+                break;
             }
         }
     };
@@ -70,6 +75,7 @@ const NavigationWord = (props) => {
         for (let i = 0; i < words.length; i++) {
             if (words[i].wordName === evt.target.innerText) {
                 setWord(words[i]);
+                break;
             }
         }
     };
@@ -94,7 +100,7 @@ const mapStateToProps = (state) => {
     const {wordsToRender} = state;
     return {
         words: wordsToRender.words,
-        wordToShow: wordsToRender.wordToShow
+        // wordToShow: wordsToRender.wordToShow
     }
 };
 

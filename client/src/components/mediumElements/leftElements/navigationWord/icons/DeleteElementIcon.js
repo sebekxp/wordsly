@@ -5,6 +5,7 @@ import styled from "styled-components";
 import {connect, useDispatch} from "react-redux";
 import {setActive, setDeleted} from "../../../WordsToRenderSlice";
 import {bookmarkType as Type} from "../../../../topElements/bookmarks/BookmarkType";
+import Colors from "../../../../Colors";
 
 const DeleteElementIcon = (props) => {
     const [hover, setHover] = useState(false);
@@ -37,7 +38,7 @@ const DeleteElementIcon = (props) => {
 
     const DeleteElementIcon = styled(selectIcon())`
           display: flex;
-          color: #dc3545;
+          color: ${Colors.DELETE_ELEM_ICON}
           width: 30px;
           height: 30px;
           border-radius: 50%;
@@ -56,10 +57,9 @@ const DeleteElementIcon = (props) => {
 
 const mapStateToProps = (state) => {
     const {bookmark} = state;
-    const {wordsToRender} = state;
+
     return {
         bookmark: bookmark,
-        words: wordsToRender
     }
 };
 

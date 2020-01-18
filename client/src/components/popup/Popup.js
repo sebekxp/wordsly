@@ -43,11 +43,11 @@ const Popup = ({open, children, x, y}) => {
      `;
 
     return (
-        open && shouldRender ?
-            ReactDOM.createPortal(
-                <Popup id={id} ref={target}>
-                    {children}
-                </Popup>, document.body) : null
+        (open && shouldRender) &&
+        ReactDOM.createPortal(
+            <Popup id={id} ref={target}>
+                {children}
+            </Popup>, document.body)
     );
 };
 

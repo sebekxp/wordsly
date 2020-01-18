@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import TopElementsWrapper from "./topElements/TopElementsWrapper";
 import MediumElementsWrapper from "./mediumElements/MediumElementsWrapper";
+import Colors from "./Colors";
 
 
 const Container = styled.div`
@@ -9,7 +10,7 @@ const Container = styled.div`
     height: 35rem;
     padding: 0;
     border-radius: 10px;
-    box-shadow: 0px 0px 5px;
+    box-shadow: ${Colors.BOX_SHADOW}
     margin: auto;
     position: fixed;
     top: 180px;

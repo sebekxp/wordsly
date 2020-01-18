@@ -6,6 +6,7 @@ import {useDispatch} from "react-redux";
 import {decrementKnownWord, incrementKnownWord} from "../../../../topElements/progressBar/ProgressBarSlice";
 import Popup from "../../../../popup/Popup";
 import {setKnowWord} from "../../../WordsToRenderSlice";
+import Colors from "../../../../Colors";
 
 
 const BlankCircleIcon = (props) => {
@@ -31,7 +32,8 @@ const BlankCircleIcon = (props) => {
     };
 
     const setColor = () => {
-        return props.hover ? "#a2a5a2" : "rgb(215, 215, 215)";
+        return props.hover ? Colors.NAVIGATION_WORD_BACKGROUND_HOVER :
+            Colors.NAVIGATION_WORD_BACKGROUND;
     };
 
     const GreenCircleIcon = styled(selectIcon())`

@@ -61,6 +61,7 @@ const wordsToRender = createSlice({
     reducers: {
         addWord(state, action) {
             const index = getIndex(state, action.payload);
+
             if (index === -1)
                 state.words.push(action.payload);
             else {

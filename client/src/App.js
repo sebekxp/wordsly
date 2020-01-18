@@ -11,6 +11,7 @@ export const store = configureStore({
     reducer: rootReducer
 });
 
+
 function App() {
     return (
         <Provider store={store}>

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import NavigationWord from "./navigationWord/NavigationWord";
 import {connect} from "react-redux";
 import {bookmarkType as Type} from "../../topElements/bookmarks/BookmarkType";
+import Colors from "../../Colors";
 
 const NavigationWordContainer = (props) => {
     const words = props.words;
@@ -14,7 +15,7 @@ const NavigationWordContainer = (props) => {
         height: 436.8px;
         border: 1px solid black;
         box-sizing: border-box;
-        background-color: #f1f1f1;
+        background-color: ${Colors.NAVIGATION_WORD_CONTAINER_BACKGROUND};
         overflow: auto;
     `;
 
@@ -33,13 +34,13 @@ const NavigationWordContainer = (props) => {
 
     const renderExamples = () => {
         return words.filter(word => {
-            return !word.deleted ? word : null
+            return !word.deleted && word
         }).map((word, index) => <NavigationWord name={word.wordName} key={index} word={word}/>)
     };
 
     const renderFavorites = () => {
         return words.filter(word => {
-            return word.active ? word : null
+            return word.active && word
         }).map((word, index) => <NavigationWord name={word.wordName} key={index}  word={word}/>)
     };
 

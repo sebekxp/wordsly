@@ -4,6 +4,7 @@ import {Star} from "styled-icons/boxicons-solid/Star";
 import {Star as BlankStar} from 'styled-icons/boxicons-regular/Star';
 import {useDispatch} from "react-redux";
 import {setActive} from "../../../WordsToRenderSlice";
+import Colros from "../../../../Colors";
 
 
 const FavElementIcon = (props) => {
@@ -32,7 +33,7 @@ const FavElementIcon = (props) => {
             top: 0;
             right: 0;
             display: flex;
-            color: #FFD700;   
+            color: ${Colros.FAV_ELEM_ICON}   
     `;
 
     return (

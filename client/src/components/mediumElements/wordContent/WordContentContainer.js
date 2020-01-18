@@ -7,6 +7,7 @@ import Favorites from "../../topElements/bookmarks/favorites/Favorites";
 import {bookmarkType as Type} from "../../topElements/bookmarks/BookmarkType";
 import {NavigateNext} from 'styled-icons/material/NavigateNext'
 import {setNextWordToShow, setPrevWordToShow} from "../WordsToRenderSlice";
+import Colors from "../../Colors";
 
 const WordContentContainer = (props) => {
     const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const WordContentContainer = (props) => {
         display: flex;
         align-items: flex-start;
         align-content: flex-start;
+        background-color: ${Colors.EXAMPLES_CONTAINER_BACKGROUND}
         width: 100%;
         height: 493.9px;
         border-bottom-right-radius: 10px; 

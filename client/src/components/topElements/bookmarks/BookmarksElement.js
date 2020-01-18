@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
-import Colors from "../Colors";
+import Colors from "../../Colors";
 import {useDispatch} from "react-redux";
 import {setBookmark} from "../../BookmarksContextSlice";
 
@@ -23,11 +23,13 @@ const BookmarksElement = (props) => {
         background-color: ${getColor()}
     `;
 
+    const handleClick = () => {
+        setSelected(!selected);
+        dispatch(setBookmark(props.bbTitle))
+    };
+
     return (
-        <Wrapper onClick={() => {
-            setSelected(!selected);
-            dispatch(setBookmark(props.bbTitle))
-        }}>
+        <Wrapper onClick={handleClick}>
             {props.bbTitle}
         </Wrapper>
     );

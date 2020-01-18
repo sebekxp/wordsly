@@ -6,7 +6,6 @@ import MoreExampleButton from "./MoreExampleButton";
 import {connect} from "react-redux";
 
 
-
 const ExampleContent = (props) => {
     const word = props.word;
     const [expand, setExpand] = useState(false);
@@ -14,7 +13,6 @@ const ExampleContent = (props) => {
     const targetRef = useRef();
 
     useEffect(() => {
-
         setExpand(false);
     }, [word]);
 
@@ -53,7 +51,6 @@ const ExampleContent = (props) => {
     };
 
     const exampleContentToRender = () => {
-
         return (
             <>
                 <KeyWordHeader>
@@ -71,7 +68,7 @@ const ExampleContent = (props) => {
                 </ExampleContent>
                 <MoreExampleButton expand={expand} setExpand={setExpand}/>
             </>
-        )
+        );
     };
 
     return (exampleContentToRender());
@@ -79,10 +76,8 @@ const ExampleContent = (props) => {
 
 const mapStateToProps = (state) => {
     const {wordsToRender} = state;
-    const {bookmark} = state;
     return {
         word: wordsToRender.wordToShow,
-        activeBookmark: bookmark
     }
 };
 
