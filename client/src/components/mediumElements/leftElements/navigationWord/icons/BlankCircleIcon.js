@@ -1,16 +1,18 @@
-import React, {useState} from "react";
+import React from "react";
 import styled from "styled-components";
 import {Circle} from 'styled-icons/fa-regular/Circle';
 import {CheckCircle} from 'styled-icons/boxicons-solid/CheckCircle';
 import {useDispatch} from "react-redux";
 import {decrementKnownWord, incrementKnownWord} from "../../../../topElements/progressBar/ProgressBarSlice";
 import Popup from "../../../../popup/Popup";
+import {setKnowWord} from "../../../WordsToRenderSlice";
 
 
 const BlankCircleIcon = (props) => {
-    const [blank, setBlank] = useState(true);
-    const [openPopup, setOpenPopup] = useState(false);
-    const [cords, setCords] = useState({x: 0, y: 0});
+    const blank = !props.word.knowWord;
+    // const [openPopup, setOpenPopup] = useState(false);
+    // const [cords, setCords] = useState({x: 0, y: 0});
+
     const dispatch = useDispatch();
 
     const selectText = () => {
@@ -18,10 +20,10 @@ const BlankCircleIcon = (props) => {
     };
 
     const updateProgBar = (e) => {
-        setOpenPopup(true);
-        setCords({x: e.screenX, y: e.screenY});
+        // setOpenPopup(true);
+        // setCords({x: e.screenX, y: e.screenY});
+        dispatch(setKnowWord({word: props.word, knowWord: !props.word.knowWord}));
         blank ? dispatch(incrementKnownWord()) : dispatch(decrementKnownWord());
-        setBlank(!blank);
     };
 
     const selectIcon = () => {

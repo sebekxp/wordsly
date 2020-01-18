@@ -4,7 +4,7 @@ import {FormatQuote} from "styled-icons/material/FormatQuote"
 import ParagraphWrapper from "./ParagraphWrapper";
 import MoreExampleButton from "./MoreExampleButton";
 import {connect} from "react-redux";
-import {bookmarkType as Type} from "../../topElements/bookmarks/BookmarkType";
+
 
 
 const ExampleContent = (props) => {
@@ -14,6 +14,7 @@ const ExampleContent = (props) => {
     const targetRef = useRef();
 
     useEffect(() => {
+
         setExpand(false);
     }, [word]);
 
@@ -52,6 +53,7 @@ const ExampleContent = (props) => {
     };
 
     const exampleContentToRender = () => {
+
         return (
             <>
                 <KeyWordHeader>
@@ -72,7 +74,7 @@ const ExampleContent = (props) => {
         )
     };
 
-    return (props.activeBookmark === Type.FAV && !word.active ? null : exampleContentToRender());
+    return (exampleContentToRender());
 };
 
 const mapStateToProps = (state) => {

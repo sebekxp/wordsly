@@ -1,4 +1,4 @@
-import React, {useState, useRef,} from "react";
+import React, {useState} from "react";
 import styled from 'styled-components';
 import BlankCircleIcon from "./icons/BlankCircleIcon";
 import DeleteElemIcon from "./icons/DeleteElementIcon";
@@ -7,7 +7,7 @@ import {connect, useDispatch} from "react-redux";
 import {setWordToShow} from "../../WordsToRenderSlice";
 
 const NavigationWord = (props) => {
-    const [word, setWord] = useState(props.wordToShow);
+    const [word, setWord] = useState(props.word);
     const dispatch = useDispatch();
     const words = props.words;
     const IconWrapper = styled.div`
@@ -61,8 +61,15 @@ const NavigationWord = (props) => {
     const clickMouseAndDisplayWordContent = (evt) => {
         for (let i = 0; i < words.length; i++) {
             if (words[i].wordName === evt.target.innerText) {
-                setWord(words[i]);
                 dispatch(setWordToShow(words[i]));
+            }
+        }
+    };
+
+    const handleMouseOver = (evt) => {
+        for (let i = 0; i < words.length; i++) {
+            if (words[i].wordName === evt.target.innerText) {
+                setWord(words[i]);
             }
         }
     };
@@ -70,8 +77,9 @@ const NavigationWord = (props) => {
     return (
         <NavigationWord
             onClick={(event) => clickMouseAndDisplayWordContent(event)}
+            onMouseOver={e => handleMouseOver(e)}
             className={"navigation-word"}>
-            <BlankCircleIcon className={"blank-circle-icon"}/>
+            <BlankCircleIcon className={"blank-circle-icon"} word={word}/>
             <WordName>
                 <span>{props.name}</span>
                 <IconWrapper>

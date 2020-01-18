@@ -10,18 +10,17 @@ import {setNextWordToShow, setPrevWordToShow} from "../WordsToRenderSlice";
 
 const WordContentContainer = (props) => {
     const dispatch = useDispatch();
-
     useEffect(() => {
         document.addEventListener("keyup", handleKeyDown);
     }, []);
 
-    const next = (bookmark) => {
-        console.log(bookmark);
-        dispatch(setNextWordToShow(bookmark));
+
+    const next = () => {
+        dispatch(setNextWordToShow());
     };
 
-    const prev = (bookmark) => {
-        dispatch(setPrevWordToShow(bookmark));
+    const prev = () => {
+        dispatch(setPrevWordToShow());
     };
 
     const handleKeyDown = (e) => {
@@ -76,10 +75,9 @@ const WordContentContainer = (props) => {
         align-items: center; 
     `;
 
-    const 
     return (
         <WordContentContainer>
-            <IconWrapper onClick={() => prev(props.bookmark)}>
+            <IconWrapper onClick={prev}>
                 <Prev/>
             </IconWrapper>
             {selectBookmark()}

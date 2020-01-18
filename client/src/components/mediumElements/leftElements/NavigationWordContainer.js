@@ -34,13 +34,13 @@ const NavigationWordContainer = (props) => {
     const renderExamples = () => {
         return words.filter(word => {
             return !word.deleted ? word : null
-        }).map((word, index) => <NavigationWord name={word.wordName} key={index}/>)
+        }).map((word, index) => <NavigationWord name={word.wordName} key={index} word={word}/>)
     };
 
     const renderFavorites = () => {
         return words.filter(word => {
             return word.active ? word : null
-        }).map((word, index) => <NavigationWord name={word.wordName} key={index}/>)
+        }).map((word, index) => <NavigationWord name={word.wordName} key={index}  word={word}/>)
     };
 
     return (
