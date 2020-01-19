@@ -9,7 +9,7 @@ import {connect} from "react-redux";
 const ExampleContent = (props) => {
     const word = props.word;
     const [expand, setExpand] = useState(false);
-    const examples = word.examples;
+    const examples = word !== undefined && word.examples;
     const targetRef = useRef();
 
     useEffect(() => {
@@ -52,6 +52,7 @@ const ExampleContent = (props) => {
 
     const exampleContentToRender = () => {
         return (
+            word !== undefined &&
             <>
                 <KeyWordHeader>
                     <h3>{word.wordName} - {word.wordTranslate}</h3>

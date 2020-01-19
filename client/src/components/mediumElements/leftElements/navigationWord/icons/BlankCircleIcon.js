@@ -5,8 +5,9 @@ import {CheckCircle} from 'styled-icons/boxicons-solid/CheckCircle';
 import {useDispatch} from "react-redux";
 import {decrementKnownWord, incrementKnownWord} from "../../../../topElements/progressBar/ProgressBarSlice";
 import Popup from "../../../../popup/Popup";
-import {setKnowWord} from "../../../WordsToRenderSlice";
+import {fetchAndUpdateKnowWord, setKnowWord} from "../../../WordsToRenderSlice";
 import Colors from "../../../../Colors";
+import {store} from "../../../../../App";
 
 
 const BlankCircleIcon = (props) => {
@@ -23,7 +24,8 @@ const BlankCircleIcon = (props) => {
     const updateProgBar = (e) => {
         // setOpenPopup(true);
         // setCords({x: e.screenX, y: e.screenY});
-        dispatch(setKnowWord({word: props.word, knowWord: !props.word.knowWord}));
+        // dispatch(setKnowWord({word: props.word, knowWord: !props.word.knowWord}));
+        store.dispatch(fetchAndUpdateKnowWord({word: props.word, knowWord: !props.word.knowWord}));
         blank ? dispatch(incrementKnownWord()) : dispatch(decrementKnownWord());
     };
 

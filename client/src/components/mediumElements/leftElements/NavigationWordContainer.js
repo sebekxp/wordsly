@@ -35,13 +35,13 @@ const NavigationWordContainer = (props) => {
     const renderExamples = () => {
         return words.filter(word => {
             return !word.deleted && word
-        }).map((word, index) => <NavigationWord name={word.wordName} key={index} word={word}/>)
+        }).map((word, index) => <NavigationWord name={word.wordName} key={index} word={word} words={words}/>)
     };
 
     const renderFavorites = () => {
         return words.filter(word => {
             return word.active && word
-        }).map((word, index) => <NavigationWord name={word.wordName} key={index}  word={word}/>)
+        }).map((word, index) => <NavigationWord name={word.wordName} key={index} word={word} words={words}/>)
     };
 
     return (

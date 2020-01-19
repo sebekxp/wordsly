@@ -46,9 +46,9 @@ const NavigationWord = (props) => {
     `;
 
     const selectColor = () => {
-        // return props.name === props.wordToShow.wordName ? Colors.NAVIGATION_WORD_BACKGROUND_HOVER :
-        //     Colors.NAVIGATION_WORD_BACKGROUND;
-        return Colors.NAVIGATION_WORD_BACKGROUND;
+        return props.name === props.wordToShow.wordName ? Colors.NAVIGATION_WORD_BACKGROUND_HOVER :
+            Colors.NAVIGATION_WORD_BACKGROUND;
+        // return Colors.NAVIGATION_WORD_BACKGROUND;
     };
 
     const WordName = styled.div`
@@ -99,8 +99,8 @@ const NavigationWord = (props) => {
 const mapStateToProps = (state) => {
     const {wordsToRender} = state;
     return {
-        words: wordsToRender.words,
-        // wordToShow: wordsToRender.wordToShow
+        // words: wordsToRender.words,
+        wordToShow: wordsToRender.wordToShow
     }
 };
 

@@ -1,17 +1,11 @@
-import React from 'react';
 import {createSlice} from "@reduxjs/toolkit";
-import {OBJWORDS as words} from "../../components/words";
 import {bookmarkType as Type} from "../topElements/bookmarks/BookmarkType";
+import axios from "axios";
 
 
-const initialState = {
-    words: [...words].map(obj =>
-        Object.assign(obj, {
-            active: false,
-            deleted: false,
-            knowWord: false,
-        })),
-    wordToShow: words[0],
+export const initialState = {
+    words: [],
+    wordToShow: undefined
 };
 
 const getActiveWordsIndex = (state) => {
@@ -32,7 +26,6 @@ const findNext = (num, array) => {
     }
 
     return temp;
-
 };
 
 const findPrev = (num, array) => {
@@ -45,13 +38,6 @@ const findPrev = (num, array) => {
     }
 
     return temp;
-
-};
-
-const updateWordToShow = (state, index) => {
-
-    // if (state.words[index].wordName === state.wordToShow.wordName)
-    // state.wordToShow.active = active;
 };
 
 
@@ -59,6 +45,10 @@ const wordsToRender = createSlice({
     name: 'WordsToRender',
     initialState,
     reducers: {
+        setInitialState(state, action) {
+            state.words = action.payload;
+            state.wordToShow = state.words[0];
+        },
         addWord(state, action) {
             const index = getIndex(state, action.payload);
 
@@ -82,7 +72,6 @@ const wordsToRender = createSlice({
             state.words[index].active = active;
 
             // Update wordToShow if Match
-            updateWordToShow(state, index);
             if (state.words[index].wordName === state.wordToShow.wordName)
                 state.wordToShow.active = active;
         },
@@ -99,8 +88,10 @@ const wordsToRender = createSlice({
         },
         setKnowWord(state, action) {
             const {word, knowWord} = action.payload;
+            console.log(word, knowWord);
             const index = getIndex(state, word);
             state.words[index].knowWord = knowWord;
+            // return state.words
         },
         setWordToShow(state, action) {
             state.wordToShow = action.payload;
@@ -147,12 +138,12 @@ const wordsToRender = createSlice({
                     state.wordToShow = state.words[i];
                 }
             }
-
         }
     }
 });
 
 export const {
+    setInitialState,
     addWord,
     setActive,
     removeWord,
@@ -166,3 +157,30 @@ export const {
 } = wordsToRender.actions;
 export default wordsToRender.reducer;
 
+export function fetchWords() {
+    return function (dispatch) {
+
+        fetch('http://localhost:5000/api/words', {
+            method: 'GET',
+            mode: "cors"
+        }).then(res => {
+            dispatch(setInitialState(res.data[0].words))
+        }).catch(err => err.message);
+
+        // return axios.get('/api/words')
+        //     .then(res => {
+        //         dispatch(setInitialState(res.data[0].words))
+        //     }).catch(err => err.message);
+    };
+}
+
+export function fetchAndUpdateKnowWord({word, knowWord}) {
+    return function (dispatch) {
+        dispatch(setKnowWord({word, knowWord}));
+
+        fetch('/updateKnowWord', {
+            method: 'PUT',
+            body: "SAD"
+        })
+    };
+}

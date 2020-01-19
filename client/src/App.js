@@ -5,7 +5,7 @@ import {Provider} from 'react-redux'
 import {rootReducer} from './reducers'
 import {configureStore} from "@reduxjs/toolkit";
 import Search from "./components/Search";
-
+import {fetchWords} from "./components/mediumElements/WordsToRenderSlice";
 
 export const store = configureStore({
     reducer: rootReducer
@@ -13,6 +13,7 @@ export const store = configureStore({
 
 
 function App() {
+    store.dispatch(fetchWords());
     return (
         <Provider store={store}>
             <div className="App">
