@@ -1,13 +1,13 @@
-import React from "react";
-import styled from "styled-components";
-import {Circle} from 'styled-icons/fa-regular/Circle';
-import {CheckCircle} from 'styled-icons/boxicons-solid/CheckCircle';
-import {useDispatch} from "react-redux";
-import {decrementKnownWord, incrementKnownWord} from "../../../../topElements/progressBar/ProgressBarSlice";
-import Popup from "../../../../popup/Popup";
-import {fetchAndUpdateKnowWord, setKnowWord} from "../../../WordsToRenderSlice";
-import Colors from "../../../../Colors";
-import {store} from "../../../../../App";
+import React from 'react';
+import styled from 'styled-components';
+import { Circle } from 'styled-icons/fa-regular/Circle';
+import { CheckCircle } from 'styled-icons/boxicons-solid/CheckCircle';
+import { useDispatch } from 'react-redux';
+import { decrementKnownWord, incrementKnownWord } from '../../../../topElements/progressBar/ProgressBarSlice';
+import Popup from '../../../../popup/Popup';
+import { fetchAndUpdateKnowWord, setKnowWord } from '../../../WordsToRenderSlice';
+import Colors from '../../../../Colors';
+import { store } from '../../../../../App';
 
 
 const BlankCircleIcon = (props) => {
@@ -18,19 +18,19 @@ const BlankCircleIcon = (props) => {
     const dispatch = useDispatch();
 
     const selectText = () => {
-        return blank ? "Set as known word" : "Set as unknown word";
+        return blank ? 'Set as known word' : 'Set as unknown word';
     };
 
     const updateProgBar = (e) => {
         // setOpenPopup(true);
         // setCords({x: e.screenX, y: e.screenY});
-        // dispatch(setKnowWord({word: props.word, knowWord: !props.word.knowWord}));
-        store.dispatch(fetchAndUpdateKnowWord({word: props.word, knowWord: !props.word.knowWord}));
+        dispatch(setKnowWord({ word: props.word, knowWord: !props.word.knowWord }));
+        // store.dispatch(fetchAndUpdateKnowWord({word: props.word, knowWord: !props.word.knowWord}));
         blank ? dispatch(incrementKnownWord()) : dispatch(decrementKnownWord());
     };
 
     const selectIcon = () => {
-        return blank ? Circle : CheckCircle
+        return blank ? Circle : CheckCircle;
     };
 
     const setColor = () => {
@@ -52,7 +52,7 @@ const BlankCircleIcon = (props) => {
         <>
             <GreenCircleIcon
                 onClick={e => updateProgBar(e)}
-                title={"Mark as known word"}/>
+                title={'Mark as known word'}/>
             {/*<Popup open={openPopup} x={cords.x} y={cords.y}>*/}
             {/*    {selectText()}*/}
             {/*</Popup>*/}

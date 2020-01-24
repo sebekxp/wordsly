@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import styled from "styled-components";
-import Colors from "../../Colors";
-import {useDispatch} from "react-redux";
-import {setBookmark} from "../../BookmarksContextSlice";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import Colors from '../../Colors';
+import { useDispatch } from 'react-redux';
+import { setBookmark } from '../../BookmarksContextSlice';
 
 
 const BookmarksElement = (props) => {
@@ -12,7 +12,7 @@ const BookmarksElement = (props) => {
     const getColor = () => {
         return selected ?
             Colors.BOOKMARKS_ELEMENT_SELECTED_BACKGROUND :
-            Colors.BOOKMARKS_ELEMENT_BACKGROUND
+            Colors.BOOKMARKS_ELEMENT_BACKGROUND;
     };
 
     const Wrapper = styled.div`
@@ -25,7 +25,7 @@ const BookmarksElement = (props) => {
 
     const handleClick = () => {
         setSelected(!selected);
-        dispatch(setBookmark(props.bbTitle))
+        dispatch(setBookmark(props.bbTitle));
     };
 
     return (

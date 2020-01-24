@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 
 const knownWordCounterSlice = createSlice({
@@ -10,5 +10,5 @@ const knownWordCounterSlice = createSlice({
     }
 });
 
-export const {incrementKnownWord, decrementKnownWord} = knownWordCounterSlice.actions;
+export const { incrementKnownWord, decrementKnownWord } = knownWordCounterSlice.actions;
 export default knownWordCounterSlice.reducer;

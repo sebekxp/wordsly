@@ -1,11 +1,11 @@
-import React, {useState} from "react";
-import {XCircle} from 'styled-icons/boxicons-solid/XCircle';
-import {XCircle as BlankCircle} from 'styled-icons/boxicons-regular/XCircle';
-import styled from "styled-components";
-import {connect, useDispatch} from "react-redux";
-import {setActive, setDeleted} from "../../../WordsToRenderSlice";
-import {bookmarkType as Type} from "../../../../topElements/bookmarks/BookmarkType";
-import Colors from "../../../../Colors";
+import React, { useState } from 'react';
+import { XCircle } from 'styled-icons/boxicons-solid/XCircle';
+import { XCircle as BlankCircle } from 'styled-icons/boxicons-regular/XCircle';
+import styled from 'styled-components';
+import { connect, useDispatch } from 'react-redux';
+import { setActive, setDeleted } from '../../../WordsToRenderSlice';
+import { bookmarkType as Type } from '../../../../topElements/bookmarks/BookmarkType';
+import Colors from '../../../../Colors';
 
 const DeleteElementIcon = (props) => {
     const [hover, setHover] = useState(false);
@@ -25,10 +25,10 @@ const DeleteElementIcon = (props) => {
         // dispatch(removeWord(props.word.wordName));
 
         if (props.bookmark === Type.FAV)
-            dispatch(setActive({word: props.word, active: false}));
+            dispatch(setActive({ word: props.word, active: false }));
 
         if (props.bookmark === Type.EXAMPLES)
-            dispatch(setDeleted({word: props.word, deleted: true}));
+            dispatch(setDeleted({ word: props.word, deleted: true }));
     };
 
 
@@ -50,17 +50,17 @@ const DeleteElementIcon = (props) => {
         <DeleteElementIcon onMouseEnter={onMouseEnterHandler}
                            onMouseLeave={onMouseLeaveHandler}
                            onClick={e => deleteNavigationWord(e)}
-                           title={"Delete word"}/>
+                           title={'Delete word'}/>
     );
 
 };
 
 const mapStateToProps = (state) => {
-    const {bookmark} = state;
+    const { bookmark } = state;
 
     return {
-        bookmark: bookmark,
-    }
+        bookmark: bookmark
+    };
 };
 
 export default connect(mapStateToProps)(DeleteElementIcon);

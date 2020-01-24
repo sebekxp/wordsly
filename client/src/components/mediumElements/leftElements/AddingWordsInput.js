@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import {AddCircleOutline} from 'styled-icons/material/AddCircleOutline';
-import {AddCircle} from 'styled-icons/material/AddCircle';
-import {useDispatch} from "react-redux";
-import {addWord} from "../WordsToRenderSlice";
-import Colors from "../../../utils/Colors";
+import { AddCircleOutline } from 'styled-icons/material/AddCircleOutline';
+import { AddCircle } from 'styled-icons/material/AddCircle';
+import { useDispatch } from 'react-redux';
+import { addWord } from '../WordsToRenderSlice';
+import Colors from '../../../utils/Colors';
 
 const AddingWordsInput = () => {
     const [hover, setHover] = useState(false);
@@ -52,7 +52,7 @@ const AddingWordsInput = () => {
     };
 
     const selectIcon = () => {
-        return !hover ? AddCircleOutline : AddCircle
+        return !hover ? AddCircleOutline : AddCircle;
     };
 
 
@@ -70,12 +70,12 @@ const AddingWordsInput = () => {
             wordName: wordName,
             wordTranslate: wordTranslate,
             examples: [
-                "a woman of her ability " + wordName + " ",
-                " " + wordName + " he has an ability for figures",
-                "a low ability student " + wordName + " ",
-                "You possess the ability to back your strong imagination with will and action. " + wordName + " ",
+                'a woman of her ability ' + wordName + ' ',
+                ' ' + wordName + ' he has an ability for figures',
+                'a low ability student ' + wordName + ' ',
+                'You possess the ability to back your strong imagination with will and action. ' + wordName + ' '
             ]
-        }
+        };
     };
 
     const getInputValue = () => {
@@ -85,7 +85,7 @@ const AddingWordsInput = () => {
     const createAndAddWordToRepo = () => {
         const inputValue = getInputValue();
         if (inputValue.length === 0 || inputValue.length > 11) {
-            alert("The name is too short or too long to be used as a navigation word.");
+            alert('The name is too short or too long to be used as a navigation word.');
             return;
         }
         const nav = createNavWord(inputValue, inputValue);
@@ -105,7 +105,7 @@ const AddingWordsInput = () => {
     return (
         <AddingWordsInput>
             <InputWrapper>
-                <AddInput type="text" name="" id="add-word" placeholder={"Add word"} ref={target}
+                <AddInput type="text" name="" id="add-word" placeholder={'Add word'} ref={target}
                           onKeyPress={e => handleEnterPress(e)}/>
                 <Add onClick={handleButtonPress}
                      onMouseEnter={onMouseEnterHandler}

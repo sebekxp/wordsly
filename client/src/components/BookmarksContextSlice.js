@@ -1,5 +1,5 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {bookmarkType as Type} from "./topElements/bookmarks/BookmarkType";
+import { createSlice } from '@reduxjs/toolkit';
+import { bookmarkType as Type } from './topElements/bookmarks/BookmarkType';
 
 const initialState = Type.EXAMPLES;
 
@@ -14,5 +14,5 @@ const bookmarksContext = createSlice({
     }
 });
 
-export const {setBookmark} = bookmarksContext.actions;
+export const { setBookmark } = bookmarksContext.actions;
 export default bookmarksContext.reducer;

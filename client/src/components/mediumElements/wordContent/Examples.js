@@ -1,11 +1,11 @@
 import React from 'react';
-import styled from "styled-components";
-import ExampleContent from "./ExampleContent";
-import Colors from "../../Colors";
+import styled from 'styled-components';
+import ExampleContent from './ExampleContent';
+import Colors from '../../Colors';
 
 
 const Examples = () => {
-    
+
     const ExamplesContainer = styled.div`
         margin: 50px auto;
         width: 600px;
@@ -21,4 +21,4 @@ const Examples = () => {
     );
 };
 
-export default Examples
+export default Examples;

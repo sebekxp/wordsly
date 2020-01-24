@@ -1,10 +1,10 @@
-import React, {useState} from "react";
-import styled from "styled-components";
-import {Star} from "styled-icons/boxicons-solid/Star";
-import {Star as BlankStar} from 'styled-icons/boxicons-regular/Star';
-import {useDispatch} from "react-redux";
-import {setActive} from "../../../WordsToRenderSlice";
-import Colros from "../../../../Colors";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { Star } from 'styled-icons/boxicons-solid/Star';
+import { Star as BlankStar } from 'styled-icons/boxicons-regular/Star';
+import { useDispatch } from 'react-redux';
+import { setActive } from '../../../WordsToRenderSlice';
+import Colros from '../../../../Colors';
 
 
 const FavElementIcon = (props) => {
@@ -20,7 +20,7 @@ const FavElementIcon = (props) => {
     };
 
     const handleClick = (e) => {
-        dispatch(setActive({word: props.word, active: true}));
+        dispatch(setActive({ word: props.word, active: true }));
         e.stopPropagation();
     };
 
@@ -40,7 +40,7 @@ const FavElementIcon = (props) => {
         <FavElemIcon onMouseEnter={onMouseEnterHandler}
                      onMouseLeave={onMouseLeaveHandler}
                      onClick={e => handleClick(e)}
-                     title={"Add to favorites word"}
+                     title={'Add to favorites word'}
                      size={30}/>
     );
 };

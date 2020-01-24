@@ -1,11 +1,17 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {bookmarkType as Type} from "../topElements/bookmarks/BookmarkType";
+import {OBJWORDS as words} from "../../components/words";
 import axios from "axios";
 
 
-export const initialState = {
-    words: [],
-    wordToShow: undefined
+const initialState = {
+    words: [...words].filter((obj, index) => index < 20).map(obj =>
+        Object.assign(obj, {
+            active: false,
+            deleted: false,
+            knowWord: false,
+        })),
+    wordToShow: words[0],
 };
 
 const getActiveWordsIndex = (state) => {
@@ -88,7 +94,7 @@ const wordsToRender = createSlice({
         },
         setKnowWord(state, action) {
             const {word, knowWord} = action.payload;
-            console.log(word, knowWord);
+            // console.log(word, knowWord);
             const index = getIndex(state, word);
             state.words[index].knowWord = knowWord;
             // return state.words
@@ -158,29 +164,36 @@ export const {
 export default wordsToRender.reducer;
 
 export function fetchWords() {
-    return function (dispatch) {
-
-        fetch('http://localhost:5000/api/words', {
+    return (dispatch) => {
+        fetch('http://192.168.142.23:5000/api/words', {
             method: 'GET',
-            mode: "cors"
         }).then(res => {
-            dispatch(setInitialState(res.data[0].words))
+            console.log(res.json());
+            return res.json();
+        }).then(obj => {
+            console.log(obj);
+            dispatch(setInitialState(obj))
         }).catch(err => err.message);
-
-        // return axios.get('/api/words')
-        //     .then(res => {
-        //         dispatch(setInitialState(res.data[0].words))
-        //     }).catch(err => err.message);
     };
 }
 
 export function fetchAndUpdateKnowWord({word, knowWord}) {
     return function (dispatch) {
-        dispatch(setKnowWord({word, knowWord}));
-
-        fetch('/updateKnowWord', {
+        // dispatch(setKnowWord({word, knowWord}));
+        console.log(word);
+        fetch('http://localhost:5000/api/words/updateKnowWord', {
             method: 'PUT',
-            body: "SAD"
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(word)
         })
-    };
+            .then((response) => response.json())
+            .then((result) => {
+                console.log('Success:', result);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
 }

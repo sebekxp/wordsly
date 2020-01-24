@@ -1,8 +1,8 @@
 import React from 'react';
-import styled from "styled-components";
-import TopElementsWrapper from "./topElements/TopElementsWrapper";
-import MediumElementsWrapper from "./mediumElements/MediumElementsWrapper";
-import Colors from "./Colors";
+import styled from 'styled-components';
+import TopElementsWrapper from './topElements/TopElementsWrapper';
+import MediumElementsWrapper from './mediumElements/MediumElementsWrapper';
+import Colors from './Colors';
 
 
 const Container = styled.div`

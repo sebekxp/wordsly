@@ -8,7 +8,7 @@ const WordItemSchema = new Schema({
     },
     wordTranslate: {
         type: String,
-        required: true,
+        required: true
     },
     examples: [String],
     date: {

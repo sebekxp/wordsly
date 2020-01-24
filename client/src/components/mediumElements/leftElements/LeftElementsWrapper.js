@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import NavigationWordContainer from "./NavigationWordContainer";
-import AddingWordsInput from "./AddingWordsInput";
+import NavigationWordContainer from './NavigationWordContainer';
+import AddingWordsInput from './AddingWordsInput';
 
 
 const LeftElementsWrapper = () => {

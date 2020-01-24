@@ -1,18 +1,18 @@
-import React, {useEffect} from "react";
-import styled from "styled-components";
-import Examples from "./Examples";
-import {connect, useDispatch} from "react-redux";
-import FlashCards from "../../topElements/bookmarks/flashCards/FlashCard";
-import Favorites from "../../topElements/bookmarks/favorites/Favorites";
-import {bookmarkType as Type} from "../../topElements/bookmarks/BookmarkType";
-import {NavigateNext} from 'styled-icons/material/NavigateNext'
-import {setNextWordToShow, setPrevWordToShow} from "../WordsToRenderSlice";
-import Colors from "../../Colors";
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import Examples from './Examples';
+import { connect, useDispatch } from 'react-redux';
+import FlashCards from '../../topElements/bookmarks/flashCards/FlashCard';
+import Favorites from '../../topElements/bookmarks/favorites/Favorites';
+import { bookmarkType as Type } from '../../topElements/bookmarks/BookmarkType';
+import { NavigateNext } from 'styled-icons/material/NavigateNext';
+import { setNextWordToShow, setPrevWordToShow } from '../WordsToRenderSlice';
+import Colors from '../../Colors';
 
 const WordContentContainer = (props) => {
     const dispatch = useDispatch();
     useEffect(() => {
-        document.addEventListener("keyup", handleKeyDown);
+        document.addEventListener('keyup', handleKeyDown);
     }, []);
 
 
@@ -54,7 +54,7 @@ const WordContentContainer = (props) => {
             case Type.FAV:
                 return <Favorites/>;
             default:
-                return
+                return;
         }
     };
 
@@ -91,10 +91,10 @@ const WordContentContainer = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    const {bookmark} = state;
+    const { bookmark } = state;
     return {
-        bookmark: bookmark,
-    }
+        bookmark: bookmark
+    };
 };
 
 export default connect(mapStateToProps)(WordContentContainer);

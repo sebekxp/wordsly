@@ -1,5 +1,5 @@
 export const bookmarkType = {
     EXAMPLES: 'Examples',
     FAV: 'Favorites',
-    FLASH_CARDS: "Flash Cards"
+    FLASH_CARDS: 'Flash Cards'
 };

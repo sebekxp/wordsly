@@ -1,7 +1,7 @@
 import React from 'react';
-import styled from "styled-components";
-import WordContentContainer from "./wordContent/WordContentContainer";
-import LeftElementsWrapper from "./leftElements/LeftElementsWrapper";
+import styled from 'styled-components';
+import WordContentContainer from './wordContent/WordContentContainer';
+import LeftElementsWrapper from './leftElements/LeftElementsWrapper';
 
 
 const MediumElementsWrapper = () => {

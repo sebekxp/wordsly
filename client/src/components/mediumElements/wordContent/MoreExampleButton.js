@@ -1,16 +1,16 @@
 import React from 'react';
-import styled from "styled-components";
-import {ExpandMore} from "styled-icons/material/ExpandMore";
-import {ExpandLess} from "styled-icons/material/ExpandLess";
+import styled from 'styled-components';
+import { ExpandMore } from 'styled-icons/material/ExpandMore';
+import { ExpandLess } from 'styled-icons/material/ExpandLess';
 
 const MoreExampleButton = (props) => {
 
     const toggleMoreExample = () => {
-        props.setExpand(!props.expand)
+        props.setExpand(!props.expand);
     };
 
     const selectIcon = () => {
-        return !props.expand ? ExpandMore : ExpandLess
+        return !props.expand ? ExpandMore : ExpandLess;
     };
 
     const ExpandHideIcon = styled(selectIcon())`
@@ -54,10 +54,10 @@ const MoreExampleButton = (props) => {
 
     return (
         <MoreExamples onClick={toggleMoreExample}>
-            {!props.expand ? "More" : "Less"}
+            {!props.expand ? 'More' : 'Less'}
             <ExpandHideIcon/>
         </MoreExamples>
     );
 };
 
-export default MoreExampleButton
+export default MoreExampleButton;

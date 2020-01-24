@@ -1,7 +1,7 @@
 import React from 'react';
-import Colors from "../../Colors";
-import styled from "styled-components";
-import {connect, useSelector} from "react-redux";
+import Colors from '../../Colors';
+import styled from 'styled-components';
+import { connect, useSelector } from 'react-redux';
 
 
 const Wrapper = styled.div`
@@ -60,8 +60,8 @@ const ProgressBar = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    const {wordsToRender} = state;
-    return {words: wordsToRender.words}
+    const { wordsToRender } = state;
+    return { words: wordsToRender.words };
 };
 
 export default connect(mapStateToProps)(ProgressBar);

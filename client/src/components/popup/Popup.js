@@ -1,9 +1,9 @@
-import React, {useEffect, useRef, useState} from "react";
-import ReactDOM from "react-dom";
-import styled from "styled-components";
-import uuid from 'uuid'
+import React, { useEffect, useRef, useState } from 'react';
+import ReactDOM from 'react-dom';
+import styled from 'styled-components';
+import uuid from 'uuid';
 
-const Popup = ({open, children, x, y}) => {
+const Popup = ({ open, children, x, y }) => {
     const target = useRef();
     const [shouldRender, setShouldRender] = useState(true);
     const id = uuid();
@@ -16,7 +16,7 @@ const Popup = ({open, children, x, y}) => {
 
         return () => {
             clearTimeout(timer);
-        }
+        };
     }, [open]);
 
 

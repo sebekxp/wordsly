@@ -1,9 +1,9 @@
-import React, {useState, useRef, useEffect} from 'react';
-import styled from "styled-components";
-import {FormatQuote} from "styled-icons/material/FormatQuote"
-import ParagraphWrapper from "./ParagraphWrapper";
-import MoreExampleButton from "./MoreExampleButton";
-import {connect} from "react-redux";
+import React, { useState, useRef, useEffect } from 'react';
+import styled from 'styled-components';
+import { FormatQuote } from 'styled-icons/material/FormatQuote';
+import ParagraphWrapper from './ParagraphWrapper';
+import MoreExampleButton from './MoreExampleButton';
+import { connect } from 'react-redux';
 
 
 const ExampleContent = (props) => {
@@ -47,7 +47,7 @@ const ExampleContent = (props) => {
     `;
 
     const makeHeaderWordBold = (str, wordName) => {
-        return str.replace(" " + wordName + " ", ' <b>' + wordName + '</b> ')
+        return str.replace(' ' + wordName + ' ', ' <b>' + wordName + '</b> ');
     };
 
     const exampleContentToRender = () => {
@@ -63,7 +63,7 @@ const ExampleContent = (props) => {
                             index < (expand ? examples.length : 3)).map((example, index) =>
                             <ParagraphWrapper key={index}>
                                 <Quote/>
-                                <p dangerouslySetInnerHTML={{__html: makeHeaderWordBold(example, word.wordName)}}/>
+                                <p dangerouslySetInnerHTML={{ __html: makeHeaderWordBold(example, word.wordName) }}/>
                             </ParagraphWrapper>)
                     }
                 </ExampleContent>
@@ -76,10 +76,10 @@ const ExampleContent = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    const {wordsToRender} = state;
+    const { wordsToRender } = state;
     return {
-        word: wordsToRender.wordToShow,
-    }
+        word: wordsToRender.wordToShow
+    };
 };
 
 export default connect(mapStateToProps)(ExampleContent);

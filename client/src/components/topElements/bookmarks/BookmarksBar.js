@@ -1,9 +1,9 @@
 import React from 'react';
-import styled from "styled-components";
-import BookmarksElement from "./BookmarksElement";
-import Colors from "../../Colors";
-import {useSelector} from "react-redux";
-import {bookmarkType as Type} from "./BookmarkType";
+import styled from 'styled-components';
+import BookmarksElement from './BookmarksElement';
+import Colors from '../../Colors';
+import { useSelector } from 'react-redux';
+import { bookmarkType as Type } from './BookmarkType';
 
 
 const BookmarksBar = () => {

@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import NavigationWord from "./navigationWord/NavigationWord";
-import {connect} from "react-redux";
-import {bookmarkType as Type} from "../../topElements/bookmarks/BookmarkType";
-import Colors from "../../Colors";
+import React from 'react';
+import styled from 'styled-components';
+import NavigationWord from './navigationWord/NavigationWord';
+import { connect } from 'react-redux';
+import { bookmarkType as Type } from '../../topElements/bookmarks/BookmarkType';
+import Colors from '../../Colors';
 
 const NavigationWordContainer = (props) => {
     const words = props.words;
@@ -28,24 +28,24 @@ const NavigationWordContainer = (props) => {
             case Type.FAV:
                 return renderFavorites();
             default:
-                return
+                return;
         }
     };
 
     const renderExamples = () => {
         return words.filter(word => {
-            return !word.deleted && word
-        }).map((word, index) => <NavigationWord name={word.wordName} key={index} word={word} words={words}/>)
+            return !word.deleted && word;
+        }).map((word, index) => <NavigationWord name={word.wordName} key={index} word={word} words={words}/>);
     };
 
     const renderFavorites = () => {
         return words.filter(word => {
-            return word.active && word
-        }).map((word, index) => <NavigationWord name={word.wordName} key={index} word={word} words={words}/>)
+            return word.active && word;
+        }).map((word, index) => <NavigationWord name={word.wordName} key={index} word={word} words={words}/>);
     };
 
     return (
-        <Container id={"navigation-word-container"} className={"words"}>
+        <Container id={'navigation-word-container'} className={'words'}>
             {
                 selectBookmark()
             }
@@ -55,13 +55,13 @@ const NavigationWordContainer = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    const {wordsToRender} = state;
-    const {bookmark} = state;
+    const { wordsToRender } = state;
+    const { bookmark } = state;
 
     return {
         words: wordsToRender.words,
         bookmark: bookmark
-    }
+    };
 };
 
 export default connect(mapStateToProps)(NavigationWordContainer);
