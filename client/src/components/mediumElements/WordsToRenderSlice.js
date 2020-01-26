@@ -1,7 +1,7 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {bookmarkType as Type} from "../topElements/bookmarks/BookmarkType";
-import {OBJWORDS as words} from "../../components/words";
-import axios from "axios";
+import { createSlice } from '@reduxjs/toolkit';
+import { bookmarkType as Type } from '../topElements/bookmarks/BookmarkType';
+import { OBJWORDS as words } from '../../components/words';
+import axios from 'axios';
 
 
 const initialState = {
@@ -9,9 +9,9 @@ const initialState = {
         Object.assign(obj, {
             active: false,
             deleted: false,
-            knowWord: false,
+            knowWord: false
         })),
-    wordToShow: words[0],
+    wordToShow: words[0]
 };
 
 const getActiveWordsIndex = (state) => {
@@ -61,7 +61,7 @@ const wordsToRender = createSlice({
             if (index === -1)
                 state.words.push(action.payload);
             else {
-                alert("Word already exist.")
+                alert('Word already exist.');
             }
         },
         removeWord(state, action) {
@@ -69,11 +69,11 @@ const wordsToRender = createSlice({
             const index = state.words.findIndex(obj => obj.wordName === wordName);
 
             state.words = state.words.filter((obj, i) => {
-                return i !== index
+                return i !== index;
             });
         },
         setActive(state, action) {
-            const {word, active} = action.payload;
+            const { word, active } = action.payload;
             const index = getIndex(state, word);
             state.words[index].active = active;
 
@@ -82,18 +82,18 @@ const wordsToRender = createSlice({
                 state.wordToShow.active = active;
         },
         findByName(state, action) {
-            const {word} = action.payload;
+            const { word } = action.payload;
             const index = getIndex(state, word);
 
             return state.words[index];
         },
         setDeleted(state, action) {
-            const {word, deleted} = action.payload;
+            const { word, deleted } = action.payload;
             const index = getIndex(state, word);
             state.words[index].deleted = deleted;
         },
         setKnowWord(state, action) {
-            const {word, knowWord} = action.payload;
+            const { word, knowWord } = action.payload;
             // console.log(word, knowWord);
             const index = getIndex(state, word);
             state.words[index].knowWord = knowWord;
@@ -166,19 +166,19 @@ export default wordsToRender.reducer;
 export function fetchWords() {
     return (dispatch) => {
         fetch('http://192.168.142.23:5000/api/words', {
-            method: 'GET',
+            method: 'GET'
         }).then(res => {
             console.log(res.json());
             return res.json();
         }).then(obj => {
             console.log(obj);
-            dispatch(setInitialState(obj))
+            dispatch(setInitialState(obj));
         }).catch(err => err.message);
     };
 }
 
-export function fetchAndUpdateKnowWord({word, knowWord}) {
-    return function (dispatch) {
+export function fetchAndUpdateKnowWord({ word, knowWord }) {
+    return function(dispatch) {
         // dispatch(setKnowWord({word, knowWord}));
         console.log(word);
         fetch('http://localhost:5000/api/words/updateKnowWord', {
@@ -195,5 +195,5 @@ export function fetchAndUpdateKnowWord({word, knowWord}) {
             .catch((error) => {
                 console.error('Error:', error);
             });
-    }
+    };
 }

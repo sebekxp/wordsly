@@ -7,7 +7,7 @@ import { setActive, setDeleted } from '../../../WordsToRenderSlice';
 import { bookmarkType as Type } from '../../../../topElements/bookmarks/BookmarkType';
 import Colors from '../../../../Colors';
 
-const DeleteElementIcon = (props) => {
+const DeleteElementIcon = ({ word, bookmark }) => {
     const [hover, setHover] = useState(false);
     const dispatch = useDispatch();
 
@@ -20,15 +20,15 @@ const DeleteElementIcon = (props) => {
 
     };
 
-    const deleteNavigationWord = (e) => {
+    const deleteNavigationWord = () => {
         // e.currentTarget.parentElement.parentElement.parentElement.remove();
         // dispatch(removeWord(props.word.wordName));
 
-        if (props.bookmark === Type.FAV)
-            dispatch(setActive({ word: props.word, active: false }));
+        if (bookmark === Type.FAV)
+            dispatch(setActive({ word: word, active: false }));
 
-        if (props.bookmark === Type.EXAMPLES)
-            dispatch(setDeleted({ word: props.word, deleted: true }));
+        if (bookmark === Type.EXAMPLES)
+            dispatch(setDeleted({ word: word, deleted: true }));
     };
 
 
@@ -36,7 +36,7 @@ const DeleteElementIcon = (props) => {
         return hover ? XCircle : BlankCircle;
     };
 
-    const DeleteElementIcon = styled(selectIcon())`
+    const DeleteElementIconComponent = styled(selectIcon())`
           display: flex;
           color: ${Colors.DELETE_ELEM_ICON}
           width: 30px;
@@ -47,10 +47,10 @@ const DeleteElementIcon = (props) => {
         `;
 
     return (
-        <DeleteElementIcon onMouseEnter={onMouseEnterHandler}
-                           onMouseLeave={onMouseLeaveHandler}
-                           onClick={e => deleteNavigationWord(e)}
-                           title={'Delete word'}/>
+        <DeleteElementIconComponent onMouseEnter={onMouseEnterHandler}
+                                    onMouseLeave={onMouseLeaveHandler}
+                                    onClick={e => deleteNavigationWord(e)}
+                                    title="Delete word"/>
     );
 
 };
@@ -59,7 +59,7 @@ const mapStateToProps = (state) => {
     const { bookmark } = state;
 
     return {
-        bookmark: bookmark
+        bookmark
     };
 };
 

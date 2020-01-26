@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Search as searchIcon } from 'styled-icons/icomoon/Search';
-import Colors from './Colors';
 import { connect } from 'react-redux';
+import Colors from './Colors';
 
 const Search = (props) => {
-    const words = props.words;
+    const {words} = props;
 
     const handleInputChange = (e) => {
-        let inputValue = e.target.value.toLowerCase().trim();
+        const inputValue = e.target.value.toLowerCase().trim();
         const navigationWord = window.document.getElementsByClassName('navigation-word');
         const navWordToArray = [...navigationWord];
 
@@ -56,7 +56,7 @@ const Search = (props) => {
 
     return (
         <SearchContainer>
-            <SearchInput type="text" name="" id="search" placeholder={'Search word ...'}
+            <SearchInput type="text" name="" id="search" placeholder="Search word ..."
                          onChange={(e) => handleInputChange(e)}/>
             <SearchIcon/>
         </SearchContainer>

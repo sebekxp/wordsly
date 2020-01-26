@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import { ExpandMore } from 'styled-icons/material/ExpandMore';
 import { ExpandLess } from 'styled-icons/material/ExpandLess';
 
-const MoreExampleButton = (props) => {
+const MoreExampleButton = ({ expand, setExpand }) => {
 
     const toggleMoreExample = () => {
-        props.setExpand(!props.expand);
+        setExpand(!expand);
     };
 
     const selectIcon = () => {
-        return !props.expand ? ExpandMore : ExpandLess;
+        return !expand ? ExpandMore : ExpandLess;
     };
 
     const ExpandHideIcon = styled(selectIcon())`
@@ -54,7 +54,7 @@ const MoreExampleButton = (props) => {
 
     return (
         <MoreExamples onClick={toggleMoreExample}>
-            {!props.expand ? 'More' : 'Less'}
+            {!expand ? 'More' : 'Less'}
             <ExpandHideIcon/>
         </MoreExamples>
     );

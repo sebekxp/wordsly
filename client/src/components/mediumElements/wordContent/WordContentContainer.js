@@ -1,16 +1,24 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import Examples from './Examples';
+import { NavigateNext } from 'styled-icons/material/NavigateNext';
 import { connect, useDispatch } from 'react-redux';
+import Examples from './Examples';
 import FlashCards from '../../topElements/bookmarks/flashCards/FlashCard';
 import Favorites from '../../topElements/bookmarks/favorites/Favorites';
 import { bookmarkType as Type } from '../../topElements/bookmarks/BookmarkType';
-import { NavigateNext } from 'styled-icons/material/NavigateNext';
 import { setNextWordToShow, setPrevWordToShow } from '../WordsToRenderSlice';
 import Colors from '../../Colors';
 
 const WordContentContainer = (props) => {
     const dispatch = useDispatch();
+
+    const handleKeyDown = (e) => {
+        if (e.which === 39)
+            next();
+        if (e.which === 37)
+            prev();
+    };
+
     useEffect(() => {
         document.addEventListener('keyup', handleKeyDown);
     }, []);
@@ -22,14 +30,6 @@ const WordContentContainer = (props) => {
 
     const prev = () => {
         dispatch(setPrevWordToShow());
-    };
-
-    const handleKeyDown = (e) => {
-        if (e.which === 39)
-            next();
-        if (e.which === 37)
-            prev();
-
     };
 
     const WordContentContainer = styled.div`

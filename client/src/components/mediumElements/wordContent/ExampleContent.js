@@ -1,13 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { FormatQuote } from 'styled-icons/material/FormatQuote';
+import { connect } from 'react-redux';
 import ParagraphWrapper from './ParagraphWrapper';
 import MoreExampleButton from './MoreExampleButton';
-import { connect } from 'react-redux';
 
 
-const ExampleContent = (props) => {
-    const word = props.word;
+const ExampleContent = ({ word }) => {
     const [expand, setExpand] = useState(false);
     const examples = word !== undefined && word.examples;
     const targetRef = useRef();
@@ -17,7 +16,7 @@ const ExampleContent = (props) => {
     }, [word]);
 
 
-    const ExampleContent = styled.div`
+    const ExampleContentComponent = styled.div`
         height: auto;
         overflow: hidden;
         
@@ -47,7 +46,7 @@ const ExampleContent = (props) => {
     `;
 
     const makeHeaderWordBold = (str, wordName) => {
-        return str.replace(' ' + wordName + ' ', ' <b>' + wordName + '</b> ');
+        return str.replace(` ${wordName} `, ` <b>${wordName}</b> `);
     };
 
     const exampleContentToRender = () => {
@@ -57,7 +56,7 @@ const ExampleContent = (props) => {
                 <KeyWordHeader>
                     <h3>{word.wordName} - {word.wordTranslate}</h3>
                 </KeyWordHeader>
-                <ExampleContent ref={targetRef}>
+                <ExampleContentComponent ref={targetRef}>
                     {
                         examples.filter((elem, index) =>
                             index < (expand ? examples.length : 3)).map((example, index) =>
@@ -66,7 +65,7 @@ const ExampleContent = (props) => {
                                 <p dangerouslySetInnerHTML={{ __html: makeHeaderWordBold(example, word.wordName) }}/>
                             </ParagraphWrapper>)
                     }
-                </ExampleContent>
+                </ExampleContentComponent>
                 <MoreExampleButton expand={expand} setExpand={setExpand}/>
             </>
         );

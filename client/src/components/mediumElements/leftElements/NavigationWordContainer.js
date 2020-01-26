@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import NavigationWord from './navigationWord/NavigationWord';
 import { connect } from 'react-redux';
+import NavigationWord from './navigationWord/NavigationWord';
 import { bookmarkType as Type } from '../../topElements/bookmarks/BookmarkType';
 import Colors from '../../Colors';
 
-const NavigationWordContainer = (props) => {
-    const words = props.words;
+const NavigationWordContainer = ({ words, bookmark }) => {
 
     const Container = styled.div`
         display: flex;
@@ -19,33 +18,40 @@ const NavigationWordContainer = (props) => {
         overflow: auto;
     `;
 
-    const selectBookmark = () => {
-        switch (props.bookmark) {
-            case Type.EXAMPLES:
-                return renderExamples();
-            case Type.FLASH_CARDS:
-                return renderExamples();
-            case Type.FAV:
-                return renderFavorites();
-            default:
-                return;
-        }
-    };
-
     const renderExamples = () => {
         return words.filter(word => {
             return !word.deleted && word;
-        }).map((word, index) => <NavigationWord name={word.wordName} key={index} word={word} words={words}/>);
+        }).map((word) => <NavigationWord name={word.wordName} key={word.wordName} word={word} words={words}/>);
     };
 
     const renderFavorites = () => {
         return words.filter(word => {
             return word.active && word;
-        }).map((word, index) => <NavigationWord name={word.wordName} key={index} word={word} words={words}/>);
+        }).map((word) => <NavigationWord name={word.wordName} key={word.wordName} word={word} words={words}/>);
+    };
+
+    const selectBookmark = () => {
+        let retVal;
+        switch (bookmark) {
+            case Type.EXAMPLES:
+                retVal = renderExamples();
+                break;
+            case Type.FLASH_CARDS:
+                retVal = renderExamples();
+                break;
+            case Type.FAV:
+                retVal = renderFavorites();
+                break;
+            default:
+                retVal = renderExamples();
+                break;
+
+        }
+        return retVal;
     };
 
     return (
-        <Container id={'navigation-word-container'} className={'words'}>
+        <Container id="navigation-word-container" className="words">
             {
                 selectBookmark()
             }
@@ -60,7 +66,7 @@ const mapStateToProps = (state) => {
 
     return {
         words: wordsToRender.words,
-        bookmark: bookmark
+        bookmark
     };
 };
 

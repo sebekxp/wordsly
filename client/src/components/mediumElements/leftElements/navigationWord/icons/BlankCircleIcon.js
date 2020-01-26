@@ -4,29 +4,23 @@ import { Circle } from 'styled-icons/fa-regular/Circle';
 import { CheckCircle } from 'styled-icons/boxicons-solid/CheckCircle';
 import { useDispatch } from 'react-redux';
 import { decrementKnownWord, incrementKnownWord } from '../../../../topElements/progressBar/ProgressBarSlice';
-import Popup from '../../../../popup/Popup';
 import { fetchAndUpdateKnowWord, setKnowWord } from '../../../WordsToRenderSlice';
 import Colors from '../../../../Colors';
 import { store } from '../../../../../App';
 
 
-const BlankCircleIcon = (props) => {
-    const blank = !props.word.knowWord;
-    // const [openPopup, setOpenPopup] = useState(false);
-    // const [cords, setCords] = useState({x: 0, y: 0});
-
+const BlankCircleIcon = ({ word, hover }) => {
+    const blank = !word.knowWord;
     const dispatch = useDispatch();
 
-    const selectText = () => {
-        return blank ? 'Set as known word' : 'Set as unknown word';
-    };
 
-    const updateProgBar = (e) => {
-        // setOpenPopup(true);
-        // setCords({x: e.screenX, y: e.screenY});
-        dispatch(setKnowWord({ word: props.word, knowWord: !props.word.knowWord }));
+    const updateProgBar = () => {
+        dispatch(setKnowWord({ word, knowWord: !word.knowWord }));
         // store.dispatch(fetchAndUpdateKnowWord({word: props.word, knowWord: !props.word.knowWord}));
-        blank ? dispatch(incrementKnownWord()) : dispatch(decrementKnownWord());
+        if (blank)
+            dispatch(incrementKnownWord());
+        else
+            dispatch(decrementKnownWord());
     };
 
     const selectIcon = () => {
@@ -34,7 +28,7 @@ const BlankCircleIcon = (props) => {
     };
 
     const setColor = () => {
-        return props.hover ? Colors.NAVIGATION_WORD_BACKGROUND_HOVER :
+        return hover ? Colors.NAVIGATION_WORD_BACKGROUND_HOVER :
             Colors.NAVIGATION_WORD_BACKGROUND;
     };
 
@@ -52,10 +46,7 @@ const BlankCircleIcon = (props) => {
         <>
             <GreenCircleIcon
                 onClick={e => updateProgBar(e)}
-                title={'Mark as known word'}/>
-            {/*<Popup open={openPopup} x={cords.x} y={cords.y}>*/}
-            {/*    {selectText()}*/}
-            {/*</Popup>*/}
+                title="Mark as known word"/>
         </>
     );
 };

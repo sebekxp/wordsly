@@ -11,7 +11,7 @@ const AddingWordsInput = () => {
     const dispatch = useDispatch();
     const target = React.createRef();
 
-    const AddingWordsInput = styled.div`
+    const AddingWordsInputComponent = styled.div`
         display: flex;
         width: 275px;
         height: 57px;
@@ -67,13 +67,13 @@ const AddingWordsInput = () => {
 
     const createNavWord = (wordName, wordTranslate) => {
         return {
-            wordName: wordName,
-            wordTranslate: wordTranslate,
+            wordName,
+            wordTranslate,
             examples: [
-                'a woman of her ability ' + wordName + ' ',
-                ' ' + wordName + ' he has an ability for figures',
-                'a low ability student ' + wordName + ' ',
-                'You possess the ability to back your strong imagination with will and action. ' + wordName + ' '
+                `a woman of her ability ${  wordName  } `,
+                ` ${  wordName  } he has an ability for figures`,
+                `a low ability student ${  wordName  } `,
+                `You possess the ability to back your strong imagination with will and action. ${  wordName  } `
             ]
         };
     };
@@ -103,15 +103,15 @@ const AddingWordsInput = () => {
     };
 
     return (
-        <AddingWordsInput>
+        <AddingWordsInputComponent>
             <InputWrapper>
-                <AddInput type="text" name="" id="add-word" placeholder={'Add word'} ref={target}
+                <AddInput type="text" name="" id="add-word" placeholder="Add word" ref={target}
                           onKeyPress={e => handleEnterPress(e)}/>
                 <Add onClick={handleButtonPress}
                      onMouseEnter={onMouseEnterHandler}
                      onMouseLeave={onMouseLeaveHandler}/>
             </InputWrapper>
-        </AddingWordsInput>
+        </AddingWordsInputComponent>
     );
 
 };

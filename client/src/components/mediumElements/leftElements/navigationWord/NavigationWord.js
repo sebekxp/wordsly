@@ -1,27 +1,26 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { connect, useDispatch } from 'react-redux';
 import BlankCircleIcon from './icons/BlankCircleIcon';
 import DeleteElemIcon from './icons/DeleteElementIcon';
 import FavElementIcon from './icons/FavElementIcon';
-import { connect, useDispatch } from 'react-redux';
 import { setWordToShow } from '../../WordsToRenderSlice';
 import Colors from '../../../Colors';
 
-const NavigationWord = (props) => {
-    const [word, setWord] = useState(props.word);
+const NavigationWord = ({ words, word, name, wordToShow, shouldBeHide }) => {
+    const [wordObj, setWordObj] = useState(word);
     const dispatch = useDispatch();
-    const words = props.words;
 
     const IconWrapper = styled.div`
          display: none;
     `;
 
-    const shouldBeHide = () => {
-        return props.shouldBeHide ? 'none' : 'flex';
+    const getDisplay = () => {
+        return shouldBeHide ? 'none' : 'flex';
     };
 
-    const NavigationWord = styled.div`
-        display: ${shouldBeHide()};
+    const NavigationWordComponent = styled.div`
+        display: ${getDisplay()};
         justify-content: center;
         align-items: center;
         margin-bottom: 3px;
@@ -46,9 +45,8 @@ const NavigationWord = (props) => {
     `;
 
     const selectColor = () => {
-        return props.name === props.wordToShow.wordName ? Colors.NAVIGATION_WORD_BACKGROUND_HOVER :
+        return name === wordToShow.wordName ? Colors.NAVIGATION_WORD_BACKGROUND_HOVER :
             Colors.NAVIGATION_WORD_BACKGROUND;
-        // return Colors.NAVIGATION_WORD_BACKGROUND;
     };
 
     const WordName = styled.div`
@@ -74,32 +72,32 @@ const NavigationWord = (props) => {
     const handleMouseOver = (evt) => {
         for (let i = 0; i < words.length; i++) {
             if (words[i].wordName === evt.target.innerText) {
-                setWord(words[i]);
+                setWordObj(words[i]);
                 break;
             }
         }
     };
 
     return (
-        <NavigationWord
+        <NavigationWordComponent
             onClick={(event) => clickMouseAndDisplayWordContent(event)}
             onMouseOver={e => handleMouseOver(e)}
-            className={'navigation-word'}>
-            <BlankCircleIcon className={'blank-circle-icon'} word={word}/>
+            onFocus={e => handleMouseOver(e)}
+            className="navigation-word">
+            <BlankCircleIcon className="blank-circle-icon" word={wordObj}/>
             <WordName>
-                <span>{props.name}</span>
+                <span>{name}</span>
                 <IconWrapper>
-                    <FavElementIcon word={word} position={'relative'}/>
-                    <DeleteElemIcon word={word}/>
+                    <FavElementIcon word={wordObj} position="relative"/>
+                    <DeleteElemIcon word={wordObj}/>
                 </IconWrapper>
             </WordName>
-        </NavigationWord>);
+        </NavigationWordComponent>);
 };
 
 const mapStateToProps = (state) => {
     const { wordsToRender } = state;
     return {
-        // words: wordsToRender.words,
         wordToShow: wordsToRender.wordToShow
     };
 };

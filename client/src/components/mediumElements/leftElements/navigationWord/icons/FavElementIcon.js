@@ -4,10 +4,10 @@ import { Star } from 'styled-icons/boxicons-solid/Star';
 import { Star as BlankStar } from 'styled-icons/boxicons-regular/Star';
 import { useDispatch } from 'react-redux';
 import { setActive } from '../../../WordsToRenderSlice';
-import Colros from '../../../../Colors';
+import Colors from '../../../../Colors';
 
 
-const FavElementIcon = (props) => {
+const FavElementIcon = ({ word, position }) => {
     const [hover, setHover] = useState(false);
     const dispatch = useDispatch();
 
@@ -20,7 +20,7 @@ const FavElementIcon = (props) => {
     };
 
     const handleClick = (e) => {
-        dispatch(setActive({ word: props.word, active: true }));
+        dispatch(setActive({ word, active: true }));
         e.stopPropagation();
     };
 
@@ -29,18 +29,18 @@ const FavElementIcon = (props) => {
     };
 
     const FavElemIcon = styled(selectIcon())`
-            position: ${props.position};
+            position: ${position};
             top: 0;
             right: 0;
             display: flex;
-            color: ${Colros.FAV_ELEM_ICON}   
+            color: ${Colors.FAV_ELEM_ICON}   
     `;
 
     return (
         <FavElemIcon onMouseEnter={onMouseEnterHandler}
                      onMouseLeave={onMouseLeaveHandler}
                      onClick={e => handleClick(e)}
-                     title={'Add to favorites word'}
+                     title="Add to favorites word"
                      size={30}/>
     );
 };
