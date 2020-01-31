@@ -4,9 +4,8 @@ import { Circle } from 'styled-icons/fa-regular/Circle';
 import { CheckCircle } from 'styled-icons/boxicons-solid/CheckCircle';
 import { useDispatch } from 'react-redux';
 import { decrementKnownWord, incrementKnownWord } from '../../../../topElements/progressBar/ProgressBarSlice';
-import { fetchAndUpdateKnowWord, setKnowWord } from '../../../WordsToRenderSlice';
+import { setKnowWord } from '../../../WordsToRenderSlice';
 import Colors from '../../../../Colors';
-import { store } from '../../../../../App';
 
 
 const BlankCircleIcon = ({ word, hover }) => {

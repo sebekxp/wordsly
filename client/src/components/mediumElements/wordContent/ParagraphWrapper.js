@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 
-const ParagraphWrapper = (props) => {
-    const targetRef = props.inputRef;
+const ParagraphWrapper = ({ inputRef, children }) => {
+    const targetRef = inputRef;
 
     const Wrapper = styled.div`
         display: flex;  
@@ -11,7 +11,7 @@ const ParagraphWrapper = (props) => {
 
     return (
         <Wrapper ref={targetRef}>
-            {props.children}
+            {children}
         </Wrapper>);
 };
 

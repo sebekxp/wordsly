@@ -6,6 +6,7 @@
   "scripts": {
     "client-install": "npm install --prefix client",
     "start": "node server.js",
+    "lint": "eslint --ext .js,.jsx ./ --max-warnings=0",
     "precommit": "lint-staged",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",

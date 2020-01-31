@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { NavigateNext } from 'styled-icons/material/NavigateNext';
 import { connect, useDispatch } from 'react-redux';
@@ -12,18 +12,6 @@ import Colors from '../../Colors';
 const WordContentContainer = (props) => {
     const dispatch = useDispatch();
 
-    const handleKeyDown = (e) => {
-        if (e.which === 39)
-            next();
-        if (e.which === 37)
-            prev();
-    };
-
-    useEffect(() => {
-        document.addEventListener('keyup', handleKeyDown);
-    }, []);
-
-
     const next = () => {
         dispatch(setNextWordToShow());
     };
@@ -32,7 +20,23 @@ const WordContentContainer = (props) => {
         dispatch(setPrevWordToShow());
     };
 
-    const WordContentContainer = styled.div`
+    const handleKeyDown = useCallback(event => {
+        if (event.which === 39)
+            next();
+
+        if (event.which === 37)
+            prev();
+    });
+
+    useEffect(() => {
+        window.addEventListener('keyup', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keyup', handleKeyDown);
+        };
+    }, [handleKeyDown]);
+
+    const WordContentContainerComponent = styled.div`
         display: flex;
         align-items: flex-start;
         align-content: flex-start;
@@ -45,17 +49,22 @@ const WordContentContainer = (props) => {
     `;
 
     const selectBookmark = () => {
-
+        let bookmark;
         switch (props.bookmark) {
             case Type.EXAMPLES:
-                return <Examples/>;
+                bookmark = <Examples/>;
+                break;
             case Type.FLASH_CARDS:
-                return <FlashCards/>;
+                bookmark = <FlashCards/>;
+                break;
             case Type.FAV:
-                return <Favorites/>;
+                bookmark = <Favorites/>;
+                break;
             default:
-                return;
+                bookmark = <Examples/>;
         }
+
+        return bookmark;
     };
 
     const Next = styled(NavigateNext)`
@@ -78,7 +87,7 @@ const WordContentContainer = (props) => {
     `;
 
     return (
-        <WordContentContainer>
+        <WordContentContainerComponent>
             <IconWrapper onClick={prev}>
                 <Prev/>
             </IconWrapper>
@@ -86,14 +95,14 @@ const WordContentContainer = (props) => {
             <IconWrapper onClick={next}>
                 <Next/>
             </IconWrapper>
-        </WordContentContainer>
+        </WordContentContainerComponent>
     );
 };
 
 const mapStateToProps = (state) => {
     const { bookmark } = state;
     return {
-        bookmark: bookmark
+        bookmark
     };
 };
 

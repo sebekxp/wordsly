@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 import FavElementIcon from '../../../mediumElements/leftElements/navigationWord/icons/FavElementIcon';
 import Colors from '../../../Colors';
 
-const FlashCards = (props) => {
+const FlashCards = ({word}) => {
     const [flippy, changeFlip] = useState(false);
-    const word = props.word;
 
     const handleUserKeyPress = useCallback(event => {
         const { keyCode } = event;
@@ -71,11 +70,11 @@ const FlashCards = (props) => {
             style={flippyStyle}>
             <FrontSide style={frontSideStyle} onClick={handleClick}>
                 {word.wordName}
-                <FavElementIcon position={'absolute'} word={props.word}/>
+                <FavElementIcon position="absolute" word={word}/>
             </FrontSide>
             <BackSide style={backSideStyle} onClick={handleClick}>
                 {word.wordTranslate}
-                <FavElementIcon position={'absolute'}/>
+                <FavElementIcon position="absolute"/>
             </BackSide>
         </Flippy>
     );

@@ -9,7 +9,7 @@ const Popup = ({ open, children, x, y }) => {
     const id = uuid();
 
     useEffect(() => {
-        let timer = setTimeout(() => {
+        const timer = setTimeout(() => {
             if (open)
                 setShouldRender(false);
         }, 800);

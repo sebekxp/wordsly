@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Colors from '../../Colors';
 import { useDispatch } from 'react-redux';
+import Colors from '../../Colors';
 import { setBookmark } from '../../BookmarksContextSlice';
 
 
-const BookmarksElement = (props) => {
+const BookmarksElement = ({selected, bbTitle}) => {
     const dispatch = useDispatch();
-    const [selected, setSelected] = useState(props.selected);
+    const [isSelected, setSelected] = useState(selected);
 
     const getColor = () => {
-        return selected ?
+        return isSelected ?
             Colors.BOOKMARKS_ELEMENT_SELECTED_BACKGROUND :
             Colors.BOOKMARKS_ELEMENT_BACKGROUND;
     };
@@ -24,13 +24,13 @@ const BookmarksElement = (props) => {
     `;
 
     const handleClick = () => {
-        setSelected(!selected);
-        dispatch(setBookmark(props.bbTitle));
+        setSelected(!isSelected);
+        dispatch(setBookmark(bbTitle));
     };
 
     return (
         <Wrapper onClick={handleClick}>
-            {props.bbTitle}
+            {bbTitle}
         </Wrapper>
     );
 

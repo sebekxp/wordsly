@@ -1,25 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { bookmarkType as Type } from '../topElements/bookmarks/BookmarkType';
-import { OBJWORDS as words } from '../../components/words';
-import axios from 'axios';
 
 
 const initialState = {
-    words: [...words].filter((obj, index) => index < 20).map(obj =>
-        Object.assign(obj, {
-            active: false,
-            deleted: false,
-            knowWord: false
-        })),
-    wordToShow: words[0]
+    words: [],
+    wordToShow: undefined
 };
 
-const getActiveWordsIndex = (state) => {
-    return state.words.map((word, i) => word.active ? i : null).filter(obj => obj != null).sort();
+const getActiveWordsIndex = ({ words }) => {
+    return words.map((word, i) => word.active ? i : null).filter(obj => obj != null).sort();
 };
 
-const getIndex = (state, word) => {
-    return state.words.findIndex(obj => obj.wordName === word.wordName);
+const getIndex = ({ words }, word) => {
+    return words.findIndex(obj => obj.wordName === word.wordName);
 };
 
 const findNext = (num, array) => {
@@ -56,48 +49,52 @@ const wordsToRender = createSlice({
             state.wordToShow = state.words[0];
         },
         addWord(state, action) {
+            const { words } = state;
             const index = getIndex(state, action.payload);
 
             if (index === -1)
-                state.words.push(action.payload);
+                words.push(action.payload);
             else {
                 alert('Word already exist.');
             }
         },
         removeWord(state, action) {
+            let { words } = state;
             const wordName = action.payload;
-            const index = state.words.findIndex(obj => obj.wordName === wordName);
+            const index = words.findIndex(obj => obj.wordName === wordName);
 
-            state.words = state.words.filter((obj, i) => {
+            words = words.filter((obj, i) => {
                 return i !== index;
             });
         },
         setActive(state, action) {
+            const { words, wordToShow } = state;
             const { word, active } = action.payload;
             const index = getIndex(state, word);
-            state.words[index].active = active;
+            words[index].active = active;
 
             // Update wordToShow if Match
-            if (state.words[index].wordName === state.wordToShow.wordName)
-                state.wordToShow.active = active;
+            if (words[index].wordName === state.wordToShow.wordName)
+                wordToShow.active = active;
         },
         findByName(state, action) {
+            const { words } = state;
             const { word } = action.payload;
             const index = getIndex(state, word);
 
-            return state.words[index];
+            return words[index];
         },
         setDeleted(state, action) {
+            const { words } = state;
             const { word, deleted } = action.payload;
             const index = getIndex(state, word);
-            state.words[index].deleted = deleted;
+            words[index].deleted = deleted;
         },
         setKnowWord(state, action) {
+            const { words } = state;
             const { word, knowWord } = action.payload;
-            // console.log(word, knowWord);
             const index = getIndex(state, word);
-            state.words[index].knowWord = knowWord;
-            // return state.words
+            words[index].knowWord = knowWord;
         },
         setWordToShow(state, action) {
             state.wordToShow = action.payload;
@@ -114,7 +111,6 @@ const wordsToRender = createSlice({
         setNextWordToShow(state, action) {
             const bookmark = action.activeBookmark;
             const index = getIndex(state, state.wordToShow);
-
 
             if (bookmark !== Type.FAV) {
                 if (index + 1 < state.words.length) {
@@ -165,13 +161,11 @@ export default wordsToRender.reducer;
 
 export function fetchWords() {
     return (dispatch) => {
-        fetch('http://192.168.142.23:5000/api/words', {
+        fetch('http://localhost:5000/api/words', {
             method: 'GET'
         }).then(res => {
-            console.log(res.json());
             return res.json();
         }).then(obj => {
-            console.log(obj);
             dispatch(setInitialState(obj));
         }).catch(err => err.message);
     };

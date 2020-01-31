@@ -25,10 +25,10 @@ const DeleteElementIcon = ({ word, bookmark }) => {
         // dispatch(removeWord(props.word.wordName));
 
         if (bookmark === Type.FAV)
-            dispatch(setActive({ word: word, active: false }));
+            dispatch(setActive({ word, active: false }));
 
         if (bookmark === Type.EXAMPLES)
-            dispatch(setDeleted({ word: word, deleted: true }));
+            dispatch(setDeleted({ word, deleted: true }));
     };
 
 

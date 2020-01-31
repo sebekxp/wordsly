@@ -2,14 +2,14 @@ import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { FormatQuote } from 'styled-icons/material/FormatQuote';
 import { connect } from 'react-redux';
+import uuid from 'uuid';
 import ParagraphWrapper from './ParagraphWrapper';
 import MoreExampleButton from './MoreExampleButton';
-
 
 const ExampleContent = ({ word }) => {
     const [expand, setExpand] = useState(false);
     const examples = word !== undefined && word.examples;
-    const targetRef = useRef();
+    const targetRef = useRef(0);
 
     useEffect(() => {
         setExpand(false);
@@ -59,9 +59,10 @@ const ExampleContent = ({ word }) => {
                 <ExampleContentComponent ref={targetRef}>
                     {
                         examples.filter((elem, index) =>
-                            index < (expand ? examples.length : 3)).map((example, index) =>
-                            <ParagraphWrapper key={index}>
+                            index < (expand ? examples.length : 3)).map((example) =>
+                            <ParagraphWrapper key={uuid()}>
                                 <Quote/>
+                                {/* eslint react/no-danger:0 */}
                                 <p dangerouslySetInnerHTML={{ __html: makeHeaderWordBold(example, word.wordName) }}/>
                             </ParagraphWrapper>)
                     }

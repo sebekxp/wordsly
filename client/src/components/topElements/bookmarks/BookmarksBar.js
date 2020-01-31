@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import BookmarksElement from './BookmarksElement';
 import Colors from '../../Colors';
-import { useSelector } from 'react-redux';
 import { bookmarkType as Type } from './BookmarkType';
 
 
