@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 
-const WordItemSchema = new Schema({
+const {Schema} = mongoose;
+
+const WordsSchema = new Schema({
+
     wordName: {
         type: String,
         required: true
@@ -11,10 +13,10 @@ const WordItemSchema = new Schema({
         required: true
     },
     examples: [String],
-    date: {
-        type: Date,
-        default: Date.now
-    }
+    active: false,
+    deleted: false,
+    knowWord: false
+
 });
 
-module.exports = WordItem = mongoose.model('word', WordItemSchema);
+module.exports = Words = mongoose.model('words', WordsSchema);

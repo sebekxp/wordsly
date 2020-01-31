@@ -58,15 +58,6 @@ const wordsToRender = createSlice({
                 alert('Word already exist.');
             }
         },
-        removeWord(state, action) {
-            let { words } = state;
-            const wordName = action.payload;
-            const index = words.findIndex(obj => obj.wordName === wordName);
-
-            words = words.filter((obj, i) => {
-                return i !== index;
-            });
-        },
         setActive(state, action) {
             const { words, wordToShow } = state;
             const { word, active } = action.payload;
@@ -76,13 +67,6 @@ const wordsToRender = createSlice({
             // Update wordToShow if Match
             if (words[index].wordName === state.wordToShow.wordName)
                 wordToShow.active = active;
-        },
-        findByName(state, action) {
-            const { words } = state;
-            const { word } = action.payload;
-            const index = getIndex(state, word);
-
-            return words[index];
         },
         setDeleted(state, action) {
             const { words } = state;
@@ -148,8 +132,6 @@ export const {
     setInitialState,
     addWord,
     setActive,
-    removeWord,
-    findByName,
     setDeleted,
     setWordToShow,
     setNextWordToShow,

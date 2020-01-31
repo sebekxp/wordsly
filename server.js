@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const words = require('./routes/api/words');
+
 const app = express();
 const cors = require('cors');
 
