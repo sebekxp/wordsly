@@ -46,7 +46,7 @@ const wordsToRender = createSlice({
     reducers: {
         setInitialState(state, action) {
             state.words = action.payload;
-            state.wordToShow = state.words[0];
+            [state.wordToShow] = state.words;
         },
         addWord(state, action) {
             const { words } = state;
@@ -143,7 +143,7 @@ export default wordsToRender.reducer;
 
 export function fetchWords() {
     return (dispatch) => {
-        fetch('http://localhost:5000/api/words', {
+        fetch('/api/words', {
             method: 'GET'
         }).then(res => {
             return res.json();
@@ -165,9 +165,6 @@ export function fetchAndUpdateKnowWord({ word, knowWord }) {
             body: JSON.stringify(word)
         })
             .then((response) => response.json())
-            .then((result) => {
-                console.log('Success:', result);
-            })
             .catch((error) => {
                 console.error('Error:', error);
             });

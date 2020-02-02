@@ -13,10 +13,6 @@ const WordsSchema = new Schema({
         required: true
     },
     examples: [String],
-    active: false,
-    deleted: false,
-    knowWord: false
-
 });
 
 module.exports = Words = mongoose.model('words', WordsSchema);

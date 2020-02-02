@@ -14,7 +14,6 @@ const User = require('../../models/UserSchema');
 // @desc Register user
 // @access Public
 router.post('/register', (req, res) => {
-    console.log(req.body);
 
     // Form validation
     const { errors, isValid } = validateRegisterInput(req.body);
@@ -23,6 +22,7 @@ router.post('/register', (req, res) => {
     if (!isValid) {
         return res.status(400).json(errors);
     }
+
     User.findOne({ email: req.body.email }).then(user => {
         if (user) {
             return res.status(400).json({ email: 'Email already exists' });
@@ -30,18 +30,21 @@ router.post('/register', (req, res) => {
         const newUser = new User({
             name: req.body.name,
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+            active: false,
+            deleted: false,
+            knowWord: false
         });
 
         // Hash password before saving in database
         bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(newUser.password, salt, (err, hash) => {
-                if (err) throw err;
+            bcrypt.hash(newUser.password, salt, (error, hash) => {
+                if (error) throw error;
                 newUser.password = hash;
                 newUser
                     .save()
-                    .then(user => res.json(user))
-                    .catch(err => console.log(err));
+                    .then(user1 => res.json(user1))
+                    .catch(e => console.log(e));
             });
         });
 
@@ -83,7 +86,7 @@ router.post('/login', (req, res) => {
                 // Sign token
                 jwt.sign(
                     payload,
-                    "secret",
+                    'secret',
                     {
                         expiresIn: 31556926 // 1 year in seconds
                     },

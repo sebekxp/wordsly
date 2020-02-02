@@ -49,10 +49,14 @@ const ExampleContent = ({ word }) => {
         return str.replace(` ${wordName} `, ` <b>${wordName}</b> `);
     };
 
+    const style = {
+        padding: '5px 5px'
+    };
+
     const exampleContentToRender = () => {
         return (
             word !== undefined &&
-            <>
+            <div style={style}>
                 <KeyWordHeader>
                     <h3>{word.wordName} - {word.wordTranslate}</h3>
                 </KeyWordHeader>
@@ -68,7 +72,7 @@ const ExampleContent = ({ word }) => {
                     }
                 </ExampleContentComponent>
                 <MoreExampleButton expand={expand} setExpand={setExpand}/>
-            </>
+            </div>
         );
     };
 

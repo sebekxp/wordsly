@@ -8,6 +8,7 @@ import Colors from '../../Colors';
 const NavigationWordContainer = ({ words, bookmark }) => {
 
     const Container = styled.div`
+        padding-left: 3px;
         display: flex;
         width: 275px;
         flex-direction: column;

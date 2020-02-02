@@ -29,10 +29,8 @@ const Counter = styled.div`
     padding: 5px 0;
 `;
 
-const ProgressBar = (props) => {
-
+const ProgressBar = ({ words }) => {
     const knowWord = useSelector(state => state.knowWord);
-    const {words} = props;
 
     const getCurrentProgress = (knownWords) => {
         const numOfKnownWords = knownWords;

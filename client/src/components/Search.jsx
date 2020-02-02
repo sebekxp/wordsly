@@ -10,7 +10,7 @@ const Search = (props) => {
         const navigationWord = window.document.getElementsByClassName('navigation-word');
         const navWordToArray = [...navigationWord];
 
-        for (let i = 0; i < words.length; i++) {
+        for (let i = 0; i < navWordToArray.length; i++) {
             const wordName = words[i].wordName.toLowerCase();
             if (wordName.includes(inputValue)) {
                 navWordToArray[i].style.display = '';
