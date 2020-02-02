@@ -41,7 +41,7 @@ const ProgressBar = (props) => {
         return numOfKnownWords * percentageValue;
     };
 
-    const ProgressBar = styled.div`
+    const ProgressBarComponent = styled.div`
         width: ${getCurrentProgress(knowWord)}%;
         height: 15px;
         background-color: ${Colors.PROGRESS_BAR_BLUE};
@@ -52,7 +52,7 @@ const ProgressBar = (props) => {
     return (
         (<Wrapper>
             <ProgressBarWrapper>
-                <ProgressBar/>
+                <ProgressBarComponent/>
             </ProgressBarWrapper>
             <Counter>{knowWord} / {words.length}</Counter>
         </Wrapper>)

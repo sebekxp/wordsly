@@ -1,31 +1,31 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import Flippy, { FrontSide, BackSide } from 'react-flippy';
 import { connect } from 'react-redux';
 import FavElementIcon from '../../../mediumElements/leftElements/navigationWord/icons/FavElementIcon';
 import Colors from '../../../Colors';
 
-const FlashCards = ({word}) => {
+const FlashCards = ({ word }) => {
     const [flippy, changeFlip] = useState(false);
-
-    const handleUserKeyPress = useCallback(event => {
-        const { keyCode } = event;
-
-        if (keyCode === 32) {
-            changeFlip(!flippy);
-        }
-    });
 
     const handleClick = () => {
         changeFlip(!flippy);
     };
 
     useEffect(() => {
+
+        const handleUserKeyPress = event => {
+            const { keyCode } = event;
+
+            if (keyCode === 32) {
+                changeFlip(!flippy);
+            }
+        };
         window.addEventListener('keyup', handleUserKeyPress);
 
         return () => {
             window.removeEventListener('keyup', handleUserKeyPress);
         };
-    }, [handleUserKeyPress]);
+    });
 
 
     const flippyStyle = {

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { NavigateNext } from 'styled-icons/material/NavigateNext';
 import { connect, useDispatch } from 'react-redux';
@@ -20,21 +20,22 @@ const WordContentContainer = (props) => {
         dispatch(setPrevWordToShow());
     };
 
-    const handleKeyDown = useCallback(event => {
-        if (event.which === 39)
-            next();
-
-        if (event.which === 37)
-            prev();
-    });
 
     useEffect(() => {
+
+        const handleKeyDown = event => {
+            if (event.which === 39)
+                next();
+
+            if (event.which === 37)
+                prev();
+        };
         window.addEventListener('keyup', handleKeyDown);
 
         return () => {
             window.removeEventListener('keyup', handleKeyDown);
         };
-    }, [handleKeyDown]);
+    });
 
     const WordContentContainerComponent = styled.div`
         display: flex;
