@@ -42,10 +42,10 @@ const Register = () => {
         e.preventDefault();
         const { name, value } = e.target;
         const { errors } = accountData;
-        console.log(errors);
+        console.log(name, value, accountData.password);
         switch (name) {
             case 'name':
-                errors.name = value.length <= 3
+                errors.name = value.length < 3
                     ? 'Name must be at least 3 character!'
                     : '';
                 break;
@@ -60,7 +60,7 @@ const Register = () => {
                     value.length < 6
                         ? 'Password must be at least 6 characters long!'
                         : '';
-                break;
+                // break;
             case 'password2':
                 errors.password2 =
                     value !== accountData.password
@@ -123,12 +123,18 @@ const Register = () => {
         fontSize: '20px'
     };
 
-    const getValid = (value) => {
-        return value.length === 0;
+    const getValid = (error) => {
+        return error.length === 0;
     };
 
-    const getInvalid = (value)=>{
-        return value.length > 0;
+    const getInvalid = (error) => {
+        return error.length > 1;
+    };
+
+    const getFeedback = (text) => {
+        return getValid(text)
+            ? null
+            : text;
     };
 
     return (
@@ -148,12 +154,12 @@ const Register = () => {
                            value={accountData.name}
                            error={accountData.errors.name}
                            valid={getValid(accountData.errors.name)}
-                           invalid={getValid(accountData.errors.name)}
+                           invalid={getInvalid(accountData.errors.name)}
                     />
-                    <FormFeedback valid={getValid(accountData.errors.name)} invalid={getInvalid(accountData.errors.name)}>
-                        {getValid(accountData.errors.name)
-                            ? 'Sweet! that name is available'
-                            : 'NOPE'}
+                    <FormFeedback
+                        valid={getValid(accountData.errors.name)}
+                        invalid={getInvalid(accountData.errors.name)}>
+                        {getFeedback(accountData.errors.name)}
                     </FormFeedback>
                 </FormGroup>
                 <FormGroup>
@@ -163,7 +169,14 @@ const Register = () => {
                            style={inputStyle}
                            onChange={e => onChange(e)}
                            value={accountData.email}
-                           error={accountData.errors.email}/>
+                           error={accountData.errors.email}
+                           valid={getValid(accountData.errors.email)}
+                           invalid={getInvalid(accountData.errors.email)}/>
+                    <FormFeedback
+                        valid={getValid(accountData.errors.email)}
+                        invalid={getInvalid(accountData.errors.email)}>
+                        {getFeedback(accountData.errors.email)}
+                    </FormFeedback>
                 </FormGroup>
                 <FormGroup>
                     <Label for="password">Password</Label>
@@ -172,7 +185,14 @@ const Register = () => {
                            style={inputStyle}
                            onChange={e => onChange(e)}
                            value={accountData.password}
-                           error={accountData.errors.password}/>
+                           error={accountData.errors.password}
+                           valid={getValid(accountData.errors.password)}
+                           invalid={getInvalid(accountData.errors.password)}/>
+                    <FormFeedback
+                        valid={getValid(accountData.errors.password)}
+                        invalid={getInvalid(accountData.errors.password)}>
+                        {getFeedback(accountData.errors.password)}
+                    </FormFeedback>
                 </FormGroup>
                 <FormGroup>
                     <Label for="password2">Confirm Password</Label>
@@ -181,7 +201,14 @@ const Register = () => {
                            style={inputStyle}
                            onChange={e => onChange(e)}
                            value={accountData.password2}
-                           error={accountData.errors.password2}/>
+                           error={accountData.errors.password2}
+                           valid={getValid(accountData.errors.password2)}
+                           invalid={getInvalid(accountData.errors.password2)}/>
+                    <FormFeedback
+                        valid={getValid(accountData.errors.password2)}
+                        invalid={getInvalid(accountData.errors.password2)}>
+                        {getFeedback(accountData.errors.password2)}
+                    </FormFeedback>
                 </FormGroup>
                 <Button color="primary" style={btn} type={'submit'}>sign up</Button>
             </Form>
