@@ -18,6 +18,7 @@ function App() {
         <Router>
             <Route exact path="/" component={Landing}/>
             <Route exact path='/register' component={Register}/>
+            <Route exact path='/login' component={Login}/>
             <Route exact path='/home'>
                 <Provider store={store}>
                     <div className="App">

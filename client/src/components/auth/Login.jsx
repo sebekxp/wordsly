@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import HigherOrderAuthComponent from './ HigherOrderAuthComponent';
 
 
 const Login = () => {
@@ -9,7 +10,7 @@ const Login = () => {
         password: '',
         errors: {
             email: ' ',
-            password: ' ',
+            password: ' '
         }
     });
 
@@ -26,7 +27,7 @@ const Login = () => {
         console.log(validateForm());
         const userData = {
             email: accountData.email,
-            password: accountData.password,
+            password: accountData.password
         };
         console.log(userData);
     };
@@ -62,14 +63,6 @@ const Login = () => {
             [e.target.id]: e.target.value
         });
 
-    };
-
-    const container = {
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
-        width: '550px',
-        margin: '200px auto'
     };
 
     const formStyle = {
@@ -124,13 +117,21 @@ const Login = () => {
             : text;
     };
 
+    const getHeader = () => {
+        return (
+            <>
+                <h2><span style={h2Style}>Login</span> below</h2>
+                <div style={header}>
+                    <p style={pStyle}>Don't have an account?</p>
+                    <Link to="/register" style={linkStyle}>Register</Link>
+                </div>
+            </>
+        );
+    };
+
     return (
-        <div style={container}>
-            <h2><span style={h2Style}>Login</span> below</h2>
-            <div style={header}>
-                <p style={pStyle}>Don't have an account?</p>
-                <Link to="/register" style={linkStyle}>Register</Link>
-            </div>
+        <>
+            {getHeader()}
             <Form style={formStyle} onSubmit={e => onSubmit(e)}>
                 <FormGroup>
                     <Label for="email">Email</Label>
@@ -168,10 +169,12 @@ const Login = () => {
                         {getFeedback(accountData.errors.password)}
                     </FormFeedback>
                 </FormGroup>
-                <Button color="primary" style={btn} type={'submit'}>sign up</Button>
+                <Link to='/home'>
+                    <Button color="primary" style={btn} type={'submit'}>sign in</Button>
+                </Link>
             </Form>
-        </div>
+        </>
     );
 };
 
-export default Login;
+export default HigherOrderAuthComponent(Login);

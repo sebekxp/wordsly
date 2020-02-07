@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import HigherOrderAuthComponent from './ HigherOrderAuthComponent';
+import styled from 'styled-components';
+import { ArrowLeft } from 'styled-icons/feather/ArrowLeft';
 
 const Register = () => {
     const [accountData, setAccountData] = useState({
@@ -82,13 +85,6 @@ const Register = () => {
         });
 
     };
-    const container = {
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
-        width: '550px',
-        margin: '200px auto'
-    };
 
     const formStyle = {
         display: 'flex',
@@ -142,13 +138,21 @@ const Register = () => {
             : text;
     };
 
+    const getHeader = () => {
+        return (
+            <>
+                <h2><span style={h2Style}>Create</span> an account</h2>
+                <div style={header}>
+                    <p style={pStyle}>Already have an account?</p>
+                    <Link to="/login" style={linkStyle}>Login</Link>
+                </div>
+            </>
+        );
+    };
+
     return (
-        <div style={container}>
-            <h2><span style={h2Style}>Create</span> an account</h2>
-            <div style={header}>
-                <p style={pStyle}>Already have an account?</p>
-                <Link to="/login" style={linkStyle}>Login</Link>
-            </div>
+        <>
+            {getHeader()}
             <Form style={formStyle} onSubmit={e => onSubmit(e)}>
                 <FormGroup>
                     <Label for="text">Name</Label>
@@ -224,8 +228,8 @@ const Register = () => {
                 </FormGroup>
                 <Button color="primary" style={btn} type={'submit'}>sign up</Button>
             </Form>
-        </div>
+        </>
     );
 };
 
-export default Register;
+export default HigherOrderAuthComponent(Register);
