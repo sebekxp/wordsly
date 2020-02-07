@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Form, FormGroup, Label, Input, FormFeedback, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
     const [accountData, setAccountData] = useState({
@@ -36,13 +37,13 @@ const Register = () => {
     };
 
     const validEmailRegex =
-        RegExp(/^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i);
+        RegExp(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i);
 
     const onChange = e => {
         e.preventDefault();
         const { name, value } = e.target;
         const { errors } = accountData;
-        console.log(name, value, accountData.password);
+
         switch (name) {
             case 'name':
                 errors.name = value.length < 3
@@ -60,12 +61,16 @@ const Register = () => {
                     value.length < 6
                         ? 'Password must be at least 6 characters long!'
                         : '';
-                // break;
+                errors.password2 = (errors.password.length === 0) &&
+                (value === accountData.password2)
+                    ? ''
+                    : 'Passwords must match!';
+                break;
             case 'password2':
-                errors.password2 =
-                    value !== accountData.password
-                        ? 'Passwords must match!'
-                        : '';
+                errors.password2 = (errors.password.length === 0) &&
+                (value === accountData.password)
+                    ? ''
+                    : 'Passwords must match!';
                 break;
             default:
                 break;
@@ -139,10 +144,10 @@ const Register = () => {
 
     return (
         <div style={container}>
-            <h2><span style={h2Style}>Register</span> below</h2>
+            <h2><span style={h2Style}>Create</span> an account</h2>
             <div style={header}>
                 <p style={pStyle}>Already have an account?</p>
-                <a href="" style={linkStyle}>Login</a>
+                <Link to="/login" style={linkStyle}>Login</Link>
             </div>
             <Form style={formStyle} onSubmit={e => onSubmit(e)}>
                 <FormGroup>
@@ -158,7 +163,8 @@ const Register = () => {
                     />
                     <FormFeedback
                         valid={getValid(accountData.errors.name)}
-                        invalid={getInvalid(accountData.errors.name)}>
+                        invalid={getInvalid(accountData.errors.name).toString()}
+                    >
                         {getFeedback(accountData.errors.name)}
                     </FormFeedback>
                 </FormGroup>
@@ -171,10 +177,12 @@ const Register = () => {
                            value={accountData.email}
                            error={accountData.errors.email}
                            valid={getValid(accountData.errors.email)}
-                           invalid={getInvalid(accountData.errors.email)}/>
+                           invalid={getInvalid(accountData.errors.email)}
+                    />
                     <FormFeedback
                         valid={getValid(accountData.errors.email)}
-                        invalid={getInvalid(accountData.errors.email)}>
+                        invalid={getInvalid(accountData.errors.email).toString()}
+                    >
                         {getFeedback(accountData.errors.email)}
                     </FormFeedback>
                 </FormGroup>
@@ -187,10 +195,12 @@ const Register = () => {
                            value={accountData.password}
                            error={accountData.errors.password}
                            valid={getValid(accountData.errors.password)}
-                           invalid={getInvalid(accountData.errors.password)}/>
+                           invalid={getInvalid(accountData.errors.password)}
+                    />
                     <FormFeedback
                         valid={getValid(accountData.errors.password)}
-                        invalid={getInvalid(accountData.errors.password)}>
+                        invalid={getInvalid(accountData.errors.password).toString()}
+                    >
                         {getFeedback(accountData.errors.password)}
                     </FormFeedback>
                 </FormGroup>
@@ -203,10 +213,12 @@ const Register = () => {
                            value={accountData.password2}
                            error={accountData.errors.password2}
                            valid={getValid(accountData.errors.password2)}
-                           invalid={getInvalid(accountData.errors.password2)}/>
+                           invalid={getInvalid(accountData.errors.password2)}
+                    />
                     <FormFeedback
                         valid={getValid(accountData.errors.password2)}
-                        invalid={getInvalid(accountData.errors.password2)}>
+                        invalid={getInvalid(accountData.errors.password2).toString()}
+                    >
                         {getFeedback(accountData.errors.password2)}
                     </FormFeedback>
                 </FormGroup>
