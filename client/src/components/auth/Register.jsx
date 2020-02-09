@@ -4,8 +4,11 @@ import { Link } from 'react-router-dom';
 import HigherOrderAuthComponent from './ HigherOrderAuthComponent';
 import styled from 'styled-components';
 import { ArrowLeft } from 'styled-icons/feather/ArrowLeft';
+import { registerUser } from './AuthSlice';
+import { connect, useDispatch } from 'react-redux';
 
 const Register = () => {
+    const dispatch = useDispatch();
     const [accountData, setAccountData] = useState({
         name: '',
         email: '',
@@ -30,13 +33,18 @@ const Register = () => {
     const onSubmit = e => {
         e.preventDefault();
         console.log(validateForm());
-        const newUser = {
-            name: accountData.name,
-            email: accountData.email,
-            password: accountData.password,
-            password2: accountData.password2
-        };
-        console.log(newUser);
+        if (validateForm()) {
+            const newUser = {
+                name: accountData.name,
+                email: accountData.email,
+                password: accountData.password,
+                password2: accountData.password2
+            };
+           dispatch(registerUser(newUser));
+        } else {
+            // TODO reactstrap popup
+            alert('You can not creat an account');
+        }
     };
 
     const validEmailRegex =
@@ -232,4 +240,5 @@ const Register = () => {
     );
 };
 
-export default HigherOrderAuthComponent(Register);
+
+export default HigherOrderAuthComponent(Register)

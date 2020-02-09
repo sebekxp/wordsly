@@ -14,10 +14,8 @@ const User = require('../../models/UserSchema');
 // @desc Register user
 // @access Public
 router.post('/register', (req, res) => {
-
     // Form validation
     const { errors, isValid } = validateRegisterInput(req.body);
-
     // Check validation
     if (!isValid) {
         return res.status(400).json(errors);
@@ -25,6 +23,7 @@ router.post('/register', (req, res) => {
 
     User.findOne({ email: req.body.email }).then(user => {
         if (user) {
+            // TODO More info when email exist
             return res.status(400).json({ email: 'Email already exists' });
         }
         const newUser = new User({
@@ -57,14 +56,12 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res) => {
     // Form validation
     const { errors, isValid } = validateLoginInput(req.body);
-
     // Check validation
     if (!isValid) {
         return res.status(400).json(errors);
     }
     const { email } = req.body;
     const { password } = req.body;
-
     // Find user by email
     User.findOne({ email }).then(user => {
         // Check if user exists

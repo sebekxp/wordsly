@@ -15,19 +15,19 @@ function App() {
     store.dispatch(fetchWords());
 
     return (
-        <Router>
-            <Route exact path="/" component={Landing}/>
-            <Route exact path='/register' component={Register}/>
-            <Route exact path='/login' component={Login}/>
-            <Route exact path='/home'>
-                <Provider store={store}>
+        <Provider store={store}>
+            <Router>
+                <Route exact path="/" component={Landing}/>
+                <Route exact path='/register' component={Register}/>
+                <Route exact path='/login' component={Login}/>
+                <Route exact path='/home'>
                     <div className="App">
                         <Search/>
                         <WordsContainer/>
                     </div>
-                </Provider>
-            </Route>
-        </Router>
+                </Route>
+            </Router>
+        </Provider>
     );
 }
 
