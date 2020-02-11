@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import HigherOrderAuthComponent from './ HigherOrderAuthComponent';
+import { loginUser } from './AuthSlice';
+import { useDispatch } from 'react-redux';
 
 
 const Login = () => {
+    const dispatch = useDispatch();
     const [accountData, setAccountData] = useState({
         email: '',
         password: '',
@@ -25,11 +28,13 @@ const Login = () => {
     const onSubmit = e => {
         e.preventDefault();
         console.log(validateForm());
+        if(validateForm()){
         const userData = {
             email: accountData.email,
             password: accountData.password
         };
-        console.log(userData);
+        dispatch(loginUser(userData))
+        }
     };
 
     const validEmailRegex =
@@ -169,9 +174,9 @@ const Login = () => {
                         {getFeedback(accountData.errors.password)}
                     </FormFeedback>
                 </FormGroup>
-                <Link to='/home'>
+                {/*<Link to='/home'>*/}
                     <Button color="primary" style={btn} type={'submit'}>sign in</Button>
-                </Link>
+                {/*</Link>*/}
             </Form>
         </>
     );
