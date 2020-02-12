@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import jwt_decode from "jwt-decode";
+import jwtDecode from 'jwt-decode';
+import setAuthToken from './setAuthToken';
 
 const isEmpty = require('is-empty');
 
@@ -26,20 +27,16 @@ const authContext = createSlice({
                 loading: true
             };
         },
-        getErrors(state, action) {
-            return action.payload;
-        }
     }
 });
 
 export const {
     setCurrentUser,
     userLoading,
-    getErrors
 } = authContext.actions;
 export default authContext.reducer;
 
-export const registerUser = (userData) => dispatch => {
+export const registerUser = (userData, history) => dispatch => {
 
     fetch('/api/users/register', {
         method: 'POST',
@@ -49,11 +46,13 @@ export const registerUser = (userData) => dispatch => {
         body: JSON.stringify(userData)
     })
         .then(res => {
-            return res.json();
+            if (res.status === 301)
+                history.push('/login');
+            else if (res.status === 400)
+                return res.json();
         })
         .then(res => {
-            if (res.status === 400) alert(res.email);
-            // else window.location.href = 'http://localhost:3000/login';
+            alert(res.email);
         })
         .catch(err => {
             console.log(err);
@@ -70,13 +69,7 @@ export const loginUser = (userData) => dispatch => {
         },
         body: JSON.stringify(userData)
     };
-    const setAuthToken = token => {
-        if(token){
-            fetchOptions.Authorization = token;
-        }else{
-            delete fetchOptions.Authorization;
-        }
-    };
+
     fetch('/api/users/login', fetchOptions)
         .then(res => {
             return res.json();
@@ -84,17 +77,19 @@ export const loginUser = (userData) => dispatch => {
         .then(res => {
             // Set token to localStorage
             const { token } = res;
-            localStorage.setItem("jwtToken", token);
+            localStorage.setItem('jwtToken', token);
+
             // Set token to Auth header
-            setAuthToken(token);
+            setAuthToken(token, fetchOptions);
+
             // Decode token to get user data
-            const decoded = jwt_decode(token);
+            const decoded = jwtDecode(token);
             // Set current user
             dispatch(setCurrentUser(decoded));
 
         })
         .catch(err => {
-            console.log("aDAS",err);
+            console.log(err);
             // dispatch(getErrors(err.response.data));
         });
 

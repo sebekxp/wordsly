@@ -47,6 +47,8 @@ router.post('/register', (req, res) => {
             });
         });
     });
+
+    return res.status(301);
 });
 
 // @route POST api/users/login

@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import HigherOrderAuthComponent from './ HigherOrderAuthComponent';
 import styled from 'styled-components';
 import { ArrowLeft } from 'styled-icons/feather/ArrowLeft';
 import { registerUser } from './AuthSlice';
 import { connect, useDispatch } from 'react-redux';
 
-const Register = () => {
-    const dispatch = useDispatch();
+const Register = ({ registerUser, auth, propsErrors, history }) => {
     const [accountData, setAccountData] = useState({
         name: '',
         email: '',
@@ -21,6 +20,11 @@ const Register = () => {
             password2: ' '
         }
     });
+
+    useEffect(() => {
+        console.log(propsErrors);
+        setAccountData({ ...accountData, errors: propsErrors });
+    }, [propsErrors]);
 
     const validateForm = () => {
         let valid = true;
@@ -40,9 +44,11 @@ const Register = () => {
                 password: accountData.password,
                 password2: accountData.password2
             };
-           dispatch(registerUser(newUser));
+
+            registerUser(newUser, history);
         } else {
             // TODO reactstrap popup
+            console.log(accountData.errors);
             alert('You can not creat an account');
         }
     };
@@ -54,41 +60,72 @@ const Register = () => {
         e.preventDefault();
         const { name, value } = e.target;
         const { errors } = accountData;
+        let localAccountData = {};
 
         switch (name) {
             case 'name':
-                errors.name = value.length < 3
-                    ? 'Name must be at least 3 character!'
-                    : '';
+                localAccountData = {
+                    ...accountData,
+                    errors: {
+                        ...errors,
+                        name: value.length < 3
+                            ? 'Name must be at least 3 character!'
+                            : ''
+                    }
+                };
                 break;
             case 'email':
-                errors.email =
-                    validEmailRegex.test(value)
-                        ? ''
-                        : 'Email is not valid!';
+                localAccountData = {
+                    ...accountData,
+                    errors: {
+                        ...errors,
+                        email: validEmailRegex.test(value)
+                            ? ''
+                            : 'Email is not valid!'
+                    }
+                };
                 break;
             case 'password':
-                errors.password =
-                    value.length < 6
-                        ? 'Password must be at least 6 characters long!'
-                        : '';
-                errors.password2 = (errors.password.length === 0) &&
-                (value === accountData.password2)
-                    ? ''
-                    : 'Passwords must match!';
+                localAccountData = {
+                    ...accountData,
+                    errors: {
+                        ...errors,
+                        password: value.length < 6
+                            ? 'Password must be at least 6 characters long!'
+                            : ''
+                    }
+                };
+
+                localAccountData = {
+                    ...accountData,
+                    errors: {
+                        ...localAccountData.errors,
+                        password2: (localAccountData?.errors?.password?.length === 0) &&
+                        (value === accountData.password2)
+                            ? ''
+                            : 'Passwords must match!'
+                    }
+                };
+
                 break;
             case 'password2':
-                errors.password2 = (errors.password.length === 0) &&
-                (value === accountData.password)
-                    ? ''
-                    : 'Passwords must match!';
+                localAccountData = {
+                    ...accountData,
+                    errors: {
+                        ...accountData.errors,
+                        password2: (errors?.password?.length === 0) &&
+                        (value === accountData.password)
+                            ? ''
+                            : 'Passwords must match!'
+                    }
+                };
                 break;
             default:
                 break;
         }
-
+        console.log(errors?.password?.length);
         setAccountData({
-            ...accountData,
+            ...localAccountData,
             [e.target.id]: e.target.value
         });
 
@@ -133,11 +170,11 @@ const Register = () => {
     };
 
     const getValid = (error) => {
-        return error.length === 0;
+        return error?.length === 0;
     };
 
     const getInvalid = (error) => {
-        return error.length > 1;
+        return error?.length > 1;
     };
 
     const getFeedback = (text) => {
@@ -240,5 +277,12 @@ const Register = () => {
     );
 };
 
+const mapStateToProps = state => ({
+    auth: state.auth,
+    propsErrors: state.errors
+});
 
-export default HigherOrderAuthComponent(Register)
+export default connect(
+    mapStateToProps,
+    { registerUser }
+)(withRouter(HigherOrderAuthComponent(Register)));

@@ -3,6 +3,7 @@ import knownWordCounterReducer from '../components/topElements/progressBar/Progr
 import wordsToRender from '../components/mediumElements/WordsToRenderSlice';
 import bookmarksContext from '../components/BookmarksContextSlice';
 import authContext from '../components/auth/AuthSlice';
+import authError from '../components/auth/AuthErrorSlice';
 
 const rootReducer = (state = {}, action) => {
     const activeBookmark = state.bookmark;
@@ -12,7 +13,8 @@ const rootReducer = (state = {}, action) => {
 
         // merge activeBookmark with original action object
         wordsToRender: wordsToRender(state.wordsToRender, { ...action, activeBookmark }),
-        auth: authContext(state.auth, action)
+        auth: authContext(state.auth, action),
+        errors: authError(state.errors, action)
     };
 };
 
