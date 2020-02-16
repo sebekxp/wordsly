@@ -2,27 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
 import { Link, withRouter } from 'react-router-dom';
 import HigherOrderAuthComponent from './ HigherOrderAuthComponent';
-import styled from 'styled-components';
-import { ArrowLeft } from 'styled-icons/feather/ArrowLeft';
 import { registerUser } from './AuthSlice';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
-const Register = ({ registerUser, auth, propsErrors, history }) => {
+const Register = ({ registerUser, propsErrors, history }) => {
     const [accountData, setAccountData] = useState({
         name: '',
         email: '',
         password: '',
         password2: '',
-        errors: {
-            name: ' ',
-            email: ' ',
-            password: ' ',
-            password2: ' '
-        }
+        errors: {}
     });
 
     useEffect(() => {
-        console.log(propsErrors);
         setAccountData({ ...accountData, errors: propsErrors });
     }, [propsErrors]);
 
@@ -36,7 +28,7 @@ const Register = ({ registerUser, auth, propsErrors, history }) => {
 
     const onSubmit = e => {
         e.preventDefault();
-        console.log(validateForm());
+
         if (validateForm()) {
             const newUser = {
                 name: accountData.name,
@@ -48,8 +40,6 @@ const Register = ({ registerUser, auth, propsErrors, history }) => {
             registerUser(newUser, history);
         } else {
             // TODO reactstrap popup
-            console.log(accountData.errors);
-            alert('You can not creat an account');
         }
     };
 
@@ -123,7 +113,7 @@ const Register = ({ registerUser, auth, propsErrors, history }) => {
             default:
                 break;
         }
-        console.log(errors?.password?.length);
+
         setAccountData({
             ...localAccountData,
             [e.target.id]: e.target.value
@@ -198,7 +188,7 @@ const Register = ({ registerUser, auth, propsErrors, history }) => {
     return (
         <>
             {getHeader()}
-            <Form style={formStyle} onSubmit={e => onSubmit(e)}>
+            <Form style={formStyle} onSubmit={e => onSubmit(e)} noValidate>
                 <FormGroup>
                     <Label for="text">Name</Label>
                     <Input type="text" name="name"

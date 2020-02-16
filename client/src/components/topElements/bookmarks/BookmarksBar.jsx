@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import BookmarksElement from './BookmarksElement';
 import Colors from '../../Colors';
 import { bookmarkType as Type } from './BookmarkType';
-
+import LogOutComponent from '../../LogOutBtn';
 
 const BookmarksBar = () => {
     const bookmark = useSelector(state => state.bookmark);
@@ -21,6 +21,7 @@ const BookmarksBar = () => {
         border-radius: 0 10px 0 0;
     `;
 
+
     const example = Type.EXAMPLES;
     const flashCards = Type.FLASH_CARDS;
     const fav = Type.FAV;
@@ -30,6 +31,7 @@ const BookmarksBar = () => {
             <BookmarksElement bbTitle={example} selected={getActiveBookmark(example)}/>
             <BookmarksElement bbTitle={flashCards} selected={getActiveBookmark(flashCards)}/>
             <BookmarksElement bbTitle={fav} selected={getActiveBookmark(fav)}/>
+            <LogOutComponent/>
         </Wrapper>
     );
 };

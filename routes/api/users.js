@@ -16,14 +16,20 @@ const User = require('../../models/UserSchema');
 router.post('/register', (req, res) => {
     // Form validation
     const { errors, isValid } = validateRegisterInput(req.body);
+
     // Check validation
     if (!isValid) {
         return res.status(400).json(errors);
     }
 
+    User.findOne({ name: req.body.name }).then(user => {
+        if (user) {
+            return res.status(400).json({ name: 'Name already exists' });
+        }
+    });
+
     User.findOne({ email: req.body.email }).then(user => {
         if (user) {
-            // TODO More info when email exist
             return res.status(400).json({ email: 'Email already exists' });
         }
         const newUser = new User({
@@ -43,7 +49,7 @@ router.post('/register', (req, res) => {
                 newUser
                     .save()
                     .then(user1 => res.json(user1))
-                    .catch(e => console.log(e));
+                    .catch(e => console.error(e));
             });
         });
     });
@@ -57,6 +63,7 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res) => {
     // Form validation
     const { errors, isValid } = validateLoginInput(req.body);
+
     // Check validation
     if (!isValid) {
         return res.status(400).json(errors);
@@ -67,7 +74,7 @@ router.post('/login', (req, res) => {
     User.findOne({ email }).then(user => {
         // Check if user exists
         if (!user) {
-            return res.status(404).json({ emailnotfound: 'Email not found' });
+            return res.status(404).json({ email: 'Email not found' });
         }
 
         // Check password
@@ -98,7 +105,7 @@ router.post('/login', (req, res) => {
             } else {
                 return res
                     .status(400)
-                    .json({ passwordincorrect: 'Password incorrect' });
+                    .json({ password: 'Incorrect password ' });
             }
         });
     });

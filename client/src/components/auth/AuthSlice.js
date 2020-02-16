@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import jwtDecode from 'jwt-decode';
 import setAuthToken from './setAuthToken';
+import { getErrors } from './AuthErrorSlice';
 
 const isEmpty = require('is-empty');
 
@@ -26,13 +27,13 @@ const authContext = createSlice({
                 ...state,
                 loading: true
             };
-        },
+        }
     }
 });
 
 export const {
     setCurrentUser,
-    userLoading,
+    userLoading
 } = authContext.actions;
 export default authContext.reducer;
 
@@ -52,11 +53,10 @@ export const registerUser = (userData, history) => dispatch => {
                 return res.json();
         })
         .then(res => {
-            alert(res.email);
+            dispatch(getErrors(res));
         })
         .catch(err => {
-            console.log(err);
-            // dispatch(getErrors(err.response.data));
+            console.error(err);
         });
 
 };
@@ -77,6 +77,11 @@ export const loginUser = (userData) => dispatch => {
         .then(res => {
             // Set token to localStorage
             const { token } = res;
+
+            if (!token) {
+                dispatch(getErrors(res));
+            }
+
             localStorage.setItem('jwtToken', token);
 
             // Set token to Auth header
@@ -89,8 +94,18 @@ export const loginUser = (userData) => dispatch => {
 
         })
         .catch(err => {
-            console.log(err);
-            // dispatch(getErrors(err.response.data));
+            console.error(err);
         });
 
+};
+
+// Log user out
+export const logoutUser = (history) => dispatch => {
+    // Remove token from local storage
+    localStorage.removeItem('jwtToken');
+
+    // Set current user to empty object {} which will set isAuthenticated to false
+    dispatch(setCurrentUser({}));
+
+    history.push('/login');
 };

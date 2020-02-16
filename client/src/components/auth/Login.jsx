@@ -1,21 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import HigherOrderAuthComponent from './ HigherOrderAuthComponent';
 import { loginUser } from './AuthSlice';
-import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
 
-const Login = () => {
-    const dispatch = useDispatch();
+const Login = ({ loginUser, propsErrors, history, auth }) => {
     const [accountData, setAccountData] = useState({
         email: '',
         password: '',
-        errors: {
-            email: ' ',
-            password: ' '
-        }
+        errors: {}
     });
+
+    useEffect(() => {
+        setAccountData({ ...accountData, errors: propsErrors });
+    }, [propsErrors]);
+
+    useEffect(() => {
+        if (auth.isAuthenticated) {
+            history.push('/home');
+        }
+    }, [auth]);
 
     const validateForm = () => {
         let valid = true;
@@ -27,13 +33,15 @@ const Login = () => {
 
     const onSubmit = e => {
         e.preventDefault();
+        console.log(accountData.errors);
         console.log(validateForm());
-        if(validateForm()){
-        const userData = {
-            email: accountData.email,
-            password: accountData.password
-        };
-        dispatch(loginUser(userData))
+        if (validateForm()) {
+            const userData = {
+                email: accountData.email,
+                password: accountData.password
+            };
+
+            loginUser(userData);
         }
     };
 
@@ -44,27 +52,37 @@ const Login = () => {
         e.preventDefault();
         const { name, value } = e.target;
         const { errors } = accountData;
+        let localAccountData = {};
 
         switch (name) {
-
             case 'email':
-                errors.email =
-                    validEmailRegex.test(value)
-                        ? ''
-                        : 'Email is not valid!';
+                localAccountData = {
+                    ...accountData,
+                    errors: {
+                        ...errors,
+                        email: validEmailRegex.test(value)
+                            ? ''
+                            : 'Email is not valid!'
+                    }
+                };
                 break;
             case 'password':
-                errors.password =
-                    value.length < 6
-                        ? 'Password must be at least 6 characters long!'
-                        : '';
+                localAccountData = {
+                    ...accountData,
+                    errors: {
+                        ...errors,
+                        password: value.length < 6
+                            ? 'Password must be at least 6 characters long!'
+                            : ''
+                    }
+                };
                 break;
             default:
                 break;
         }
 
         setAccountData({
-            ...accountData,
+            ...localAccountData,
             [e.target.id]: e.target.value
         });
 
@@ -109,11 +127,11 @@ const Login = () => {
     };
 
     const getValid = (error) => {
-        return error.length === 0;
+        return error?.length === 0;
     };
 
     const getInvalid = (error) => {
-        return error.length > 1;
+        return error?.length > 1;
     };
 
     const getFeedback = (text) => {
@@ -137,7 +155,7 @@ const Login = () => {
     return (
         <>
             {getHeader()}
-            <Form style={formStyle} onSubmit={e => onSubmit(e)}>
+            <Form noValidate style={formStyle} onSubmit={e => onSubmit(e)}>
                 <FormGroup>
                     <Label for="email">Email</Label>
                     <Input type="email" name="email"
@@ -174,12 +192,18 @@ const Login = () => {
                         {getFeedback(accountData.errors.password)}
                     </FormFeedback>
                 </FormGroup>
-                {/*<Link to='/home'>*/}
-                    <Button color="primary" style={btn} type={'submit'}>sign in</Button>
-                {/*</Link>*/}
+                <Button color="primary" style={btn} type={'submit'}>sign in</Button>
             </Form>
         </>
     );
 };
 
-export default HigherOrderAuthComponent(Login);
+const mapStateToProps = state => ({
+    auth: state.auth,
+    propsErrors: state.errors
+});
+
+export default connect(
+    mapStateToProps,
+    { loginUser }
+)(withRouter(HigherOrderAuthComponent(Login)));
