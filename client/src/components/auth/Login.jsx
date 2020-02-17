@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
 import { Link, withRouter } from 'react-router-dom';
 import HigherOrderAuthComponent from './ HigherOrderAuthComponent';
-import { loginUser } from './AuthSlice';
 import { connect } from 'react-redux';
+import { loginUser } from './actions/loginUser';
 
 
 const Login = ({ loginUser, propsErrors, history, auth }) => {
@@ -33,14 +33,11 @@ const Login = ({ loginUser, propsErrors, history, auth }) => {
 
     const onSubmit = e => {
         e.preventDefault();
-        console.log(accountData.errors);
-        console.log(validateForm());
         if (validateForm()) {
             const userData = {
                 email: accountData.email,
                 password: accountData.password
             };
-
             loginUser(userData);
         }
     };

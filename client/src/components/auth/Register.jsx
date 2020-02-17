@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
 import { Link, withRouter } from 'react-router-dom';
 import HigherOrderAuthComponent from './ HigherOrderAuthComponent';
-import { registerUser } from './AuthSlice';
 import { connect } from 'react-redux';
+import { registerUser } from './actions/registerUser';
 
 const Register = ({ registerUser, propsErrors, history }) => {
     const [accountData, setAccountData] = useState({

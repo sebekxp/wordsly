@@ -27,6 +27,8 @@ mongoose
     .then(() => console.log('MongoDB connected...'))
     .catch(err => console.log(err));
 
+mongoose.set('useFindAndModify', false);
+
 // Passport middleware
 app.use(passport.initialize());
 // Passport config

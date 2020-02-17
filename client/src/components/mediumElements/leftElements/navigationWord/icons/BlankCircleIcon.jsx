@@ -2,24 +2,33 @@ import React from 'react';
 import styled from 'styled-components';
 import { Circle } from 'styled-icons/fa-regular/Circle';
 import { CheckCircle } from 'styled-icons/boxicons-solid/CheckCircle';
-import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { decrementKnownWord, incrementKnownWord } from '../../../../topElements/progressBar/ProgressBarSlice';
 import { setKnowWord } from '../../../WordsToRenderSlice';
 import Colors from '../../../../Colors';
+import { withRouter } from 'react-router-dom';
+import { updateUserWords } from '../../../../auth/actions/updateUserWords';
 
 
-const BlankCircleIcon = ({ word, hover }) => {
+const BlankCircleIcon = ({
+                             word,
+                             hover,
+                             updateUserWords,
+                             auth,
+                             setKnowWord,
+                             incrementKnownWord,
+                             decrementKnownWord
+                         }) => {
     const blank = !word.knowWord;
-    const dispatch = useDispatch();
-
 
     const updateProgBar = () => {
-        dispatch(setKnowWord({ word, knowWord: !word.knowWord }));
-        // store.dispatch(fetchAndUpdateKnowWord({word: props.word, knowWord: !props.word.knowWord}));
+        setKnowWord({ word, knowWord: !word.knowWord });
+        updateUserWords(auth.user.id, word.wordName, 'knowWord');
+
         if (blank)
-            dispatch(incrementKnownWord());
+            incrementKnownWord();
         else
-            dispatch(decrementKnownWord());
+            decrementKnownWord();
     };
 
     const selectIcon = () => {
@@ -50,4 +59,17 @@ const BlankCircleIcon = ({ word, hover }) => {
     );
 };
 
-export default BlankCircleIcon;
+
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+
+export default connect(
+    mapStateToProps,
+    {
+        updateUserWords,
+        setKnowWord,
+        decrementKnownWord,
+        incrementKnownWord
+    }
+)(withRouter(BlankCircleIcon));

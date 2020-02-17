@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { LogOut } from 'styled-icons/boxicons-regular/LogOut';
 import { connect } from 'react-redux';
-import { logoutUser } from './auth/AuthSlice';
 import { withRouter } from 'react-router-dom';
+import { logoutUser } from './auth/actions/logoutUser';
 
 
 const LogOutComponent = ({ logoutUser, history }) => {

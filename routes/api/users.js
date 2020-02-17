@@ -1,3 +1,4 @@
+const uuid = require('uuid-random');
 const express = require('express');
 
 const router = express.Router();
@@ -36,9 +37,9 @@ router.post('/register', (req, res) => {
             name: req.body.name,
             email: req.body.email,
             password: req.body.password,
-            active: false,
-            deleted: false,
-            knowWord: false
+            active: [String],
+            deleted: [String],
+            knowWord: [String]
         });
 
         // Hash password before saving in database
@@ -88,10 +89,11 @@ router.post('/login', (req, res) => {
                     name: user.name
                 };
 
+                const secret = uuid().toString();
                 // Sign token
                 jwt.sign(
                     payload,
-                    'secret',
+                    secret,
                     {
                         expiresIn: 31556926 // 1 year in seconds
                     },
@@ -109,6 +111,20 @@ router.post('/login', (req, res) => {
             }
         });
     });
+});
+
+router.put('/updateuserwords', (req, res) => {
+
+    const { id, word, option } = req.body;
+
+    User.findByIdAndUpdate(id, { $addToSet: { [option]: [word] } },
+        (err, result) => {
+            if (err) {
+                res.send(err);
+            } else {
+                res.send(result);
+            }
+        });
 });
 
 module.exports = router;

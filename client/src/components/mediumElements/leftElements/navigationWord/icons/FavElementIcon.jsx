@@ -2,14 +2,21 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Star } from 'styled-icons/boxicons-solid/Star';
 import { Star as BlankStar } from 'styled-icons/boxicons-regular/Star';
-import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { setActive } from '../../../WordsToRenderSlice';
 import Colors from '../../../../Colors';
+import { updateUserWords } from '../../../../auth/actions/updateUserWords';
+import { withRouter } from 'react-router-dom';
 
 
-const FavElementIcon = ({ word, position }) => {
+const FavElementIcon = ({
+                            word,
+                            position,
+                            auth,
+                            setActive,
+                            updateUserWords
+                        }) => {
     const [hover, setHover] = useState(false);
-    const dispatch = useDispatch();
 
     const onMouseEnterHandler = () => {
         setHover(true);
@@ -20,7 +27,8 @@ const FavElementIcon = ({ word, position }) => {
     };
 
     const handleClick = (e) => {
-        dispatch(setActive({ word, active: true }));
+        setActive({ word, active: true });
+        updateUserWords(auth.user.id, word.wordName, 'active');
         e.stopPropagation();
     };
 
@@ -46,4 +54,14 @@ const FavElementIcon = ({ word, position }) => {
 };
 
 
-export default FavElementIcon;
+const mapStateToProps = (state) => {
+    const { auth } = state;
+    return {
+        auth
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    { updateUserWords, setActive }
+)(withRouter(FavElementIcon));

@@ -2,14 +2,22 @@ import React, { useState } from 'react';
 import { XCircle } from 'styled-icons/boxicons-solid/XCircle';
 import { XCircle as BlankCircle } from 'styled-icons/boxicons-regular/XCircle';
 import styled from 'styled-components';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { setActive, setDeleted } from '../../../WordsToRenderSlice';
 import { bookmarkType as Type } from '../../../../topElements/bookmarks/BookmarkType';
 import Colors from '../../../../Colors';
+import { updateUserWords } from '../../../../auth/actions/updateUserWords';
+import { withRouter } from 'react-router-dom';
 
-const DeleteElementIcon = ({ word, bookmark }) => {
+const DeleteElementIcon = ({
+                               word,
+                               bookmark,
+                               auth,
+                               setActive,
+                               setDeleted,
+                               updateUserWords
+                           }) => {
     const [hover, setHover] = useState(false);
-    const dispatch = useDispatch();
 
     const onMouseEnterHandler = () => {
         setHover(true);
@@ -23,12 +31,13 @@ const DeleteElementIcon = ({ word, bookmark }) => {
     const deleteNavigationWord = () => {
         // e.currentTarget.parentElement.parentElement.parentElement.remove();
         // dispatch(removeWord(props.word.wordName));
+        updateUserWords(auth.user.id, word.wordName, 'deleted');
 
         if (bookmark === Type.FAV)
-            dispatch(setActive({ word, active: false }));
+            setActive({ word, active: false });
 
         if (bookmark === Type.EXAMPLES)
-            dispatch(setDeleted({ word, deleted: true }));
+            setDeleted({ word, deleted: true });
     };
 
 
@@ -57,10 +66,18 @@ const DeleteElementIcon = ({ word, bookmark }) => {
 
 const mapStateToProps = (state) => {
     const { bookmark } = state;
-
+    const { auth } = state;
     return {
-        bookmark
+        bookmark,
+        auth
     };
 };
 
-export default connect(mapStateToProps)(DeleteElementIcon);
+export default connect(
+    mapStateToProps,
+    {
+        updateUserWords,
+        setDeleted,
+        setActive
+    }
+)(withRouter(DeleteElementIcon));
