@@ -100,8 +100,9 @@ const WordContentContainer = (props) => {
     );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     const { bookmark } = state;
+
     return {
         bookmark
     };

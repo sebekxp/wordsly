@@ -22,7 +22,7 @@ const Landing = () => {
     const pStyle = {
         fontSize: '18px',
         margin: '10px',
-        textAlign: 'center',
+        textAlign: 'center'
     };
 
     return (

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { LogOut } from 'styled-icons/boxicons-regular/LogOut';
 import { connect } from 'react-redux';
+// noinspection ES6CheckImport
 import { withRouter } from 'react-router-dom';
 import { logoutUser } from './auth/actions/logoutUser';
 

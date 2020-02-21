@@ -17,6 +17,7 @@
         ]
       }
     ],
+    "no-console": ["error", { "allow": ["error"] }],
     "no-alert": 0,
     "no-param-reassign": 0,
     "no-plusplus": 0,

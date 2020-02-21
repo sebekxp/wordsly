@@ -7,6 +7,7 @@ import { setActive, setDeleted } from '../../../WordsToRenderSlice';
 import { bookmarkType as Type } from '../../../../topElements/bookmarks/BookmarkType';
 import Colors from '../../../../Colors';
 import { updateUserWords } from '../../../../auth/actions/updateUserWords';
+// noinspection ES6CheckImport
 import { withRouter } from 'react-router-dom';
 
 const DeleteElementIcon = ({
@@ -29,9 +30,7 @@ const DeleteElementIcon = ({
     };
 
     const deleteNavigationWord = () => {
-        // e.currentTarget.parentElement.parentElement.parentElement.remove();
-        // dispatch(removeWord(props.word.wordName));
-        updateUserWords(auth.user.id, word.wordName, 'deleted');
+        updateUserWords(auth.user.id, word, 'deleted');
 
         if (bookmark === Type.FAV)
             setActive({ word, active: false });
@@ -64,7 +63,7 @@ const DeleteElementIcon = ({
 
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     const { bookmark } = state;
     const { auth } = state;
     return {

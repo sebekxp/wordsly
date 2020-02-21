@@ -3,41 +3,34 @@ const Words = require('../../models/WordsSchema');
 
 const router = express.Router();
 
-
+// @route GET api/users/login
+// @desc Get collection of words
+// @access Public
+// noinspection JSUnresolvedFunction
 router.get('/', (req, res) => {
     Words.find()
         .sort({ date: -1 })
         .then(items => res.json(items));
 });
 
+// @route POST api/users/login
+// @desc Create collections of words
+// @access Public
+// noinspection JSUnresolvedFunction
 router.post('/', (req, res) => {
-    // const wordsItem = new Words({
-    //     words: req.body
-    // });
     Words.insertMany(req.body).then(item => res.json(item));
 });
 
+// @route DELETE api/users/login
+// @desc Delete single word form collection
+// @access Public
+// noinspection JSUnresolvedFunction
 router.delete('/:id', (req, res) => {
     Words.findById(req.params.id)
         .then(item => item.remove().then(() => res.json({ success: true })))
-        .catch(err => res.status(404).json({ success: false }));
+        // TODO I'm not mistaken here?
+        .catch(err => res.status(404).json({ success: false })); // eslint-disable-line no-unused-vars
 });
 
-router.put('/updateKnowWord', async (req, res) => {
-    console.log(req.body);
-    const word = req.body;
-    const id = word.wordName;
-    const update = { knowWord: true };
-
-    await Words.find({ 'words': { $elemMatch: { wordName: id } } });
-    //     // await Words.find({"words.wordName": "a"});
-
-    // Words.find({'words': {$elemMatch: {wordName: id}}}, 'words.wordName words.wordTranslate', function (err, docs) {
-    //     if (!err) {
-    //         console.log(docs);
-    //     }
-    // });
-
-});
-
+// noinspection JSUndefinedPropertyAssignment
 module.exports = router;

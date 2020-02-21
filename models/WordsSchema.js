@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const {Schema} = mongoose;
+const { Schema } = mongoose;
 
 const WordsSchema = new Schema({
 
@@ -12,7 +12,7 @@ const WordsSchema = new Schema({
         type: String,
         required: true
     },
-    examples: [String],
+    examples: [String]
 });
 
 module.exports = Words = mongoose.model('words', WordsSchema);

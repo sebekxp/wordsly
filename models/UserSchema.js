@@ -15,9 +15,9 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    active: [String],
-    deleted: [String],
-    knowWord: [String],
+    active: [],
+    deleted: [],
+    knowWord: [],
     date: {
         type: Date,
         default: Date.now()

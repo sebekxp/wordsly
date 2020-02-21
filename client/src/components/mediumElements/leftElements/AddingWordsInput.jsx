@@ -69,11 +69,12 @@ const AddingWordsInput = () => {
         return {
             wordName,
             wordTranslate,
+            // TODO Changed examples maybe take 3 sentence from web?
             examples: [
-                `a woman of her ability ${  wordName  } `,
-                ` ${  wordName  } he has an ability for figures`,
-                `a low ability student ${  wordName  } `,
-                `You possess the ability to back your strong imagination with will and action. ${  wordName  } `
+                `a woman of her ability ${wordName} `,
+                ` ${wordName} he has an ability for figures`,
+                `a low ability student ${wordName} `,
+                `You possess the ability to back your strong imagination with will and action. ${wordName} `
             ]
         };
     };
@@ -85,6 +86,7 @@ const AddingWordsInput = () => {
     const createAndAddWordToRepo = () => {
         const inputValue = getInputValue();
         if (inputValue.length === 0 || inputValue.length > 11) {
+            // TODO change alert to popup
             alert('The name is too short or too long to be used as a navigation word.');
             return;
         }

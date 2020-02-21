@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
+// noinspection ES6CheckImport
 import { Link, withRouter } from 'react-router-dom';
 import HigherOrderAuthComponent from './ HigherOrderAuthComponent';
 import { connect } from 'react-redux';
@@ -21,7 +22,7 @@ const Login = ({ loginUser, propsErrors, history, auth }) => {
         if (auth.isAuthenticated) {
             history.push('/home');
         }
-    }, [auth]);
+    }, [auth, history]);
 
     const validateForm = () => {
         let valid = true;
@@ -49,7 +50,11 @@ const Login = ({ loginUser, propsErrors, history, auth }) => {
         e.preventDefault();
         const { name, value } = e.target;
         const { errors } = accountData;
-        let localAccountData = {};
+        let localAccountData = {
+            email: '',
+            password: '',
+            errors: {}
+        };
 
         switch (name) {
             case 'email':

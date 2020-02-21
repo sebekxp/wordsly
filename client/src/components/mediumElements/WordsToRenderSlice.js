@@ -39,6 +39,21 @@ const findPrev = (num, array) => {
     return temp;
 };
 
+const findByName = ({ words }, name) => {
+    return words.find(word => word.wordName === name);
+};
+
+const updatePreferences = (state, collection, option) => {
+    if (collection !== undefined) {
+        collection.forEach(obj => {
+            const word = findByName(state, obj);
+            const targetWord = { ...word };
+            const index = getIndex(state, targetWord);
+            if (state.words[index] !== undefined)
+                state.words[index][option] = true;
+        });
+    }
+};
 
 const wordsToRender = createSlice({
     name: 'WordsToRender',
@@ -124,6 +139,12 @@ const wordsToRender = createSlice({
                     state.wordToShow = state.words[i];
                 }
             }
+        },
+        setUserPreferences(state, action) {
+            const { active, deleted, knowWord } = action.payload;
+            updatePreferences(state, active, 'active');
+            updatePreferences(state, knowWord, 'knowWord');
+            updatePreferences(state, deleted, 'deleted');
         }
     }
 });
@@ -137,36 +158,8 @@ export const {
     setNextWordToShow,
     setPrevWordToShow,
     setKnowWord,
-    setFavWordToShow
+    setFavWordToShow,
+    setUserPreferences
 } = wordsToRender.actions;
+
 export default wordsToRender.reducer;
-
-export function fetchWords() {
-    return (dispatch) => {
-        fetch('/api/words', {
-            method: 'GET'
-        }).then(res => {
-            return res.json();
-        }).then(obj => {
-            dispatch(setInitialState(obj));
-        }).catch(err => err.message);
-    };
-}
-
-export function fetchAndUpdateKnowWord({ word, knowWord }) {
-    return function(dispatch) {
-        // dispatch(setKnowWord({word, knowWord}));
-        console.log(word);
-        fetch('http://localhost:5000/api/words/updateKnowWord', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(word)
-        })
-            .then((response) => response.json())
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-    };
-}

@@ -20,24 +20,25 @@ app.use(
     })
 );
 app.use(bodyParser.json());
+// noinspection JSUnresolvedVariable
 const db = process.env.mongoURI;
 
 mongoose
     .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected...'))
-    .catch(err => console.log(err));
+    .catch(err => console.error(err));
 
 mongoose.set('useFindAndModify', false);
 
 // Passport middleware
 app.use(passport.initialize());
-// Passport config
 require('./passport')(passport);
 
 // Routes
 app.use('/api/words', words);
 app.use('/api/users', users);
 
+// noinspection JSUnresolvedVariable
 const port = process.env.PORT || 5000;
 
 

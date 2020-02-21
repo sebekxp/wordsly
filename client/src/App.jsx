@@ -4,14 +4,25 @@ import { Provider } from 'react-redux';
 import WordsContainer from './components/WordContainer';
 import store from './reducers';
 import Search from './components/Search';
-import { fetchWords } from './components/mediumElements/WordsToRenderSlice';
+// noinspection ES6CheckImport
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Landing from './components/auth/Landing';
+import jwtDecode from 'jwt-decode';
+import { setCurrentUser } from './components/auth/AuthSlice';
+import { fetchWords } from './components/mediumElements/actions/fetchWordsCollection';
 
-function App() {
+
+void function keepUserLoggedIn() {
+    if (localStorage.jwtToken) {
+        const token = localStorage.jwtToken;
+        const decoded = jwtDecode(token);
+        store.dispatch(setCurrentUser(decoded));
+    }
+}();
+
+const App = () => {
     store.dispatch(fetchWords());
 
     return (
@@ -29,6 +40,6 @@ function App() {
             </Router>
         </Provider>
     );
-}
+};
 
 export default App;

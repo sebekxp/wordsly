@@ -5,7 +5,6 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// Load input validation
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
 
@@ -14,15 +13,15 @@ const User = require('../../models/UserSchema');
 // @route POST api/users/register
 // @desc Register user
 // @access Public
+// noinspection JSUnresolvedFunction
 router.post('/register', (req, res) => {
-    // Form validation
     const { errors, isValid } = validateRegisterInput(req.body);
 
-    // Check validation
     if (!isValid) {
         return res.status(400).json(errors);
     }
 
+    /* eslint consistent-return:0 */
     User.findOne({ name: req.body.name }).then(user => {
         if (user) {
             return res.status(400).json({ name: 'Name already exists' });
@@ -42,8 +41,9 @@ router.post('/register', (req, res) => {
             knowWord: [String]
         });
 
-        // Hash password before saving in database
+        // noinspection JSUnresolvedFunction
         bcrypt.genSalt(10, (err, salt) => {
+            // noinspection JSUnresolvedFunction
             bcrypt.hash(newUser.password, salt, (error, hash) => {
                 if (error) throw error;
                 newUser.password = hash;
@@ -61,36 +61,31 @@ router.post('/register', (req, res) => {
 // @route POST api/users/login
 // @desc Login user and return JWT token
 // @access Public
+// noinspection JSUnresolvedFunction
 router.post('/login', (req, res) => {
     // Form validation
     const { errors, isValid } = validateLoginInput(req.body);
 
-    // Check validation
     if (!isValid) {
         return res.status(400).json(errors);
     }
     const { email } = req.body;
     const { password } = req.body;
-    // Find user by email
     User.findOne({ email }).then(user => {
-        // Check if user exists
         if (!user) {
             return res.status(404).json({ email: 'Email not found' });
         }
 
-        // Check password
+        // noinspection JSUnresolvedFunction
         bcrypt.compare(password, user.password).then(isMatch => {
             if (isMatch) {
 
-                // User matched
-                // Create JWT Payload
                 const payload = {
                     id: user.id,
                     name: user.name
                 };
 
                 const secret = uuid().toString();
-                // Sign token
                 jwt.sign(
                     payload,
                     secret,
@@ -113,18 +108,54 @@ router.post('/login', (req, res) => {
     });
 });
 
-router.put('/updateuserwords', (req, res) => {
+// @route PUT api/users/words
+// @desc Update user preferences (words)
+// @access Public
+// noinspection JSUnresolvedFunction
+router.put('/words', (req, res) => {
 
     const { id, word, option } = req.body;
+    const { wordName } = word;
+    const shouldBeUpdated = word[option];
 
-    User.findByIdAndUpdate(id, { $addToSet: { [option]: [word] } },
+    if (!shouldBeUpdated) {
+        User.findByIdAndUpdate(id, { $addToSet: { [option]: [wordName] } },
+            (err, result) => {
+                if (err) {
+                    return res.json(err);
+                }
+                return res.json(result);
+
+            });
+    } else {
+        User.findByIdAndUpdate(id, { $pull: { [option]: wordName } },
+            (err, result) => {
+                if (err) {
+                    return res.json(err);
+                }
+
+                return res.json(result);
+            });
+    }
+});
+
+// @route GET api/users/words
+// @desc Get user preferences (words)
+// @access Public
+// noinspection JSUnresolvedFunction
+router.get('/words', (req, res) => {
+    const { id } = req.query;
+    User.findById(id,
         (err, result) => {
+            const { active, knowWord, deleted } = result;
+
             if (err) {
-                res.send(err);
-            } else {
-                res.send(result);
+                return res.json(err);
             }
+
+            return res.json({ active, knowWord, deleted });
         });
 });
 
+// noinspection JSUndefinedPropertyAssignment
 module.exports = router;

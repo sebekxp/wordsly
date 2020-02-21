@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { setActive } from '../../../WordsToRenderSlice';
 import Colors from '../../../../Colors';
 import { updateUserWords } from '../../../../auth/actions/updateUserWords';
+// noinspection ES6CheckImport
 import { withRouter } from 'react-router-dom';
 
 
@@ -28,7 +29,7 @@ const FavElementIcon = ({
 
     const handleClick = (e) => {
         setActive({ word, active: true });
-        updateUserWords(auth.user.id, word.wordName, 'active');
+        updateUserWords(auth.user.id, word, 'active');
         e.stopPropagation();
     };
 
@@ -54,8 +55,9 @@ const FavElementIcon = ({
 };
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     const { auth } = state;
+
     return {
         auth
     };

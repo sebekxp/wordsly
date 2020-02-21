@@ -5,7 +5,7 @@ import Colors from '../../Colors';
 import { setBookmark } from '../../BookmarksContextSlice';
 
 
-const BookmarksElement = ({selected, bbTitle}) => {
+const BookmarksElement = ({ selected, bbTitle }) => {
     const dispatch = useDispatch();
     const [isSelected, setSelected] = useState(selected);
 

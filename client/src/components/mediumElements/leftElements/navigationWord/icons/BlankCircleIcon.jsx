@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { decrementKnownWord, incrementKnownWord } from '../../../../topElements/progressBar/ProgressBarSlice';
 import { setKnowWord } from '../../../WordsToRenderSlice';
 import Colors from '../../../../Colors';
+// noinspection ES6CheckImport
 import { withRouter } from 'react-router-dom';
 import { updateUserWords } from '../../../../auth/actions/updateUserWords';
 
@@ -23,7 +24,7 @@ const BlankCircleIcon = ({
 
     const updateProgBar = () => {
         setKnowWord({ word, knowWord: !word.knowWord });
-        updateUserWords(auth.user.id, word.wordName, 'knowWord');
+        updateUserWords(auth.user.id, word, 'knowWord');
 
         if (blank)
             incrementKnownWord();
@@ -60,9 +61,13 @@ const BlankCircleIcon = ({
 };
 
 
-const mapStateToProps = state => ({
-    auth: state.auth
-});
+const mapStateToProps = state => {
+    const { auth } = state;
+
+    return {
+        auth
+    };
+};
 
 export default connect(
     mapStateToProps,

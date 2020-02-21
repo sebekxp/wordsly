@@ -1,18 +1,20 @@
-export const updateUserWords = (userID, word, option) => dispatch => {
+import { checkForError } from './checkForError';
 
-    fetch('/api/users/updateuserwords', {
+/*eslint no-unused-vars:0*/
+export const updateUserWords = (userID, word, option) => dispatch => {
+    const token = localStorage.jwtToken;
+    const fetchOptions = {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
+        Authorization: token,
         body: JSON.stringify({ id: userID, word, option })
-    })
-        .then(res => {
-            return res.json();
-        })
+    };
+
+    fetch('/api/users/words', fetchOptions)
+        .then(checkForError)
         .catch(err => {
             console.error(err);
         });
-
-
 };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
+// noinspection ES6CheckImport
 import { Link, withRouter } from 'react-router-dom';
 import HigherOrderAuthComponent from './ HigherOrderAuthComponent';
 import { connect } from 'react-redux';
@@ -28,7 +29,7 @@ const Register = ({ registerUser, propsErrors, history }) => {
 
     const onSubmit = e => {
         e.preventDefault();
-
+        console.log(accountData.errors);
         if (validateForm()) {
             const newUser = {
                 name: accountData.name,
@@ -39,7 +40,7 @@ const Register = ({ registerUser, propsErrors, history }) => {
 
             registerUser(newUser, history);
         } else {
-            // TODO reactstrap popup
+            // TODO popup with infos
         }
     };
 
@@ -50,7 +51,14 @@ const Register = ({ registerUser, propsErrors, history }) => {
         e.preventDefault();
         const { name, value } = e.target;
         const { errors } = accountData;
-        let localAccountData = {};
+
+        let localAccountData = {
+            name: '',
+            email: '',
+            password: '',
+            password2: '',
+            errors: {}
+        };
 
         switch (name) {
             case 'name':
@@ -267,10 +275,15 @@ const Register = ({ registerUser, propsErrors, history }) => {
     );
 };
 
-const mapStateToProps = state => ({
-    auth: state.auth,
-    propsErrors: state.errors
-});
+const mapStateToProps = state => {
+    const { auth } = state;
+    const propsErrors = state.errors;
+
+    return {
+        auth,
+        propsErrors
+    };
+};
 
 export default connect(
     mapStateToProps,

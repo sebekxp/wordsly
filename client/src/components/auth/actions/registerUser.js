@@ -10,10 +10,13 @@ export const registerUser = (userData, history) => dispatch => {
         body: JSON.stringify(userData)
     })
         .then(res => {
+            let retVal;
             if (res.status === 301)
                 history.push('/login');
             else if (res.status === 400)
-                return res.json();
+                retVal = res.json();
+
+            return retVal;
         })
         .then(res => {
             dispatch(getErrors(res));

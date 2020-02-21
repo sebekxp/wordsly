@@ -5,6 +5,7 @@ import bookmarksContext from '../components/BookmarksContextSlice';
 import authContext from '../components/auth/AuthSlice';
 import authError from '../components/auth/AuthErrorSlice';
 
+// Custom combine reducers
 const rootReducer = (state = {}, action) => {
     const activeBookmark = state.bookmark;
     return {

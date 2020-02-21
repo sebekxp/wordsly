@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 import NavigationWord from './navigationWord/NavigationWord';
 import { bookmarkType as Type } from '../../topElements/bookmarks/BookmarkType';
 import Colors from '../../Colors';
+import { fetchUserWords } from '../actions/fetchUserWords';
 
-const NavigationWordContainer = ({ words, bookmark }) => {
+const NavigationWordContainer = ({ words, bookmark, auth, fetchUserWords }) => {
+    fetchUserWords({ id: auth.user.id });
 
     const Container = styled.div`
         padding-left: 3px;
@@ -62,13 +64,13 @@ const NavigationWordContainer = ({ words, bookmark }) => {
 };
 
 const mapStateToProps = (state) => {
-    const { wordsToRender } = state;
-    const { bookmark } = state;
+    const { wordsToRender, bookmark, auth } = state;
 
     return {
         words: wordsToRender.words,
-        bookmark
+        bookmark,
+        auth
     };
 };
 
-export default connect(mapStateToProps)(NavigationWordContainer);
+export default connect(mapStateToProps, { fetchUserWords })(NavigationWordContainer);
