@@ -3,16 +3,22 @@ import { connect } from 'react-redux';
 // noinspection ES6CheckImport
 import { withRouter } from 'react-router-dom';
 import { logoutUser } from './auth/actions/logoutUser';
-import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+import { Alert, Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import { Menu } from 'styled-icons/feather/Menu';
 import styled from 'styled-components';
 import Colors from './Colors';
+import ModalExample from './ShortcutsModal';
 
 
 const LogOutComponent = ({ logoutUser, history, auth }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const userName = auth.user.name;
     const [isSelected, setSelected] = useState(false);
+    const [isOpen, setOpen] = useState(false);
+
+    const getShortcutsInfo = () => {
+        setOpen(!isOpen);
+    };
 
     const getColor = () => {
         return isSelected ?
@@ -41,16 +47,20 @@ const LogOutComponent = ({ logoutUser, history, auth }) => {
     };
 
     return (
-        <Dropdown isOpen={dropdownOpen} toggle={toggle} onClick={handleChangeColor}>
-            <DropdownToggle style={dropDownStyle} color={'red'}>
-                <ThMenuIcon/>
-            </DropdownToggle>
-            <DropdownMenu right>
-                <DropdownItem header>Hello, {userName}😊</DropdownItem>
-                <DropdownItem divider/>
-                <DropdownItem onClick={handleClick}>Logout</DropdownItem>
-            </DropdownMenu>
-        </Dropdown>
+        <>
+            <Dropdown isOpen={dropdownOpen} toggle={toggle} onClick={handleChangeColor}>
+                <DropdownToggle style={dropDownStyle} color={'red'}>
+                    <ThMenuIcon/>
+                </DropdownToggle>
+                <DropdownMenu right>
+                    <DropdownItem header>Hello, {userName}😊</DropdownItem>
+                    <DropdownItem divider/>
+                    <DropdownItem onClick={getShortcutsInfo}>Shortcuts</DropdownItem>
+                    <DropdownItem onClick={handleClick}>Logout</DropdownItem>
+                </DropdownMenu>
+            </Dropdown>
+            {isOpen && <ModalExample isOpen={true} setOpen={setOpen}/>}
+        </>
     );
 };
 
