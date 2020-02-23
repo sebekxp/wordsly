@@ -1,5 +1,6 @@
 import { checkForError } from '../../auth/actions/checkForError';
 import { setUserPreferences } from '../WordsToRenderSlice';
+import { updateKnowWord } from '../../topElements/progressBar/ProgressBarSlice';
 
 export const fetchUserWords = (userID) => dispatch => {
     const token = localStorage.jwtToken;
@@ -16,6 +17,9 @@ export const fetchUserWords = (userID) => dispatch => {
         .then(checkForError)
         .then(obj => {
             dispatch(setUserPreferences(obj));
+
+            const {knowWord} = obj;
+            dispatch(updateKnowWord(knowWord.length));
         })
         .catch(err => {
             console.error(err);

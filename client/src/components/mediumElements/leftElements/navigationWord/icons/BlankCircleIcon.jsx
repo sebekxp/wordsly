@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Circle } from 'styled-icons/fa-regular/Circle';
 import { CheckCircle } from 'styled-icons/boxicons-solid/CheckCircle';
 import { connect } from 'react-redux';
-import { decrementKnownWord, incrementKnownWord } from '../../../../topElements/progressBar/ProgressBarSlice';
 import { setKnowWord } from '../../../WordsToRenderSlice';
 import Colors from '../../../../Colors';
 // noinspection ES6CheckImport
@@ -16,20 +15,13 @@ const BlankCircleIcon = ({
                              hover,
                              updateUserWords,
                              auth,
-                             setKnowWord,
-                             incrementKnownWord,
-                             decrementKnownWord
+                             setKnowWord
                          }) => {
     const blank = !word.knowWord;
 
     const updateProgBar = () => {
         setKnowWord({ word, knowWord: !word.knowWord });
         updateUserWords(auth.user.id, word, 'knowWord');
-
-        if (blank)
-            incrementKnownWord();
-        else
-            decrementKnownWord();
     };
 
     const selectIcon = () => {
@@ -73,8 +65,6 @@ export default connect(
     mapStateToProps,
     {
         updateUserWords,
-        setKnowWord,
-        decrementKnownWord,
-        incrementKnownWord
+        setKnowWord
     }
 )(withRouter(BlankCircleIcon));

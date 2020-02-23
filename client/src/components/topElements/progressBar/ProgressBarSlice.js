@@ -5,10 +5,13 @@ const knownWordCounterSlice = createSlice({
     name: 'KnownWordCounter',
     initialState: 0,
     reducers: {
-        incrementKnownWord: state => state + 1,
-        decrementKnownWord: state => state - 1
+        updateKnowWord(state, action) {
+            return action.payload;
+        }
     }
 });
 
-export const { incrementKnownWord, decrementKnownWord } = knownWordCounterSlice.actions;
+export const {
+    updateKnowWord
+} = knownWordCounterSlice.actions;
 export default knownWordCounterSlice.reducer;
