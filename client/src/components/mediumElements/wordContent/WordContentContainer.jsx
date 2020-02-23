@@ -24,10 +24,12 @@ const WordContentContainer = (props) => {
     useEffect(() => {
 
         const handleKeyDown = event => {
-            if (event.which === 39)
+            const { keyCode, ctrlKey } = event;
+
+            if (keyCode === 39 && !ctrlKey)
                 next();
 
-            if (event.which === 37)
+            if (keyCode === 37 && !ctrlKey)
                 prev();
         };
         window.addEventListener('keyup', handleKeyDown);

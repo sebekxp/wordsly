@@ -15,7 +15,6 @@ const ExampleContent = ({ word }) => {
     useEffect(() => {
 
         const handleKeyDown = event => {
-            console.log(event.which);
             if (event.which === 40) {
                 scrollToBottom();
             }

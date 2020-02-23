@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 // noinspection ES6CheckImport
 import { withRouter } from 'react-router-dom';
 import { logoutUser } from './auth/actions/logoutUser';
-import { Alert, Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import { Menu } from 'styled-icons/feather/Menu';
 import styled from 'styled-components';
 import Colors from './Colors';

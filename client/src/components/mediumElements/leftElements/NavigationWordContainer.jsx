@@ -33,9 +33,9 @@ const NavigationWordContainer = ({ words, bookmark, auth, fetchUserWords }) => {
         }).map((word) => <NavigationWord name={word.wordName} key={word.wordName} word={word} words={words}/>);
     };
 
-    const selectBookmark = () => {
+    const selectBookmark = (value) => {
         let retVal;
-        switch (bookmark) {
+        switch (value) {
             case Type.EXAMPLES:
                 retVal = renderExamples();
                 break;
@@ -56,7 +56,7 @@ const NavigationWordContainer = ({ words, bookmark, auth, fetchUserWords }) => {
     return (
         <Container id="navigation-word-container" className="words">
             {
-                selectBookmark()
+                selectBookmark(bookmark)
             }
         </Container>
     );

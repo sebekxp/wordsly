@@ -5,22 +5,51 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 const ModalExample = ({ isOpen, setOpen }) => {
 
     const toggle = () => setOpen(!isOpen);
+
     const pStyle = {
         fontFamily: 'Roboto',
-        fontVariantLigatures: 'normal'
+        fontVariantLigatures: 'normal',
+        padding: '5px 10px',
+        margin: '0 0'
+    };
+    const spanStyle = {
+        fontWeight: '600'
     };
 
     return (
-        // TODO Made infos about shortcuts
         <Modal isOpen={isOpen} toggle={toggle}>
-            <ModalHeader toggle={toggle}>How to use shortcuts?</ModalHeader>
+            <ModalHeader toggle={toggle}>Available keyboard shortcuts</ModalHeader>
+            <p style={pStyle}>
+                Shortcuts help you save time. Available can be used throughout the application and some
+                available only for a specific activity.
+            </p>
             <ModalBody>
-                <p style={pStyle}>When you are on the "Examples" bookmark:</p>
-                <p style={pStyle}>Arrow Right -> Change to the next word</p>
-                <p style={pStyle}>Arrow Left -> Change to the previous word</p>
-                <p style={pStyle}>Space -> Shows and hides sample sentences</p>
-                <p style={pStyle}>Arrow Down -> Scroll to the next sentence when examples are shows</p>
-                <p style={pStyle}>Arrow Up -> Scroll to the previous sentence when examples are shows</p>
+                <p style={pStyle}><span style={spanStyle}>[Arrow Right]</span> - change to the next word</p>
+                <p style={pStyle}><span style={spanStyle}>[Arrow Left]</span> - change to the previous word</p>
+                <p style={pStyle}>
+                    <span style={spanStyle}>[Space] </span>
+                    - shows and hides sample sentences (Examples bookmark)
+                </p>
+                <p style={pStyle}>
+                    <span style={spanStyle}>[Space] </span>
+                    - flips the flashcard (Flashcards bookmark)
+                </p>
+                <p style={pStyle}>
+                    <span style={spanStyle}>[Arrow Down] </span>
+                    - scrolls to the next sentence when the examples are expanded
+                </p>
+                <p style={pStyle}>
+                    <span style={spanStyle}>[Arrow Up] </span>
+                    - scrolls to the previous sentence when the examples are expanded
+                </p>
+                <p style={pStyle}>
+                    <span style={spanStyle}>[Ctrl + Arrow Right] </span>
+                    - changes to the next bookmark
+                </p>
+                <p style={pStyle}>
+                    <span style={spanStyle}>[Ctrl + Arrow Left] </span>
+                    - changeslo to the previous bookmark
+                </p>
             </ModalBody>
             <ModalFooter>
                 <Button color="secondary" onClick={toggle}>Close</Button>
