@@ -1,6 +1,6 @@
 import { checkForError } from './checkForError';
 
-/*eslint no-unused-vars:0*/
+/* eslint no-unused-vars:0 */
 export const updateUserWords = (userID, word, option) => dispatch => {
     const token = localStorage.jwtToken;
     const fetchOptions = {

@@ -24,67 +24,22 @@ const Login = ({ loginUser, propsErrors, history, auth }) => {
         }
     }, [auth, history]);
 
-    const validateForm = () => {
-        let valid = true;
-        Object.values(accountData.errors).forEach(
-            (val) => val.length > 0 && (valid = false)
-        );
-        return valid;
-    };
-
     const onSubmit = e => {
         e.preventDefault();
-        if (validateForm()) {
-            const userData = {
-                email: accountData.email,
-                password: accountData.password
-            };
-            loginUser(userData);
-        }
-    };
 
-    const validEmailRegex =
-        RegExp(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i);
+        const userData = {
+            email: accountData.email,
+            password: accountData.password
+        };
+
+        loginUser(userData);
+    };
 
     const onChange = e => {
         e.preventDefault();
-        const { name, value } = e.target;
-        const { errors } = accountData;
-        let localAccountData = {
-            email: '',
-            password: '',
-            errors: {}
-        };
-
-        switch (name) {
-            case 'email':
-                localAccountData = {
-                    ...accountData,
-                    errors: {
-                        ...errors,
-                        email: validEmailRegex.test(value)
-                            ? ''
-                            : 'Email is not valid!'
-                    }
-                };
-                break;
-            case 'password':
-                localAccountData = {
-                    ...accountData,
-                    errors: {
-                        ...errors,
-                        password: value.length < 6
-                            ? 'Password must be at least 6 characters long!'
-                            : ''
-                    }
-                };
-                break;
-            default:
-                break;
-        }
 
         setAccountData({
-            ...localAccountData,
+            ...accountData,
             [e.target.id]: e.target.value
         });
 

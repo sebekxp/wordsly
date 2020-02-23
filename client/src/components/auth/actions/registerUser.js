@@ -11,9 +11,11 @@ export const registerUser = (userData, history) => dispatch => {
     })
         .then(res => {
             let retVal;
-            if (res.status === 301)
-                history.push('/login');
-            else if (res.status === 400)
+            if (res.status === 301) {
+                setTimeout(() => {
+                    history.push('/login');
+                }, 3500);
+            } else if (res.status === 400)
                 retVal = res.json();
 
             return retVal;

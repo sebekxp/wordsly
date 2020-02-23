@@ -1,7 +1,6 @@
 import jwtDecode from 'jwt-decode';
 import { getErrors } from '../AuthErrorSlice';
 import { setCurrentUser } from '../AuthSlice';
-import { checkForError } from './checkForError';
 
 export const loginUser = (userData) => dispatch => {
     const fetchOptions = {
@@ -13,11 +12,13 @@ export const loginUser = (userData) => dispatch => {
     };
 
     fetch('/api/users/login', fetchOptions)
-        .then(checkForError)
+        .then(res => res.json())
         .then(res => {
             const { token } = res;
+
             if (!token) {
                 dispatch(getErrors(res));
+                return;
             }
 
             localStorage.setItem('jwtToken', token);

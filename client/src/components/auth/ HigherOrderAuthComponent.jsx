@@ -9,7 +9,7 @@ export default (Component) => {
         alignItems: 'center',
         flexDirection: 'column',
         width: '550px',
-        margin: '200px auto'
+        margin: '150px auto'
     };
 
     const BackToHome = styled(ArrowLeft)`

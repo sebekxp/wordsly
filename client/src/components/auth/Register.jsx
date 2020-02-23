@@ -5,8 +5,10 @@ import { Link, withRouter } from 'react-router-dom';
 import HigherOrderAuthComponent from './ HigherOrderAuthComponent';
 import { connect } from 'react-redux';
 import { registerUser } from './actions/registerUser';
+import { Alert } from 'reactstrap';
 
 const Register = ({ registerUser, propsErrors, history }) => {
+    const [showAlert, setShowAlert] = useState(false);
     const [accountData, setAccountData] = useState({
         name: '',
         email: '',
@@ -29,7 +31,7 @@ const Register = ({ registerUser, propsErrors, history }) => {
 
     const onSubmit = e => {
         e.preventDefault();
-        console.log(accountData.errors);
+
         if (validateForm()) {
             const newUser = {
                 name: accountData.name,
@@ -39,8 +41,7 @@ const Register = ({ registerUser, propsErrors, history }) => {
             };
 
             registerUser(newUser, history);
-        } else {
-            // TODO popup with infos
+            setShowAlert(true);
         }
     };
 
@@ -167,6 +168,10 @@ const Register = ({ registerUser, propsErrors, history }) => {
         fontSize: '20px'
     };
 
+    const alertStyle = {
+        marginTop: '20px'
+    };
+
     const getValid = (error) => {
         return error?.length === 0;
     };
@@ -271,6 +276,16 @@ const Register = ({ registerUser, propsErrors, history }) => {
                 </FormGroup>
                 <Button color="primary" style={btn} type={'submit'}>sign up</Button>
             </Form>
+            {
+                showAlert &&
+                <Alert color="success" style={alertStyle}>
+                    <h4 className="alert-heading">Well done!</h4>
+                    <hr/>
+                    <p>
+                        You have successfully created an account😎 You will be redirected to the login page✨
+                    </p>
+                </Alert>
+            }
         </>
     );
 };
