@@ -1,34 +1,68 @@
-import React from 'react';
-import styled from 'styled-components';
-import { LogOut } from 'styled-icons/boxicons-regular/LogOut';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 // noinspection ES6CheckImport
 import { withRouter } from 'react-router-dom';
 import { logoutUser } from './auth/actions/logoutUser';
+import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+import { Menu } from 'styled-icons/feather/Menu';
+import styled from 'styled-components';
+import Colors from './Colors';
 
 
-const LogOutComponent = ({ logoutUser, history }) => {
-    const LogOutBtn = styled(LogOut)`
-        width: 50px;
-        height: 100%;
-        color: white;
-        
-        &:hover {
-            color: red;
-        }
-    `;
+const LogOutComponent = ({ logoutUser, history, auth }) => {
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const userName = auth.user.name;
+    const [isSelected, setSelected] = useState(false);
+
+    const getColor = () => {
+        return isSelected ?
+            Colors.BOOKMARKS_ELEMENT_SELECTED_BACKGROUND :
+            Colors.BOOKMARKS_ELEMENT_BACKGROUND;
+    };
+    const toggle = () => setDropdownOpen(prevState => !prevState);
 
     const handleClick = () => {
         logoutUser(history);
     };
 
+    const handleChangeColor = () => {
+        setSelected(!isSelected);
+
+    };
+
+    const ThMenuIcon = styled(Menu)`
+        width: 35px;
+    `;
+
+    const dropDownStyle = {
+        height: '100%',
+        backgroundColor: getColor(),
+        color: 'white'
+    };
+
     return (
-        <LogOutBtn onClick={handleClick}/>
+        <Dropdown isOpen={dropdownOpen} toggle={toggle} onClick={handleChangeColor}>
+            <DropdownToggle style={dropDownStyle} color={'red'}>
+                <ThMenuIcon/>
+            </DropdownToggle>
+            <DropdownMenu right>
+                <DropdownItem header>Hello, {userName}😊</DropdownItem>
+                <DropdownItem divider/>
+                <DropdownItem onClick={handleClick}>Logout</DropdownItem>
+            </DropdownMenu>
+        </Dropdown>
     );
 };
 
+const mapStateToProps = state => {
+    const { auth } = state;
+
+    return {
+        auth
+    };
+};
 
 export default connect(
-    null,
+    mapStateToProps,
     { logoutUser }
 )(withRouter(LogOutComponent));

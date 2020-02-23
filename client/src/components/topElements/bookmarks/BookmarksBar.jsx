@@ -6,6 +6,7 @@ import Colors from '../../Colors';
 import { bookmarkType as Type } from './BookmarkType';
 import LogOutComponent from '../../LogOutBtn';
 
+
 const BookmarksBar = () => {
     const bookmark = useSelector(state => state.bookmark);
 
@@ -15,12 +16,16 @@ const BookmarksBar = () => {
 
     const Wrapper = styled.div`
         display: flex;
+        justify-content: space-between;
         flex-grow: 1;
         background-color: ${Colors.BOOKMARKS_BACKGROUND};
         padding: 0;
         border-radius: 0 10px 0 0;
     `;
 
+    const style = {
+        display: "flex",
+    };
 
     const example = Type.EXAMPLES;
     const flashCards = Type.FLASH_CARDS;
@@ -28,9 +33,11 @@ const BookmarksBar = () => {
 
     return (
         <Wrapper>
-            <BookmarksElement bbTitle={example} selected={getActiveBookmark(example)}/>
-            <BookmarksElement bbTitle={flashCards} selected={getActiveBookmark(flashCards)}/>
-            <BookmarksElement bbTitle={fav} selected={getActiveBookmark(fav)}/>
+            <div style={style}>
+                <BookmarksElement bbTitle={example} selected={getActiveBookmark(example)}/>
+                <BookmarksElement bbTitle={flashCards} selected={getActiveBookmark(flashCards)}/>
+                <BookmarksElement bbTitle={fav} selected={getActiveBookmark(fav)}/>
+            </div>
             <LogOutComponent/>
         </Wrapper>
     );
