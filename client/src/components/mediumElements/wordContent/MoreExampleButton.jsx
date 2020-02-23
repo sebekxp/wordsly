@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { ExpandMore } from 'styled-icons/material/ExpandMore';
 import { ExpandLess } from 'styled-icons/material/ExpandLess';
 
 const MoreExampleButton = ({ expand, setExpand }) => {
+
+    useEffect(() => {
+
+        const handleUserKeyPress = event => {
+            const { keyCode } = event;
+
+            if (keyCode === 32) {
+                toggleMoreExample();
+            }
+        };
+        window.addEventListener('keyup', handleUserKeyPress);
+
+        return () => {
+            window.removeEventListener('keyup', handleUserKeyPress);
+        };
+    });
 
     const toggleMoreExample = () => {
         setExpand(!expand);

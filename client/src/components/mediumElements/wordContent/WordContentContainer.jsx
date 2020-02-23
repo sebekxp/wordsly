@@ -88,7 +88,7 @@ const WordContentContainer = (props) => {
     `;
 
     return (
-        <WordContentContainerComponent>
+        <WordContentContainerComponent id={'word-content-container'}>
             <IconWrapper onClick={prev}>
                 <Prev/>
             </IconWrapper>

@@ -10,6 +10,46 @@ const ExampleContent = ({ word }) => {
     const [expand, setExpand] = useState(false);
     const examples = word !== undefined && word.examples;
     const targetRef = useRef(0);
+    let scrollClickCounter = 0;
+
+    useEffect(() => {
+
+        const handleKeyDown = event => {
+            console.log(event.which);
+            if (event.which === 40) {
+                scrollToBottom();
+            }
+
+            if (event.which === 38)
+                scrollToTop();
+        };
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    });
+
+    const scrollToBottom = () => {
+        const element = document.getElementById('word-content-container');
+
+        // Scroll to first example of paragraphs
+        if (scrollClickCounter === 0) {
+            element.children[1].scrollIntoView();
+        }
+
+        if (expand && scrollClickCounter < 29) { // noinspection JSUnresolvedVariable
+            element.scrollBy(0, targetRef.current.children[scrollClickCounter++].offsetHeight);
+        }
+    };
+
+    const scrollToTop = () => {
+        const element = document.getElementById('word-content-container');
+
+        if (expand && scrollClickCounter > 0) { // noinspection JSUnresolvedVariable
+            element.scrollBy(0, -targetRef.current.children[scrollClickCounter--].offsetHeight);
+        }
+    };
 
     useEffect(() => {
         setExpand(false);
