@@ -1,6 +1,6 @@
 import { getErrors } from '../AuthErrorSlice';
 
-export const registerUser = (userData, history) => dispatch => {
+export const registerUser = (userData, history, setShowAlert) => dispatch => {
 
     fetch('/api/users/register', {
         method: 'POST',
@@ -12,6 +12,7 @@ export const registerUser = (userData, history) => dispatch => {
         .then(res => {
             let retVal;
             if (res.status === 301) {
+                setShowAlert(true);
                 setTimeout(() => {
                     history.push('/login');
                 }, 3500);
@@ -24,7 +25,7 @@ export const registerUser = (userData, history) => dispatch => {
             dispatch(getErrors(res));
         })
         .catch(err => {
-            console.error(err);
+            console.error('Error during registration', err);
         });
 
 

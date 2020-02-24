@@ -9,12 +9,16 @@ const authError = createSlice({
     reducers: {
         getErrors(state, action) {
             return action.payload;
+        },
+        clearErrors(){
+            return {};
         }
     }
 });
 
 export const {
-    getErrors
+    getErrors,
+    clearErrors
 } = authError.actions;
 
 export default authError.reducer;

@@ -5,9 +5,10 @@ import { Link, withRouter } from 'react-router-dom';
 import HigherOrderAuthComponent from './ HigherOrderAuthComponent';
 import { connect } from 'react-redux';
 import { loginUser } from './actions/loginUser';
+import { clearErrors } from './AuthErrorSlice';
 
 
-const Login = ({ loginUser, propsErrors, history, auth }) => {
+const Login = ({ loginUser, propsErrors, history, auth, clearErrors }) => {
     const [accountData, setAccountData] = useState({
         email: '',
         password: '',
@@ -15,12 +16,16 @@ const Login = ({ loginUser, propsErrors, history, auth }) => {
     });
 
     useEffect(() => {
+        clearErrors();
+    }, []);
+
+    useEffect(() => {
         setAccountData({ ...accountData, errors: propsErrors });
     }, [propsErrors]);
 
     useEffect(() => {
         if (auth.isAuthenticated) {
-            history.push('/home');
+            history.replace('/home');
         }
     }, [auth, history]);
 
@@ -162,5 +167,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { loginUser }
+    { loginUser, clearErrors }
 )(withRouter(HigherOrderAuthComponent(Login)));

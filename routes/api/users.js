@@ -50,7 +50,7 @@ router.post('/register', (req, res) => {
                 newUser
                     .save()
                     .then(user1 => res.json(user1))
-                    .catch(e => console.error(e));
+                    .catch(e => console.error('Error during hash password',e));
             });
         });
     });

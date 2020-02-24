@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const bodyParser = require("body-parser");
+const bodyParser = require('body-parser');
 const cors = require('cors');
 
 
@@ -26,7 +26,7 @@ const db = process.env.mongoURI;
 mongoose
     .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected...'))
-    .catch(err => console.error(err));
+    .catch(err => console.error('Error during connection to database', err));
 
 mongoose.set('useFindAndModify', false);
 

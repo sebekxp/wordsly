@@ -26,7 +26,7 @@ export const loginUser = (userData) => dispatch => {
             dispatch(setCurrentUser(decoded));
         })
         .catch(err => {
-            console.error(err);
+            console.error('Error during login', err);
         });
 
 };

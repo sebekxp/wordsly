@@ -32,6 +32,7 @@ const WordContentContainer = (props) => {
             if (keyCode === 37 && !ctrlKey)
                 prev();
         };
+
         window.addEventListener('keyup', handleKeyDown);
 
         return () => {

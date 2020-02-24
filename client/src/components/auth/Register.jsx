@@ -6,8 +6,9 @@ import HigherOrderAuthComponent from './ HigherOrderAuthComponent';
 import { connect } from 'react-redux';
 import { registerUser } from './actions/registerUser';
 import { Alert } from 'reactstrap';
+import { clearErrors } from './AuthErrorSlice';
 
-const Register = ({ registerUser, propsErrors, history }) => {
+const Register = ({ registerUser, propsErrors, history, clearErrors }) => {
     const [showAlert, setShowAlert] = useState(false);
     const [accountData, setAccountData] = useState({
         name: '',
@@ -16,6 +17,10 @@ const Register = ({ registerUser, propsErrors, history }) => {
         password2: '',
         errors: {}
     });
+
+    useEffect(() => {
+        clearErrors();
+    }, []);
 
     useEffect(() => {
         setAccountData({ ...accountData, errors: propsErrors });
@@ -40,8 +45,7 @@ const Register = ({ registerUser, propsErrors, history }) => {
                 password2: accountData.password2
             };
 
-            registerUser(newUser, history);
-            setShowAlert(true);
+            registerUser(newUser, history, setShowAlert);
         }
     };
 
@@ -302,5 +306,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { registerUser }
+    { registerUser, clearErrors  }
 )(withRouter(HigherOrderAuthComponent(Register)));

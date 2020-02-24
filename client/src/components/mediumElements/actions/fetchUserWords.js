@@ -22,6 +22,6 @@ export const fetchUserWords = (userID) => dispatch => {
             dispatch(updateKnowWord(knowWord.length));
         })
         .catch(err => {
-            console.error(err);
+            console.error('Error during downloading user preferences', err);
         });
 };

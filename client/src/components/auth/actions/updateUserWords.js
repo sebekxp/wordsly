@@ -15,6 +15,6 @@ export const updateUserWords = (userID, word, option) => dispatch => {
     fetch('/api/users/words', fetchOptions)
         .then(checkForError)
         .catch(err => {
-            console.error(err);
+            console.error('Error during updating user preferences', err);
         });
 };
