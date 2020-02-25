@@ -2,48 +2,33 @@
   "name": "wordsly",
   "version": "1.0.0",
   "description": "An application to learn the thousand most-used words in English",
-  "main": "server.js",
+  "main": "server/src/Server/server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
-    "start": "node server.js",
+    "start": "node server/src/Server/server.js",
     "lint": "eslint --ext .js,.jsx ./ --max-warnings=0",
     "precommit": "lint-staged",
-    "server": "nodemon server.js",
+    "server": "nodemon server/src/Server/server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "sebekxp",
   "license": "MIT",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
-    "concurrently": "^5.1.0",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "is-empty": "^1.2.0",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.8.10",
-    "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0",
-    "uuid-random": "^1.3.0",
-    "validator": "^12.2.0"
+    "concurrently": "^5.1.0"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.9.0",
-    "eslint-plugin-flowtype": "^4.6.0",
     "eslint-plugin-import": "^2.20.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.18.0",
     "eslint-plugin-react-hooks": "^2.3.0",
-    "husky": "^4.2.1",
     "lint-staged": "^10.0.2",
     "nodemon": "^1.19.4",
-    "prettier": "^1.19.1",
-    "pretty-quick": "^2.0.1"
+    "prettier": "^1.19.1"
   },
   "lint-staged": {
     "*.{js,jsx}": [
