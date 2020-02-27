@@ -5,43 +5,12 @@ import { AddCircle } from 'styled-icons/material/AddCircle';
 import { useDispatch } from 'react-redux';
 import { addWord } from '../../../redux/wordsToRenderReducer';
 import Colors from '../../utils/Colors';
+import { AddingWordsInputComponent, AddInput, InputWrapper } from './AddWordsInput.style';
 
 const AddWordsInput = () => {
     const [hover, setHover] = useState(false);
     const dispatch = useDispatch();
     const target = React.createRef();
-
-    const AddingWordsInputComponent = styled.div`
-        display: flex;
-        width: 275px;
-        height: 57px;
-        flex-grow: 1;
-        border-bottom-left-radius: 10px;
-       
-    `;
-
-    const InputWrapper = styled.div`
-        display: flex;
-        position: fixed;
-        justify-content: flex-end;
-        align-items: center;
-        border-bottom-left-radius: 10px;
-        height: 57px;
-        width: 275px;
-        margin: auto;
-    `;
-
-    const AddInput = styled.input`
-        padding: 0 5px;
-        border-bottom-left-radius: 10px;
-        font-size: 18px;
-        height: 100%;
-        width: 100%;
-        outline: none;
-        border: 1px solid ${Colors.BOOKMARKS_ELEMENT_BACKGROUND};
-
-    `;
-
 
     const onMouseEnterHandler = () => {
         setHover(true);
@@ -55,14 +24,12 @@ const AddWordsInput = () => {
         return !hover ? AddCircleOutline : AddCircle;
     };
 
-
     const Add = styled(selectIcon())`
         position: absolute;
         color: ${Colors.GREEN_CIRCLE};
         right: 10px;
         width: 35px;
         height: 35px;
-        
     `;
 
     const createNavWord = (wordName, wordTranslate) => {
@@ -94,9 +61,8 @@ const AddWordsInput = () => {
         dispatch(addWord(nav));
     };
 
-    const handleEnterPress = (e) => {
-        if (e.which !== 13)
-            return;
+    const handleEnterPress = e => {
+        if (e.which !== 13) return;
         createAndAddWordToRepo();
     };
 
@@ -107,14 +73,22 @@ const AddWordsInput = () => {
     return (
         <AddingWordsInputComponent>
             <InputWrapper>
-                <AddInput type="text" name="" id="add-word" placeholder="Add word" ref={target}
-                          onKeyPress={e => handleEnterPress(e)}/>
-                <Add onClick={handleButtonPress}
-                     onMouseEnter={onMouseEnterHandler}
-                     onMouseLeave={onMouseLeaveHandler}/>
+                <AddInput
+                    type="text"
+                    name=""
+                    id="add-word"
+                    placeholder="Add word"
+                    ref={target}
+                    onKeyPress={e => handleEnterPress(e)}
+                />
+                <Add
+                    as={selectIcon()}
+                    onClick={handleButtonPress}
+                    onMouseEnter={onMouseEnterHandler}
+                    onMouseLeave={onMouseLeaveHandler}
+                />
             </InputWrapper>
         </AddingWordsInputComponent>
     );
-
 };
 export default AddWordsInput;

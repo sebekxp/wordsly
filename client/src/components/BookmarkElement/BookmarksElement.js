@@ -1,37 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import Colors from '../utils/Colors';
 import { setBookmark } from '../../redux/bookmarkReducer';
-import { Button } from 'reactstrap';
+import { Toggle } from './BookmarksElement.style';
 
-const BookmarksElement = ({ selected, bbTitle }) => {
+const BookmarksElement = ({ bbTitle }) => {
     const dispatch = useDispatch();
-    const [isSelected, setSelected] = useState(selected);
 
-    const getColor = () => {
-        return isSelected ?
-            Colors.BOOKMARKS_ELEMENT_SELECTED_BACKGROUND :
-            Colors.BOOKMARKS_ELEMENT_BACKGROUND;
-    };
-
-    const style = {
-        width: '135px',
-        textAlign: 'center',
-        lineHeight: '56.6px',
-        color: 'white',
-        backgroundColor: getColor()
-    };
     const handleClick = () => {
-        setSelected(!isSelected);
         dispatch(setBookmark(bbTitle));
     };
 
     return (
-        <Button onClick={handleClick} style={style} color="secondary">
+        <Toggle onClick={handleClick} color="secondary">
             {bbTitle}
-        </Button>
+        </Toggle>
     );
-
 };
 
 export default BookmarksElement;

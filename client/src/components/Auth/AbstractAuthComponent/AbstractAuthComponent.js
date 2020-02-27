@@ -1,37 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
-import { ArrowLeft } from 'styled-icons/feather/ArrowLeft';
-import { Link } from 'react-router-dom';
+import { BackToHome, BackToHomeWrapper, Container } from './AbstractAuthComponent.style';
 
 export default (Component) => {
-    const container = {
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
-        width: '550px',
-        margin: '150px auto'
-    };
-
-    const BackToHome = styled(ArrowLeft)`
-        width: 50px;
-        height: 30px;
-    `;
-
-    const backToHomeWrapper = {
-        display: 'flex',
-        fontWeight: '600',
-        justifyContent: 'center',
-        textTransform: 'uppercase'
-    };
-
     return (props) => (
-
-        <div style={container}>
-            <Link to="/" style={backToHomeWrapper}>
+        <Container>
+            <BackToHomeWrapper to="/">
                 <BackToHome/>
                 <p> back to home</p>
-            </Link>
+            </BackToHomeWrapper>
             <Component {...props} />
-        </div>
+        </Container>
     );
 };

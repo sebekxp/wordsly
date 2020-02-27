@@ -11,7 +11,6 @@ const Colors = {
     DEFAULT_GREY: '#4B4C4C',
     BOX_SHADOW: '0px 0px 2.5px 0',
 
-
     EXAMPLES_BACKGROUND: '#FFFFFF',
     EXAMPLES_CONTAINER_BACKGROUND: '#F4F6F8',
 
@@ -21,8 +20,6 @@ const Colors = {
     DELETE_ELEM_ICON: '#dc3545',
     FAV_ELEM_ICON: '#FFD700',
     GREEN_CIRCLE: '#28a745'
-
-
 };
 
 export default Colors;

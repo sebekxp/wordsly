@@ -1,22 +1,14 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+// noinspection ES6CheckImport
+import { withRouter } from 'react-router-dom';
 import { Star } from 'styled-icons/boxicons-solid/Star';
 import { Star as BlankStar } from 'styled-icons/boxicons-regular/Star';
 import { connect } from 'react-redux';
 import { setActive } from '../../../../../redux/wordsToRenderReducer';
-import Colors from '../../../../utils/Colors';
 import { updateUserWords } from '../../../../../actions/users/updateUserWords';
-// noinspection ES6CheckImport
-import { withRouter } from 'react-router-dom';
+import { FavElemIcon } from './FavElementIcon.style';
 
-
-const FavElementIcon = ({
-                            word,
-                            position,
-                            auth,
-                            setActive,
-                            updateUserWords
-                        }) => {
+const FavElementIcon = ({ word, auth, setActive, updateUserWords }) => {
     const [hover, setHover] = useState(false);
 
     const onMouseEnterHandler = () => {
@@ -27,7 +19,7 @@ const FavElementIcon = ({
         setHover(false);
     };
 
-    const handleClick = (e) => {
+    const handleClick = e => {
         setActive({ word, active: true });
         updateUserWords(auth.user.id, word, 'active');
         e.stopPropagation();
@@ -37,23 +29,17 @@ const FavElementIcon = ({
         return hover ? Star : BlankStar;
     };
 
-    const FavElemIcon = styled(selectIcon())`
-            position: ${position};
-            top: 0;
-            right: 0;
-            display: flex;
-            color: ${Colors.FAV_ELEM_ICON}   
-    `;
-
     return (
-        <FavElemIcon onMouseEnter={onMouseEnterHandler}
-                     onMouseLeave={onMouseLeaveHandler}
-                     onClick={e => handleClick(e)}
-                     title="Add to favorites word"
-                     size={30}/>
+        <FavElemIcon
+            as={selectIcon()}
+            onMouseEnter={onMouseEnterHandler}
+            onMouseLeave={onMouseLeaveHandler}
+            onClick={e => handleClick(e)}
+            title="Add to favorites word"
+            size={30}
+        />
     );
 };
-
 
 const mapStateToProps = state => {
     const { auth } = state;
@@ -63,7 +49,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(
-    mapStateToProps,
-    { updateUserWords, setActive }
-)(withRouter(FavElementIcon));
+export default connect(mapStateToProps, { updateUserWords, setActive })(withRouter(FavElementIcon));

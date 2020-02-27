@@ -1,22 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
+// noinspection ES6CheckImport
+import { withRouter } from 'react-router-dom';
 import { Circle } from 'styled-icons/fa-regular/Circle';
 import { CheckCircle } from 'styled-icons/boxicons-solid/CheckCircle';
 import { connect } from 'react-redux';
 import { setKnowWord } from '../../../../../redux/wordsToRenderReducer';
-import Colors from '../../../../utils/Colors';
-// noinspection ES6CheckImport
-import { withRouter } from 'react-router-dom';
 import { updateUserWords } from '../../../../../actions/users/updateUserWords';
+import { GreenCircleIcon } from './BlankCircleIcon.style';
 
-
-const BlankCircleIcon = ({
-                             word,
-                             hover,
-                             updateUserWords,
-                             auth,
-                             setKnowWord
-                         }) => {
+const BlankCircleIcon = ({ word, hover, updateUserWords, auth, setKnowWord }) => {
     const blank = !word.knowWord;
 
     const updateProgBar = () => {
@@ -28,30 +20,15 @@ const BlankCircleIcon = ({
         return blank ? Circle : CheckCircle;
     };
 
-    const setColor = () => {
-        return hover ? Colors.NAVIGATION_WORD_BACKGROUND_HOVER :
-            Colors.NAVIGATION_WORD_BACKGROUND;
-    };
-
-    const GreenCircleIcon = styled(selectIcon())`
-        color: #28a745;
-        padding: 12px 12px;
-        width: 53.59px;
-        height: 53.9px;
-        margin-right: 3px;
-        border-radius: 5px;
-        background-color: ${setColor()}
-    `;
-
     return (
-        <>
-            <GreenCircleIcon
-                onClick={e => updateProgBar(e)}
-                title="Mark as known word"/>
-        </>
+        <GreenCircleIcon
+            hover={hover}
+            as={selectIcon()}
+            onClick={e => updateProgBar(e)}
+            title="Mark as known word"
+        />
     );
 };
-
 
 const mapStateToProps = state => {
     const { auth } = state;
@@ -61,10 +38,7 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(
-    mapStateToProps,
-    {
-        updateUserWords,
-        setKnowWord
-    }
-)(withRouter(BlankCircleIcon));
+export default connect(mapStateToProps, {
+    updateUserWords,
+    setKnowWord
+})(withRouter(BlankCircleIcon));

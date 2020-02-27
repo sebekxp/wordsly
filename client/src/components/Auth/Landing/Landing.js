@@ -1,44 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'reactstrap';
 import HigherOrderAuthComponent from '../AbstractAuthComponent';
+import { CustomButton, P, Wrapper } from './Landing.style';
 
 
 const Landing = () => {
-    const btn = {
-        marginTop: '30px',
-        width: '150px',
-        fontSize: '22px',
-        textTransform: 'uppercase',
-        fontWeight: '500'
-    };
-
-    const btnContainer = {
-        display: 'flex',
-        width: '400px',
-        justifyContent: 'space-between'
-    };
-
-    const pStyle = {
-        fontSize: '18px',
-        margin: '10px',
-        textAlign: 'center'
-    };
 
     return (
         <>
             <h2>You want to learn english quickly?</h2>
-            <p style={pStyle}>
+            <P>
                 Knowledge of this vocabulary group makes it possible to understand 80% or even 95% of the message.
-            </p>
-            <div style={btnContainer}>
+            </P>
+            <Wrapper>
                 <Link to='/register'>
-                    <Button color="primary" style={btn} type={'submit'}>register</Button>
+                    <CustomButton color="primary" type="submit">register</CustomButton>
                 </Link>
                 <Link to='/login'>
-                    <Button color="primary" style={btn} type={'submit'}>Login</Button>
+                    <CustomButton color="primary" type="submit">Login</CustomButton>
                 </Link>
-            </div>
+            </Wrapper>
 
         </>
     );

@@ -1,11 +1,11 @@
 import React from 'react';
-import { FormGroup, Input } from 'reactstrap';
 import { connect } from 'react-redux';
+import { FormGroupWrapper, InputWrapper } from './Search.style';
 
-const Search = (props) => {
+const Search = props => {
     const { words } = props;
 
-    const handleInputChange = (e) => {
+    const handleInputChange = e => {
         const inputValue = e.target.value.toLowerCase().trim();
         const navigationWord = window.document.getElementsByClassName('navigation-word');
         const navWordToArray = [...navigationWord];
@@ -20,30 +20,20 @@ const Search = (props) => {
         }
     };
 
-    const formGroupStyle = {
-        width: '360px',
-        margin: '100px auto'
-    };
-
-    const inputStyle = {
-        fontSize: '18px'
-    };
-
     return (
-        <FormGroup style={formGroupStyle}>
-            <Input
-                style={inputStyle}
+        <FormGroupWrapper>
+            <InputWrapper
                 type="search"
                 name="search"
                 id="exampleSearch"
                 placeholder="Search word..."
-                onChange={(e) => handleInputChange(e)}
+                onChange={e => handleInputChange(e)}
             />
-        </FormGroup>
+        </FormGroupWrapper>
     );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     const { wordsToRender } = state;
     return { words: wordsToRender.words };
 };

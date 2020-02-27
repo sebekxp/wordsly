@@ -1,12 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
+import { FormGroup, Label, FormFeedback } from 'reactstrap';
 // noinspection ES6CheckImport
-import { Link, withRouter } from 'react-router-dom';
-import HigherOrderAuthComponent from '../AbstractAuthComponent';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import HigherOrderAuthComponent from '../AbstractAuthComponent';
 import { loginUser } from '../../../actions/users/loginUser';
 import { clearErrors } from '../../../redux/authErrorReducer';
+import {
+    ButtonWrapper,
+    FormWrapper,
+    Header,
+    InputWrapper,
+    LinkWrapper,
+    P,
+    SPAN
+} from './Login.style';
 
+export const getValid = error => {
+    return error?.length === 0;
+};
+
+export const getInvalid = error => {
+    return error?.length > 1;
+};
+
+export const getFeedback = text => {
+    return getValid(text) ? null : text;
+};
 
 const Login = ({ loginUser, propsErrors, history, auth, clearErrors }) => {
     const [accountData, setAccountData] = useState({
@@ -17,10 +37,10 @@ const Login = ({ loginUser, propsErrors, history, auth, clearErrors }) => {
 
     useEffect(() => {
         clearErrors();
-    }, []);
+    }, [clearErrors]);
 
     useEffect(() => {
-        setAccountData({ ...accountData, errors: propsErrors });
+        setAccountData(prevState => ({ ...prevState, errors: propsErrors }));
     }, [propsErrors]);
 
     useEffect(() => {
@@ -47,69 +67,18 @@ const Login = ({ loginUser, propsErrors, history, auth, clearErrors }) => {
             ...accountData,
             [e.target.id]: e.target.value
         });
-
-    };
-
-    const formStyle = {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
-    };
-
-    const inputStyle = {
-        width: '400px'
-    };
-
-    const header = {
-        display: 'flex',
-        alignItems: 'baseline',
-        margin: '0 auto',
-        marginBottom: '20px'
-    };
-
-    const linkStyle = {
-        fontSize: '18px',
-        padding: '5px'
-    };
-
-    const btn = {
-        marginTop: '30px',
-        width: '150px',
-        fontSize: '18px',
-        textTransform: 'uppercase',
-        fontWeight: '500'
-    };
-
-    const h2Style = {
-        fontWeight: '750'
-    };
-
-    const pStyle = {
-        fontSize: '20px'
-    };
-
-    const getValid = (error) => {
-        return error?.length === 0;
-    };
-
-    const getInvalid = (error) => {
-        return error?.length > 1;
-    };
-
-    const getFeedback = (text) => {
-        return getValid(text)
-            ? null
-            : text;
     };
 
     const getHeader = () => {
         return (
             <>
-                <h2><span style={h2Style}>Login</span> below</h2>
-                <div style={header}>
-                    <p style={pStyle}>Don't have an account?</p>
-                    <Link to="/register" style={linkStyle}>Register</Link>
-                </div>
+                <h2>
+                    <SPAN>Login</SPAN> below
+                </h2>
+                <Header>
+                    <P>Don't have an account?</P>
+                    <LinkWrapper to="/register">Register</LinkWrapper>
+                </Header>
             </>
         );
     };
@@ -117,17 +86,19 @@ const Login = ({ loginUser, propsErrors, history, auth, clearErrors }) => {
     return (
         <>
             {getHeader()}
-            <Form noValidate style={formStyle} onSubmit={e => onSubmit(e)}>
+            <FormWrapper noValidate onSubmit={e => onSubmit(e)}>
                 <FormGroup>
                     <Label for="email">Email</Label>
-                    <Input type="email" name="email"
-                           id="email" placeholder="Email"
-                           style={inputStyle}
-                           onChange={e => onChange(e)}
-                           value={accountData.email}
-                           error={accountData.errors.email}
-                           valid={getValid(accountData.errors.email)}
-                           invalid={getInvalid(accountData.errors.email)}
+                    <InputWrapper
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="Email"
+                        onChange={e => onChange(e)}
+                        value={accountData.email}
+                        error={accountData.errors.email}
+                        valid={getValid(accountData.errors.email)}
+                        invalid={getInvalid(accountData.errors.email)}
                     />
                     <FormFeedback
                         valid={getValid(accountData.errors.email)}
@@ -138,14 +109,16 @@ const Login = ({ loginUser, propsErrors, history, auth, clearErrors }) => {
                 </FormGroup>
                 <FormGroup>
                     <Label for="password">Password</Label>
-                    <Input type="password" name="password"
-                           id="password" placeholder="Password"
-                           style={inputStyle}
-                           onChange={e => onChange(e)}
-                           value={accountData.password}
-                           error={accountData.errors.password}
-                           valid={getValid(accountData.errors.password)}
-                           invalid={getInvalid(accountData.errors.password)}
+                    <InputWrapper
+                        type="password"
+                        name="password"
+                        id="password"
+                        placeholder="Password"
+                        onChange={e => onChange(e)}
+                        value={accountData.password}
+                        error={accountData.errors.password}
+                        valid={getValid(accountData.errors.password)}
+                        invalid={getInvalid(accountData.errors.password)}
                     />
                     <FormFeedback
                         valid={getValid(accountData.errors.password)}
@@ -154,8 +127,10 @@ const Login = ({ loginUser, propsErrors, history, auth, clearErrors }) => {
                         {getFeedback(accountData.errors.password)}
                     </FormFeedback>
                 </FormGroup>
-                <Button color="primary" style={btn} type={'submit'}>sign in</Button>
-            </Form>
+                <ButtonWrapper color="primary" type="submit">
+                    sign in
+                </ButtonWrapper>
+            </FormWrapper>
         </>
     );
 };
@@ -165,7 +140,6 @@ const mapStateToProps = state => ({
     propsErrors: state.errors
 });
 
-export default connect(
-    mapStateToProps,
-    { loginUser, clearErrors }
-)(withRouter(HigherOrderAuthComponent(Login)));
+export default connect(mapStateToProps, { loginUser, clearErrors })(
+    withRouter(HigherOrderAuthComponent(Login))
+);

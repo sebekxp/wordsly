@@ -28,18 +28,36 @@ const NavigationWordRenderer = ({ words, bookmark, auth, fetchUserWords }) => {
     `;
 
     const renderExamples = () => {
-        return words.filter(word => {
-            return !word.deleted && word;
-        }).map((word) => <NavigationWord name={word.wordName} key={word.wordName} word={word} words={words}/>);
+        return words
+            .filter(word => {
+                return !word.deleted && word;
+            })
+            .map(word => (
+                <NavigationWord
+                    name={word.wordName}
+                    key={word.wordName}
+                    word={word}
+                    words={words}
+                />
+            ));
     };
 
     const renderFavorites = () => {
-        return words.filter(word => {
-            return word.active && word;
-        }).map((word) => <NavigationWord name={word.wordName} key={word.wordName} word={word} words={words}/>);
+        return words
+            .filter(word => {
+                return word.active && word;
+            })
+            .map(word => (
+                <NavigationWord
+                    name={word.wordName}
+                    key={word.wordName}
+                    word={word}
+                    words={words}
+                />
+            ));
     };
 
-    const selectBookmark = (value) => {
+    const selectBookmark = value => {
         let retVal;
         switch (value) {
             case Type.EXAMPLES:
@@ -54,7 +72,6 @@ const NavigationWordRenderer = ({ words, bookmark, auth, fetchUserWords }) => {
             default:
                 retVal = renderExamples();
                 break;
-
         }
         return retVal;
     };
@@ -62,17 +79,14 @@ const NavigationWordRenderer = ({ words, bookmark, auth, fetchUserWords }) => {
     return (
         <Wrapper>
             <Container id="navigation-word-container" className="words">
-                {
-                    selectBookmark(bookmark)
-                }
+                {selectBookmark(bookmark)}
             </Container>
-            <AddWordsInput/>
+            <AddWordsInput />
         </Wrapper>
     );
-
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     const { wordsToRender, bookmark, auth } = state;
 
     return {

@@ -1,18 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
-
+import { Wrapper } from './ParagraphWrapper.style';
 
 const ParagraphWrapper = ({ inputRef, children }) => {
-    const targetRef = inputRef;
-
-    const Wrapper = styled.div`
-        display: flex;  
-    `;
-
-    return (
-        <Wrapper ref={targetRef}>
-            {children}
-        </Wrapper>);
+    return <Wrapper ref={inputRef}>{children}</Wrapper>;
 };
 
 export default ParagraphWrapper;

@@ -17,8 +17,34 @@
         ]
       }
     ],
-    "no-console": ["error", { "allow": ["error"] }],
-    "no-alert": 0,
+    "no-shadow": [
+      2,
+      {
+        "builtinGlobals": false,
+        "hoist": "functions",
+        "allow": [
+          "setBookmark",
+          "logoutUser",
+          "loginUser",
+          "clearErrors",
+          "registerUser",
+          "updateUserWords",
+          "setKnowWord",
+          "setActive",
+          "setDeleted"
+        ]
+      }
+    ],
+    "react/no-unescaped-entities": 0,
+    "react/jsx-props-no-spreading": 0,
+    "no-console": [
+      "error",
+      {
+        "allow": [
+          "error"
+        ]
+      }
+    ],
     "no-param-reassign": 0,
     "no-plusplus": 0,
     "react/prop-types": 0,
