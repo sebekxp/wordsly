@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Dropdown, DropdownItem, DropdownMenu } from 'reactstrap';
 import { logoutUser } from '../../../actions/users/logoutUser';
-import ShortcutsModal from '../../ShortcutsModal';
+import ShortcutsModal from '../../Modals/ShortcutsModal';
 import { ThMenuIcon, Toggle } from './Logout.style';
 import { authProp } from '../../utils/propTypes';
 
@@ -37,7 +37,7 @@ const Logout = ({ logoutUser, history, auth }) => {
                     <DropdownItem onClick={handleClick}>Logout</DropdownItem>
                 </DropdownMenu>
             </Dropdown>
-            {isOpen && <ShortcutsModal isOpen setOpen={setOpen} />}
+            {isOpen && <ShortcutsModal isOpen={isOpen} setOpen={setOpen} />}
         </>
     );
 };

@@ -1,19 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { setBookmark } from '../../redux/bookmarkReducer';
 import { Toggle } from './BookmarksElement.style';
 
-// TODO Make default bookmark selected
-const BookmarksElement = ({ bbTitle, selected }) => {
-    const dispatch = useDispatch();
-
+const BookmarksElement = ({ bbTitle, selected, setBookmarkAction }) => {
     const handleClick = () => {
-        dispatch(setBookmark(bbTitle));
+        setBookmarkAction(bbTitle);
     };
 
     return (
-        <Toggle onClick={handleClick} color="secondary">
+        <Toggle onClick={handleClick} color="secondary" selected={selected}>
             {bbTitle}
         </Toggle>
     );
@@ -24,4 +21,4 @@ BookmarksElement.propTypes = {
     selected: PropTypes.bool.isRequired
 };
 
-export default BookmarksElement;
+export default connect(null, { setBookmarkAction: setBookmark })(BookmarksElement);

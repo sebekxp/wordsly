@@ -7,7 +7,6 @@ import Logout from '../Buttons/Logout';
 import { setBookmark } from '../../redux/bookmarkReducer';
 import { Wrap, Wrapper } from './BookmarksBar.style';
 
-// TODO String bookmark form redux?
 const BookmarksBar = ({ bookmark, setBookmark }) => {
     const nextBookmark = new Map([
         [Type.EXAMPLES, Type.FLASH_CARDS],

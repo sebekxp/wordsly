@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Button } from 'reactstrap';
 import Colors from '../utils/Colors';
 
@@ -13,4 +13,10 @@ export const Toggle = styled(Button)`
     &:focus {
         background-color: ${Colors.BOOKMARKS_ELEMENT_SELECTED_BACKGROUND};
     }
+
+    ${({ selected }) =>
+        selected &&
+        css`
+            background-color: ${Colors.BOOKMARKS_ELEMENT_SELECTED_BACKGROUND};
+        `}
 `;

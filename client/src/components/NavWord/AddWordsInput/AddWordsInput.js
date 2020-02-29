@@ -8,10 +8,12 @@ import { connect } from 'react-redux';
 import { addWord } from '../../../redux/wordsToRenderReducer';
 import Colors from '../../utils/Colors';
 import { AddingWordsInputComponent, AddInput, InputWrapper } from './AddWordsInput.style';
+import AddWordModal from '../../Modals/AddWordModal/AddWordModal';
 
 const AddWordsInput = ({ addWordAction }) => {
     const [hover, setHover] = useState(false);
     const target = React.createRef();
+    const [isOpen, setOpen] = useState(false);
 
     const onMouseEnterHandler = () => {
         setHover(true);
@@ -55,11 +57,10 @@ const AddWordsInput = ({ addWordAction }) => {
         const inputValue = getInputValue();
         if (inputValue.length === 0 || inputValue.length > 11) {
             // TODO change alert to Popup
-            alert('The name is too short or too long to be used as a navigation word.');
+            setOpen(!isOpen);
             return;
         }
         const nav = createNavWord(inputValue, inputValue);
-        // TODO Change to map state to props
         addWordAction(nav);
     };
 
@@ -73,24 +74,27 @@ const AddWordsInput = ({ addWordAction }) => {
     };
 
     return (
-        <AddingWordsInputComponent>
-            <InputWrapper>
-                <AddInput
-                    type="text"
-                    name=""
-                    id="add-word"
-                    placeholder="Add word"
-                    ref={target}
-                    onKeyPress={e => handleEnterPress(e)}
-                />
-                <Add
-                    as={selectIcon()}
-                    onClick={handleButtonPress}
-                    onMouseEnter={onMouseEnterHandler}
-                    onMouseLeave={onMouseLeaveHandler}
-                />
-            </InputWrapper>
-        </AddingWordsInputComponent>
+        <>
+            <AddingWordsInputComponent>
+                <InputWrapper>
+                    <AddInput
+                        type="text"
+                        name=""
+                        id="add-word"
+                        placeholder="Add word"
+                        ref={target}
+                        onKeyPress={e => handleEnterPress(e)}
+                    />
+                    <Add
+                        as={selectIcon()}
+                        onClick={handleButtonPress}
+                        onMouseEnter={onMouseEnterHandler}
+                        onMouseLeave={onMouseLeaveHandler}
+                    />
+                </InputWrapper>
+            </AddingWordsInputComponent>
+            {isOpen && <AddWordModal isOpen={isOpen} setOpen={setOpen} />}
+        </>
     );
 };
 export default connect(null, { addWordAction: addWord })(withRouter(AddWordsInput));
