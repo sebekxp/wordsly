@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { AddCircleOutline } from 'styled-icons/material/AddCircleOutline';
 import { AddCircle } from 'styled-icons/material/AddCircle';
-import { useDispatch } from 'react-redux';
+// noinspection ES6CheckImport
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { addWord } from '../../../redux/wordsToRenderReducer';
 import Colors from '../../utils/Colors';
 import { AddingWordsInputComponent, AddInput, InputWrapper } from './AddWordsInput.style';
 
-const AddWordsInput = () => {
+const AddWordsInput = ({ addWordAction }) => {
     const [hover, setHover] = useState(false);
-    const dispatch = useDispatch();
     const target = React.createRef();
 
     const onMouseEnterHandler = () => {
@@ -58,7 +59,8 @@ const AddWordsInput = () => {
             return;
         }
         const nav = createNavWord(inputValue, inputValue);
-        dispatch(addWord(nav));
+        // TODO Change to map state to props
+        addWordAction(nav);
     };
 
     const handleEnterPress = e => {
@@ -91,4 +93,4 @@ const AddWordsInput = () => {
         </AddingWordsInputComponent>
     );
 };
-export default AddWordsInput;
+export default connect(null, { addWordAction: addWord })(withRouter(AddWordsInput));

@@ -1,8 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { Wrapper } from './ParagraphWrapper.style';
 
-const ParagraphWrapper = ({ inputRef, children }) => {
-    return <Wrapper ref={inputRef}>{children}</Wrapper>;
+const ParagraphWrapper = ({ children }) => {
+    return <Wrapper>{children}</Wrapper>;
+};
+
+ParagraphWrapper.prototype = {
+    children: PropTypes.element.isRequired
 };
 
 export default ParagraphWrapper;

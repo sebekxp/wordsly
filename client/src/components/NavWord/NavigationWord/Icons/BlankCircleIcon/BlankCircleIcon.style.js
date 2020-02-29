@@ -5,9 +5,8 @@ const setColor = hover => {
     return hover ? Colors.NAVIGATION_WORD_BACKGROUND_HOVER : Colors.NAVIGATION_WORD_BACKGROUND;
 };
 
-// TODO color to utils
 export const GreenCircleIcon = styled.div`
-    color: #28a745;
+    color: ${Colors.GREEN_CIRCLE};
     padding: 12px 12px;
     width: 53.59px;
     height: 53.9px;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FormGroup, Label, FormFeedback } from 'reactstrap';
 // noinspection ES6CheckImport
@@ -264,6 +265,23 @@ const Register = ({ registerUser, propsErrors, history, clearErrors }) => {
             )}
         </>
     );
+};
+
+Register.propTypes = {
+    registerUser: PropTypes.func.isRequired,
+    propsErrors: PropTypes.PropTypes.oneOfType([
+        PropTypes.shape({}),
+        PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            email: PropTypes.string.isRequired,
+            password: PropTypes.string.isRequired,
+            password2: PropTypes.string.isRequired
+        })
+    ]).isRequired,
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired
+    }).isRequired,
+    clearErrors: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {

@@ -9,6 +9,7 @@ import authError from '../authErrorReducer';
 const rootReducer = (state = {}, action) => {
     const activeBookmark = state.bookmark;
     return {
+        // TODO Change spelling (grammar)
         knowWord: progressBar(state.knowWord, action),
         bookmark: bookmarksContext(state.bookmark, action),
 

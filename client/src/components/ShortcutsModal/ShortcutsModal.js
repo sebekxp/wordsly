@@ -1,5 +1,6 @@
 /* eslint react/no-multi-comp: 0, react/prop-types: 0 */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { P, SPAN } from './ShortcutsModal.style';
 
@@ -48,6 +49,11 @@ const ShortcutsModal = ({ isOpen, setOpen }) => {
             </ModalFooter>
         </Modal>
     );
+};
+
+ShortcutsModal.propsTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    setOpen: PropTypes.func.isRequired
 };
 
 export default ShortcutsModal;

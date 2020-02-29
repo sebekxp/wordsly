@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { FormGroup, Label, FormFeedback } from 'reactstrap';
 // noinspection ES6CheckImport
 import { withRouter } from 'react-router-dom';
@@ -6,6 +7,7 @@ import { connect } from 'react-redux';
 import HigherOrderAuthComponent from '../AbstractAuthComponent';
 import { loginUser } from '../../../actions/users/loginUser';
 import { clearErrors } from '../../../redux/authErrorReducer';
+import { authProp } from '../../utils/propTypes';
 import {
     ButtonWrapper,
     FormWrapper,
@@ -133,6 +135,22 @@ const Login = ({ loginUser, propsErrors, history, auth, clearErrors }) => {
             </FormWrapper>
         </>
     );
+};
+
+Login.propTypes = {
+    loginUser: PropTypes.func.isRequired,
+    propsErrors: PropTypes.PropTypes.oneOfType([
+        PropTypes.shape({}),
+        PropTypes.shape({
+            email: PropTypes.string.isRequired,
+            password: PropTypes.string.isRequired
+        })
+    ]).isRequired,
+    history: PropTypes.shape({
+        replace: PropTypes.func.isRequired
+    }).isRequired,
+    auth: authProp.isRequired,
+    clearErrors: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

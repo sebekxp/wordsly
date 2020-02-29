@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import BookmarksElement from '../BookmarkElement';
 import { bookmarkType as Type } from '../utils/BookmarkType';
@@ -6,6 +7,7 @@ import Logout from '../Buttons/Logout';
 import { setBookmark } from '../../redux/bookmarkReducer';
 import { Wrap, Wrapper } from './BookmarksBar.style';
 
+// TODO String bookmark form redux?
 const BookmarksBar = ({ bookmark, setBookmark }) => {
     const nextBookmark = new Map([
         [Type.EXAMPLES, Type.FLASH_CARDS],
@@ -50,6 +52,11 @@ const BookmarksBar = ({ bookmark, setBookmark }) => {
             <Logout />
         </Wrapper>
     );
+};
+
+BookmarksBar.propTypes = {
+    setBookmark: PropTypes.func.isRequired,
+    bookmark: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => {

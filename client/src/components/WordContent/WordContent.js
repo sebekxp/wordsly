@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect, useDispatch } from 'react-redux';
 import Examples from './Examples';
 import FlashCards from '../FlashCards';
@@ -14,7 +15,7 @@ import {
     Wrapper
 } from './WordContent.style';
 
-const WordContent = props => {
+const WordContent = ({ bookmark }) => {
     const dispatch = useDispatch();
 
     const next = () => {
@@ -42,28 +43,28 @@ const WordContent = props => {
     });
 
     const selectBookmark = () => {
-        let bookmark;
-        switch (props.bookmark) {
+        let retVal;
+        switch (bookmark) {
             case Type.EXAMPLES:
-                bookmark = <Examples />;
+                retVal = <Examples />;
                 break;
             case Type.FLASH_CARDS:
-                bookmark = <FlashCards />;
+                retVal = <FlashCards />;
                 break;
             case Type.FAV:
-                bookmark = <Favorites />;
+                retVal = <Favorites />;
                 break;
             default:
-                bookmark = <Examples />;
+                retVal = <Examples />;
         }
 
-        return bookmark;
+        return retVal;
     };
 
     return (
         <Wrapper>
             <NavigationWordContainer />
-            <WordContentContainerComponent id={'word-content-container'}>
+            <WordContentContainerComponent id="word-content-container">
                 <IconWrapper onClick={prev}>
                     <Prev />
                 </IconWrapper>
@@ -74,6 +75,10 @@ const WordContent = props => {
             </WordContentContainerComponent>
         </Wrapper>
     );
+};
+
+WordContent.propTypes = {
+    bookmark: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => {

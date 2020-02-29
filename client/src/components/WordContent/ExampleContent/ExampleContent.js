@@ -4,7 +4,8 @@ import uuid from 'uuid';
 import ParagraphWrapper from '../ParagraphWrapper';
 import MoreExampleButton from '../MoreExampleButton';
 import { ExampleContentComponent, KeyWordHeader, Quote } from './ExampleContent.style';
-
+import { wordProp } from '../../utils/propTypes';
+// TODO If words doesn't load properly make sure the actions don't cause problems
 const ExampleContent = ({ word }) => {
     const [expand, setExpand] = useState(false);
     const examples = word !== undefined && word.examples;
@@ -93,8 +94,13 @@ const ExampleContent = ({ word }) => {
     return exampleContentToRender();
 };
 
+ExampleContent.propsTypes = {
+    word: wordProp.isRequired
+};
+
 const mapStateToProps = state => {
     const { wordsToRender } = state;
+
     return {
         word: wordsToRender.wordToShow
     };

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 // noinspection ES6CheckImport
 import { withRouter } from 'react-router-dom';
 import { XCircle } from 'styled-icons/boxicons-solid/XCircle';
@@ -8,6 +9,7 @@ import { setActive, setDeleted } from '../../../../../redux/wordsToRenderReducer
 import { bookmarkType as Type } from '../../../../utils/BookmarkType';
 import { updateUserWords } from '../../../../../actions/users/updateUserWords';
 import { DeleteElementIconComponent } from './DeleteElementIcon.style';
+import { authProp, wordProp } from '../../../../utils/propTypes';
 
 const DeleteElementIcon = ({ word, bookmark, auth, setActive, setDeleted, updateUserWords }) => {
     const [hover, setHover] = useState(false);
@@ -41,6 +43,15 @@ const DeleteElementIcon = ({ word, bookmark, auth, setActive, setDeleted, update
             title="Delete word"
         />
     );
+};
+
+DeleteElementIcon.propTypes = {
+    word: PropTypes.oneOfType([wordProp, PropTypes.shape({})]).isRequired,
+    bookmark: PropTypes.string.isRequired,
+    auth: authProp.isRequired,
+    setActive: PropTypes.func.isRequired,
+    setDeleted: PropTypes.func.isRequired,
+    updateUserWords: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {

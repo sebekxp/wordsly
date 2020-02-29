@@ -3,6 +3,7 @@ import Flippy, { FrontSide, BackSide } from 'react-flippy';
 import { connect } from 'react-redux';
 import FavElementIcon from '../NavWord/NavigationWord/Icons/FavElementIcon/FavElementIcon';
 import { backSideStyle, flippyStyle, frontSideStyle } from './FlashCard.style';
+import { wordProp } from '../utils/propTypes';
 
 const FlashCards = ({ word }) => {
     const [flippy, changeFlip] = useState(false);
@@ -40,10 +41,14 @@ const FlashCards = ({ word }) => {
             </FrontSide>
             <BackSide style={backSideStyle} onClick={handleClick}>
                 {word.wordTranslate}
-                <FavElementIcon position="absolute" />
+                <FavElementIcon position="absolute" word={word} />
             </BackSide>
         </Flippy>
     );
+};
+
+FlashCards.propTypes = {
+    word: wordProp.isRequired
 };
 
 const mapStateToProps = state => {

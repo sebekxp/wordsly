@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Counter, ProgressBarComponent, ProgressBarWrapper, Wrapper } from './ProgressBar.style';
+import { wordProp } from '../utils/propTypes';
 
 const ProgressBar = ({ words, knowWord }) => {
     return (
@@ -13,6 +15,11 @@ const ProgressBar = ({ words, knowWord }) => {
             </Counter>
         </Wrapper>
     );
+};
+
+ProgressBar.propsTypes = {
+    words: PropTypes.arrayOf(wordProp.isRequired).isRequired,
+    knowWord: PropTypes.number.isRequired
 };
 
 const mapStateToProps = state => {

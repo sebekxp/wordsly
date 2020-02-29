@@ -25,11 +25,8 @@ export const IconWrapper = styled.div`
     display: none;
 `;
 
-const getDisplay = shouldBeHide => {
-    return shouldBeHide ? 'none' : 'flex';
-};
-
 export const NavigationWordComponent = styled.div`
+    display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 3px;
@@ -51,8 +48,4 @@ export const NavigationWordComponent = styled.div`
             background-color: ${Colors.NAVIGATION_WORD_BACKGROUND_HOVER};
         }
     }
-
-    ${({ shouldBeHide }) => css`
-        display: ${getDisplay(shouldBeHide)};
-    `}
 `;

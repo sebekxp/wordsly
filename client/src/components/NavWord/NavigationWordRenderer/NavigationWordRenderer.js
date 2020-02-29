@@ -1,31 +1,19 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import NavigationWord from '../NavigationWord';
 import { bookmarkType as Type } from '../../utils/BookmarkType';
-import Colors from '../../utils/Colors';
 import { fetchUserWords } from '../../../actions/words/fetchUserWords';
 import AddWordsInput from '../AddWordsInput';
+import { Container, Wrapper } from './NavigationWordRenderer.style';
+import { authProp, wordProp } from '../../utils/propTypes';
 
-const NavigationWordRenderer = ({ words, bookmark, auth, fetchUserWords }) => {
-    fetchUserWords({ id: auth.user.id });
+const NavigationWordRenderer = ({ words, bookmark, auth, fetchUserWordsAction }) => {
+    // TODO Move fetchUserWords inside useEffect or pass dependency Why dont work indise
 
-    const Container = styled.div`
-        padding-left: 3px;
-        display: flex;
-        width: 275px;
-        flex-direction: column;
-        height: 436.8px;
-        border: 1px solid black;
-        box-sizing: border-box;
-        background-color: ${Colors.NAVIGATION_WORD_CONTAINER_BACKGROUND};
-        overflow: auto;
-    `;
-
-    const Wrapper = styled.div`
-        width: 275px;
-        height: calc(100% - 56px);
-    `;
+    useEffect(() => {
+        fetchUserWordsAction({ id: auth.user.id });
+    }, [auth, fetchUserWordsAction, words]);
 
     const renderExamples = () => {
         return words
@@ -78,12 +66,17 @@ const NavigationWordRenderer = ({ words, bookmark, auth, fetchUserWords }) => {
 
     return (
         <Wrapper>
-            <Container id="navigation-word-container" className="words">
-                {selectBookmark(bookmark)}
-            </Container>
+            <Container>{selectBookmark(bookmark)}</Container>
             <AddWordsInput />
         </Wrapper>
     );
+};
+
+NavigationWordRenderer.propsTypes = {
+    words: PropTypes.arrayOf(wordProp.isRequired).isRequired,
+    bookmark: PropTypes.string.isRequired,
+    auth: authProp.isRequired,
+    fetchUserWords: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
@@ -96,4 +89,6 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, { fetchUserWords })(NavigationWordRenderer);
+export default connect(mapStateToProps, { fetchUserWordsAction: fetchUserWords })(
+    NavigationWordRenderer
+);

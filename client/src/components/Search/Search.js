@@ -1,10 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FormGroupWrapper, InputWrapper } from './Search.style';
+import { wordProp } from '../utils/propTypes';
 
-const Search = props => {
-    const { words } = props;
-
+const Search = ({ words }) => {
     const handleInputChange = e => {
         const inputValue = e.target.value.toLowerCase().trim();
         const navigationWord = window.document.getElementsByClassName('navigation-word');
@@ -33,8 +33,13 @@ const Search = props => {
     );
 };
 
+Search.propsTypes = {
+    words: PropTypes.arrayOf(wordProp.isRequired).isRequired
+};
+
 const mapStateToProps = state => {
     const { wordsToRender } = state;
+
     return { words: wordsToRender.words };
 };
 

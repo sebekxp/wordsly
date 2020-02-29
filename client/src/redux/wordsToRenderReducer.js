@@ -1,14 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { bookmarkType as Type } from '../components/utils/BookmarkType';
 
-
 const initialState = {
     words: [],
     wordToShow: undefined
 };
 
 const getActiveWordsIndex = ({ words }) => {
-    return words.map((word, i) => word.active ? i : null).filter(obj => obj != null).sort();
+    return words
+        .map((word, i) => (word.active ? i : null))
+        .filter(obj => obj != null)
+        .sort();
 };
 
 const getIndex = ({ words }, word) => {
@@ -49,8 +51,7 @@ const updatePreferences = (state, collection, option) => {
             const word = findByName(state, obj);
             const targetWord = { ...word };
             const index = getIndex(state, targetWord);
-            if (state.words[index] !== undefined)
-                state.words[index][option] = true;
+            if (state.words[index] !== undefined) state.words[index][option] = true;
         });
     }
 };
@@ -67,8 +68,7 @@ const wordsToRender = createSlice({
             const { words } = state;
             const index = getIndex(state, action.payload);
 
-            if (index === -1)
-                words.push(action.payload);
+            if (index === -1) words.push(action.payload);
             else {
                 alert('Word already exist.');
             }
@@ -80,8 +80,7 @@ const wordsToRender = createSlice({
             words[index].active = active;
 
             // Update wordToShow if Match
-            if (words[index].wordName === state.wordToShow.wordName)
-                wordToShow.active = active;
+            if (words[index].wordName === state.wordToShow.wordName) wordToShow.active = active;
         },
         setDeleted(state, action) {
             const { words } = state;

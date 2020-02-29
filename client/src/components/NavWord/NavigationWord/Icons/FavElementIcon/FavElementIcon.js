@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 // noinspection ES6CheckImport
 import { withRouter } from 'react-router-dom';
 import { Star } from 'styled-icons/boxicons-solid/Star';
@@ -7,6 +8,7 @@ import { connect } from 'react-redux';
 import { setActive } from '../../../../../redux/wordsToRenderReducer';
 import { updateUserWords } from '../../../../../actions/users/updateUserWords';
 import { FavElemIcon } from './FavElementIcon.style';
+import { authProp, wordProp } from '../../../../utils/propTypes';
 
 const FavElementIcon = ({ word, auth, setActive, updateUserWords }) => {
     const [hover, setHover] = useState(false);
@@ -39,6 +41,13 @@ const FavElementIcon = ({ word, auth, setActive, updateUserWords }) => {
             size={30}
         />
     );
+};
+
+FavElementIcon.propTypes = {
+    word: PropTypes.oneOfType([wordProp, PropTypes.shape({})]).isRequired,
+    auth: authProp.isRequired,
+    updateUserWords: PropTypes.func.isRequired,
+    setActive: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {

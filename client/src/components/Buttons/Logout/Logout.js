@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // noinspection ES6CheckImport
 import { withRouter } from 'react-router-dom';
@@ -6,6 +7,7 @@ import { Dropdown, DropdownItem, DropdownMenu } from 'reactstrap';
 import { logoutUser } from '../../../actions/users/logoutUser';
 import ShortcutsModal from '../../ShortcutsModal';
 import { ThMenuIcon, Toggle } from './Logout.style';
+import { authProp } from '../../utils/propTypes';
 
 const Logout = ({ logoutUser, history, auth }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -38,6 +40,14 @@ const Logout = ({ logoutUser, history, auth }) => {
             {isOpen && <ShortcutsModal isOpen setOpen={setOpen} />}
         </>
     );
+};
+
+Logout.propTypes = {
+    logoutUser: PropTypes.func.isRequired,
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired
+    }).isRequired,
+    auth: authProp.isRequired
 };
 
 const mapStateToProps = state => {
