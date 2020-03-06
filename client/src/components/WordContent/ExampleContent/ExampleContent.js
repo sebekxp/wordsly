@@ -9,6 +9,7 @@ import { wordProp } from '../../utils/propTypes';
 const ExampleContent = ({ word }) => {
     const [expand, setExpand] = useState(false);
     const examples = word !== undefined && word.examples;
+
     const targetRef = useRef(0);
     let scrollClickCounter = 0;
 

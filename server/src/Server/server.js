@@ -1,4 +1,4 @@
-require('dotenv').config({path: 'server/src/Config/.env'});
+require('dotenv').config({ path: 'server/src/Config/.env' });
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -7,10 +7,9 @@ const passport = require('passport');
 const words = require('../Routes/api/words');
 const users = require('../Routes/api/users');
 
-
 const app = express();
 
-app.use(express.json(), cors());
+app.use(express.json({ limit: '50mb' }), cors());
 
 // Body parser middleware
 app.use(
@@ -40,6 +39,5 @@ app.use('/api/users', users);
 
 // noinspection JSUnresolvedVariable
 const port = process.env.PORT || 5000;
-
 
 app.listen(port, () => console.log(`Server started on port ${port}`));

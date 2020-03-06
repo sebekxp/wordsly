@@ -31,7 +31,8 @@
           "updateUserWords",
           "setKnowWord",
           "setActive",
-          "setDeleted"
+          "setDeleted",
+          "fetchUserWords"
         ]
       }
     ],

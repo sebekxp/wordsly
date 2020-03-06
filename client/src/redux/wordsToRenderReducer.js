@@ -3,7 +3,8 @@ import { bookmarkType as Type } from '../components/utils/BookmarkType';
 
 const initialState = {
     words: [],
-    wordToShow: undefined
+    wordToShow: undefined,
+    rendered: false
 };
 
 const getActiveWordsIndex = ({ words }) => {
@@ -45,15 +46,42 @@ const findByName = ({ words }, name) => {
     return words.find(word => word.wordName === name);
 };
 
-const updatePreferences = (state, collection, option) => {
-    if (collection !== undefined) {
-        collection.forEach(obj => {
-            const word = findByName(state, obj);
-            const targetWord = { ...word };
-            const index = getIndex(state, targetWord);
-            if (state.words[index] !== undefined) state.words[index][option] = true;
-        });
-    }
+const updateObjectInArray = (words, action) => {
+    const array = [...words];
+
+    return array.map((item, index) => {
+        if (index !== action.index) {
+            return item;
+        }
+
+        return {
+            ...item,
+            ...action.option
+        };
+    });
+};
+
+const updatePreferences = (state, optionsArray, option) => {
+    const { words } = state;
+    const newWords = [...words];
+    if (words === undefined) return state;
+    optionsArray.forEach(obj => {
+        const word = findByName(state, obj);
+        const targetWord = { ...word };
+        const index = getIndex(state, targetWord);
+
+        if (words[index] !== undefined) {
+            newWords.splice(index, 1, {
+                ...newWords[index],
+                [option]: true
+            });
+        }
+    });
+
+    return {
+        ...state,
+        words: newWords
+    };
 };
 
 const wordsToRender = createSlice({
@@ -61,89 +89,171 @@ const wordsToRender = createSlice({
     initialState,
     reducers: {
         setInitialState(state, action) {
-            state.words = action.payload;
-            [state.wordToShow] = state.words;
+            const words = action.payload;
+
+            return {
+                words,
+                wordToShow: words[0],
+                rendered: true
+            };
         },
         addWord(state, action) {
             const { words } = state;
+            const newWords = [...words];
             const index = getIndex(state, action.payload);
 
-            if (index === -1) words.push(action.payload);
+            if (index === -1) newWords.push(action.payload);
             else {
                 alert('Word already exist.');
             }
+
+            return {
+                ...state,
+                newWords
+            };
         },
         setActive(state, action) {
             const { words, wordToShow } = state;
             const { word, active } = action.payload;
             const index = getIndex(state, word);
-            words[index].active = active;
+            const updatedWords = updateObjectInArray(words, { index, option: { active } });
 
             // Update wordToShow if Match
-            if (words[index].wordName === state.wordToShow.wordName) wordToShow.active = active;
+            if (words[index].wordName === state.wordToShow.wordName) {
+                const newWordToShow = {
+                    ...wordToShow,
+                    active
+                };
+
+                return {
+                    words: updatedWords,
+                    wordToShow: newWordToShow
+                };
+            }
+
+            return {
+                ...state,
+                words: updatedWords
+            };
         },
         setDeleted(state, action) {
             const { words } = state;
             const { word, deleted } = action.payload;
             const index = getIndex(state, word);
-            words[index].deleted = deleted;
+            const updatedWords = updateObjectInArray(words, { index, option: { deleted } });
+
+            return {
+                ...state,
+                words: updatedWords
+            };
         },
         setKnowWord(state, action) {
             const { words } = state;
             const { word, knowWord } = action.payload;
             const index = getIndex(state, word);
-            words[index].knowWord = knowWord;
+            const updatedWords = updateObjectInArray(words, { index, option: { knowWord } });
+
+            return {
+                ...state,
+                words: updatedWords
+            };
         },
         setWordToShow(state, action) {
-            state.wordToShow = action.payload;
+            const targetWordName = action.payload;
+            for (let i = 0; i < state.words.length; i++) {
+                if (state.words[i].wordName === targetWordName) {
+                    return {
+                        ...state,
+                        wordToShow: state.words[i]
+                    };
+                }
+            }
+
+            return {
+                ...state
+            };
         },
         setFavWordToShow(state, action) {
             const bookmark = action.activeBookmark;
             if (Type.FAV === bookmark) {
                 const favWordsIndex = getActiveWordsIndex(state);
 
-                if (favWordsIndex[0] !== undefined)
-                    state.wordToShow = state.words[favWordsIndex[0]];
+                if (favWordsIndex[0] !== undefined) {
+                    return {
+                        ...state,
+                        wordToShow: state.words[favWordsIndex[0]]
+                    };
+                }
             }
+
+            return {
+                ...state
+            };
         },
         setNextWordToShow(state, action) {
             const bookmark = action.activeBookmark;
             const index = getIndex(state, state.wordToShow);
+            let localState = {};
 
             if (bookmark !== Type.FAV) {
                 if (index + 1 < state.words.length) {
-                    state.wordToShow = state.words[index + 1];
+                    localState = {
+                        ...state,
+                        wordToShow: state.words[index + 1]
+                    };
                 }
             } else {
                 const favWordsIndex = getActiveWordsIndex(state);
                 const i = findNext(index, favWordsIndex);
                 if (i !== -1) {
-                    state.wordToShow = state.words[i];
+                    localState = {
+                        ...state,
+                        wordToShow: state.words[i]
+                    };
                 }
             }
+
+            return {
+                ...localState
+            };
         },
         setPrevWordToShow(state, action) {
             const bookmark = action.activeBookmark;
             const index = getIndex(state, state.wordToShow);
+            let localState = {};
 
             // To move only by examples
             if (bookmark !== Type.FAV) {
                 if (index - 1 >= 0) {
-                    state.wordToShow = state.words[index - 1];
+                    localState = {
+                        ...state,
+                        wordToShow: state.words[index - 1]
+                    };
                 }
             } else {
                 const favWordsIndex = getActiveWordsIndex(state);
                 const i = findPrev(index, favWordsIndex);
                 if (i !== -1) {
-                    state.wordToShow = state.words[i];
+                    localState = {
+                        ...state,
+                        wordToShow: state.words[i]
+                    };
                 }
             }
+
+            return {
+                ...localState
+            };
         },
         setUserPreferences(state, action) {
             const { active, deleted, knowWord } = action.payload;
-            updatePreferences(state, active, 'active');
-            updatePreferences(state, knowWord, 'knowWord');
-            updatePreferences(state, deleted, 'deleted');
+            const tempState = updatePreferences(state, active, 'active');
+            const tempState1 = updatePreferences(tempState, knowWord, 'knowWord');
+            const tempState2 = updatePreferences(tempState1, deleted, 'deleted');
+
+            return {
+                ...tempState2
+            };
         }
     }
 });

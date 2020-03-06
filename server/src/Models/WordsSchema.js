@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const WordsSchema = new Schema({
-
     wordName: {
         type: String,
         required: true
@@ -12,7 +11,10 @@ const WordsSchema = new Schema({
         type: String,
         required: true
     },
-    examples: [String]
+    examples: [String],
+    active: Boolean,
+    deleted: Boolean,
+    knowWord: Boolean
 });
 
 module.exports = Words = mongoose.model('words', WordsSchema);

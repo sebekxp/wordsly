@@ -12,6 +12,7 @@ import { authProp, wordProp } from '../../../../utils/propTypes';
 
 const BlankCircleIcon = ({ word, updateUserWords, auth, setKnowWord }) => {
     const blank = !word.knowWord;
+
     const updateProgBar = () => {
         setKnowWord({ word, knowWord: !word.knowWord });
         updateUserWords(auth.user.id, word, 'knowWord');
@@ -21,13 +22,7 @@ const BlankCircleIcon = ({ word, updateUserWords, auth, setKnowWord }) => {
         return blank ? Circle : CheckCircle;
     };
 
-    return (
-        <GreenCircleIcon
-            as={selectIcon()}
-            onClick={e => updateProgBar(e)}
-            title="Mark as known word"
-        />
-    );
+    return <GreenCircleIcon as={selectIcon()} onClick={updateProgBar} title="Mark as known word" />;
 };
 
 BlankCircleIcon.propTypes = {

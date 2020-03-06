@@ -15,10 +15,11 @@ export const WordName = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 11.8px 11.8px 11.8px 11.8px;
+    background-color: ${Colors.NAVIGATION_WORD_BACKGROUND};
 
-    ${({ name, wordName }) => css`
-        background-color: ${selectColor(name, wordName)};
-    `}
+    // ${({ name, wordName }) => css`
+    //     background-color: ${selectColor(name, wordName)};
+    // `}
 `;
 
 export const IconWrapper = styled.div`

@@ -39,7 +39,7 @@ const DeleteElementIcon = ({ word, bookmark, auth, setActive, setDeleted, update
             as={selectIcon()}
             onMouseEnter={onMouseEnterHandler}
             onMouseLeave={onMouseLeaveHandler}
-            onClick={e => deleteNavigationWord(e)}
+            onClick={deleteNavigationWord}
             title="Delete word"
         />
     );

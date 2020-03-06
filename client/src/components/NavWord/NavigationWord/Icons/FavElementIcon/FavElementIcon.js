@@ -36,7 +36,7 @@ const FavElementIcon = ({ word, auth, setActive, updateUserWords }) => {
             as={selectIcon()}
             onMouseEnter={onMouseEnterHandler}
             onMouseLeave={onMouseLeaveHandler}
-            onClick={e => handleClick(e)}
+            onClick={handleClick}
             title="Add to favorites word"
             size={30}
         />
