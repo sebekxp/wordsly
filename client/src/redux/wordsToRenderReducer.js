@@ -140,9 +140,14 @@ const wordsToRender = createSlice({
             const index = getIndex(state, word);
             const updatedWords = updateObjectInArray(words, { index, option: { deleted } });
 
+            const wordsWithoutDeleted = updatedWords.filter(w => {
+                return !w.deleted && w;
+            });
+
             return {
                 ...state,
-                words: updatedWords
+                words: wordsWithoutDeleted,
+                wordToShow: index === 0 ? wordsWithoutDeleted[0] : state.wordToShow
             };
         },
         setKnowWord(state, action) {
@@ -191,7 +196,9 @@ const wordsToRender = createSlice({
         setNextWordToShow(state, action) {
             const bookmark = action.activeBookmark;
             const index = getIndex(state, state.wordToShow);
-            let localState = {};
+            let localState = {
+                ...state
+            };
 
             if (bookmark !== Type.FAV) {
                 if (index + 1 < state.words.length) {
@@ -218,8 +225,9 @@ const wordsToRender = createSlice({
         setPrevWordToShow(state, action) {
             const bookmark = action.activeBookmark;
             const index = getIndex(state, state.wordToShow);
-            let localState = {};
-
+            let localState = {
+                ...state
+            };
             // To move only by examples
             if (bookmark !== Type.FAV) {
                 if (index - 1 >= 0) {
@@ -231,6 +239,7 @@ const wordsToRender = createSlice({
             } else {
                 const favWordsIndex = getActiveWordsIndex(state);
                 const i = findPrev(index, favWordsIndex);
+
                 if (i !== -1) {
                     localState = {
                         ...state,
@@ -249,8 +258,14 @@ const wordsToRender = createSlice({
             const tempState1 = updatePreferences(tempState, knowWord, 'knowWord');
             const tempState2 = updatePreferences(tempState1, deleted, 'deleted');
 
+            const wordsWithoutDeleted = tempState2.words.filter(w => {
+                return !w.deleted && w;
+            });
+
             return {
-                ...tempState2
+                ...tempState2,
+                words: wordsWithoutDeleted,
+                wordToShow: wordsWithoutDeleted[0]
             };
         }
     }

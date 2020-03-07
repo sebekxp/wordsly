@@ -17,19 +17,21 @@ const NavigationWord = ({ word, setWordToShowAction }) => {
     };
 
     return (
-        <NavigationWordComponent
-            onClick={clickMouseAndDisplayWordContent}
-            className="navigation-word"
-        >
-            <BlankCircleIcon word={word} />
-            <WordName name={wordName}>
-                <span>{wordName}</span>
-                <IconWrapper>
-                    <FavElementIcon word={word} />
-                    <DeleteElemIcon word={word} />
-                </IconWrapper>
-            </WordName>
-        </NavigationWordComponent>
+        !word.deleted && (
+            <NavigationWordComponent
+                onClick={clickMouseAndDisplayWordContent}
+                className="navigation-word"
+            >
+                <BlankCircleIcon word={word} />
+                <WordName name={wordName}>
+                    <span>{wordName}</span>
+                    <IconWrapper>
+                        <FavElementIcon word={word} />
+                        <DeleteElemIcon word={word} />
+                    </IconWrapper>
+                </WordName>
+            </NavigationWordComponent>
+        )
     );
 };
 

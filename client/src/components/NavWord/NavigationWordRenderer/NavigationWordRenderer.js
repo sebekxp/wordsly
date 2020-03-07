@@ -9,11 +9,7 @@ import { authProp, wordProp } from '../../utils/propTypes';
 
 const NavigationWordRenderer = ({ words, bookmark }) => {
     const renderExamples = () => {
-        return words
-            .filter(word => {
-                return !word.deleted && word;
-            })
-            .map(word => <NavigationWord key={word._id} word={word} />);
+        return words.map(word => <NavigationWord key={word._id} word={word} />);
     };
 
     const renderFavorites = () => {
