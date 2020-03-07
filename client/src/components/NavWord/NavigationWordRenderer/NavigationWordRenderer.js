@@ -1,33 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import NavigationWord from '../NavigationWord';
 import { bookmarkType as Type } from '../../utils/BookmarkType';
-import { fetchUserWords } from '../../../actions/words/fetchUserWords';
 import AddWordsInput from '../AddWordsInput';
 import { Container, Wrapper } from './NavigationWordRenderer.style';
 import { authProp, wordProp } from '../../utils/propTypes';
-import { setUserPreferences } from '../../../redux/wordsToRenderReducer';
 
-const NavigationWordRenderer = ({ words, bookmark, auth, fetchUserWordsAction, rendered }) => {
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await fetchUserWordsAction({ id: auth.user.id });
-                if (!res.ok) throw Error(res.statusText);
-
-                const obj = await res.json();
-                dispatch(setUserPreferences(obj));
-            } catch (err) {
-                console.error('Error during downloading user preferences', err);
-            }
-        };
-
-        fetchData();
-    }, [rendered, dispatch, fetchUserWordsAction, auth]);
-
+const NavigationWordRenderer = ({ words, bookmark }) => {
     const renderExamples = () => {
         return words
             .filter(word => {
@@ -80,16 +60,13 @@ NavigationWordRenderer.propsTypes = {
 };
 
 const mapStateToProps = state => {
-    const { wordsToRender, bookmark, auth } = state;
+    const { wordsToRender, bookmark } = state;
 
     return {
         words: wordsToRender.words,
         bookmark,
-        auth,
         rendered: wordsToRender.rendered
     };
 };
 
-export default connect(mapStateToProps, { fetchUserWordsAction: fetchUserWords })(
-    NavigationWordRenderer
-);
+export default connect(mapStateToProps, null)(NavigationWordRenderer);

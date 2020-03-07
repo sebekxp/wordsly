@@ -10,7 +10,6 @@ import Register from './components/Auth/Register';
 import Login from './components/Auth/Login';
 import Landing from './components/Auth/Landing';
 import { setCurrentUser } from './redux/authReducer';
-import { fetchWords } from './actions/words/fetchWordsCollection';
 import WordContentWrapper from './components/WordContent/WordContentWrapper';
 
 (function keepUserLoggedIn() {
@@ -22,8 +21,6 @@ import WordContentWrapper from './components/WordContent/WordContentWrapper';
 })();
 
 const App = () => {
-    store.dispatch(fetchWords());
-
     return (
         <Provider store={store}>
             <Router>

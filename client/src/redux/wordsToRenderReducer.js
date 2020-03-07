@@ -3,8 +3,7 @@ import { bookmarkType as Type } from '../components/utils/BookmarkType';
 
 const initialState = {
     words: [],
-    wordToShow: undefined,
-    rendered: false
+    wordToShow: undefined
 };
 
 const getActiveWordsIndex = ({ words }) => {
@@ -93,8 +92,7 @@ const wordsToRender = createSlice({
 
             return {
                 words,
-                wordToShow: words[0],
-                rendered: true
+                wordToShow: words[0]
             };
         },
         addWord(state, action) {

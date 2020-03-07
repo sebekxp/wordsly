@@ -9,8 +9,8 @@ import { wordProp } from '../../utils/propTypes';
 
 // TODO Delete word form list hide it only fix it / WordName focus color
 const NavigationWord = ({ word, setWordToShowAction }) => {
-    const { wordName } = word;
     console.log('render');
+    const { wordName } = word;
 
     const clickMouseAndDisplayWordContent = evt => {
         setWordToShowAction(evt.target.innerText);
