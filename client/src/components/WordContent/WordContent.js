@@ -70,6 +70,7 @@ const WordContent = ({
     const prev = () => {
         setPrevWordToShowAction();
     };
+
     // TODO UseEffect to custom hook
     useEffect(() => {
         const handleKeyDown = event => {
@@ -87,9 +88,9 @@ const WordContent = ({
         };
     });
 
-    const selectBookmark = () => {
+    const selectBookmark = value => {
         let retVal;
-        switch (bookmark) {
+        switch (value) {
             case Type.EXAMPLES:
                 retVal = <Examples />;
                 break;
@@ -114,7 +115,7 @@ const WordContent = ({
                     <IconWrapper onClick={prev}>
                         <Prev />
                     </IconWrapper>
-                    {selectBookmark()}
+                    {selectBookmark(bookmark)}
                     <IconWrapper onClick={next}>
                         <Next />
                     </IconWrapper>

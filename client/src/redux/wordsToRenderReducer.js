@@ -59,7 +59,11 @@ const updateObjectInArray = (words, action) => {
         };
     });
 };
-
+const updateDeletedWord = words => {
+    return words.filter(w => {
+        return !w.deleted && w;
+    });
+};
 const updatePreferences = (state, optionsArray, option) => {
     const { words } = state;
     const newWords = [...words];
@@ -140,9 +144,7 @@ const wordsToRender = createSlice({
             const index = getIndex(state, word);
             const updatedWords = updateObjectInArray(words, { index, option: { deleted } });
 
-            const wordsWithoutDeleted = updatedWords.filter(w => {
-                return !w.deleted && w;
-            });
+            const wordsWithoutDeleted = updateDeletedWord(updatedWords);
 
             return {
                 ...state,
@@ -258,9 +260,7 @@ const wordsToRender = createSlice({
             const tempState1 = updatePreferences(tempState, knowWord, 'knowWord');
             const tempState2 = updatePreferences(tempState1, deleted, 'deleted');
 
-            const wordsWithoutDeleted = tempState2.words.filter(w => {
-                return !w.deleted && w;
-            });
+            const wordsWithoutDeleted = updateDeletedWord(tempState2.words);
 
             return {
                 ...tempState2,

@@ -1,50 +1,57 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import memoize from 'memoize-one';
+import { FixedSizeList as List } from 'react-window';
 import { connect } from 'react-redux';
-import NavigationWord from '../NavigationWord';
 import { bookmarkType as Type } from '../../utils/BookmarkType';
 import AddWordsInput from '../AddWordsInput';
-import { Container, Wrapper } from './NavigationWordRenderer.style';
+import { Container, listHeight } from './NavigationWordRenderer.style';
 import { authProp, wordProp } from '../../utils/propTypes';
+import NavigationWordItemRow from './NavigationWordItemRow';
 
 const NavigationWordRenderer = ({ words, bookmark }) => {
-    const renderExamples = () => {
-        return words.map(word => <NavigationWord key={word._id} word={word} />);
+    const getExamples = () => {
+        return words;
     };
 
-    const renderFavorites = () => {
-        return words
-            .filter(word => {
-                return word.active && word;
-            })
-            .map(word => <NavigationWord key={word._id} word={word} />);
+    const getFavorites = () => {
+        return words.filter(word => word.active && word);
     };
 
     const selectBookmark = value => {
         let retVal;
-        switch (value) {
-            case Type.EXAMPLES:
-                retVal = renderExamples();
-                break;
-            case Type.FLASH_CARDS:
-                retVal = renderExamples();
-                break;
-            case Type.FAV:
-                retVal = renderFavorites();
-                break;
-            default:
-                retVal = renderExamples();
-                break;
+        if (value === Type.EXAMPLES || value === Type.FLASH_CARDS) {
+            retVal = getExamples();
+        } else {
+            retVal = getFavorites();
         }
 
         return retVal;
     };
 
+    const createItemData = memoize(items => ({
+        items
+    }));
+
+    const itemData = createItemData(selectBookmark(bookmark));
+
     return (
-        <Wrapper>
-            <Container>{selectBookmark(bookmark)}</Container>
+        <div>
+            <Container>
+                <List
+                    useIsScrolling
+                    // overscanCount={20}
+                    height={listHeight}
+                    itemCount={bookmark === Type.EXAMPLES ? words.length : getFavorites().length}
+                    itemData={itemData}
+                    itemSize={56} // 56px 53 height + 3 margin-bottom
+                    width={270}
+                >
+                    {NavigationWordItemRow}
+                </List>
+            </Container>
             <AddWordsInput />
-        </Wrapper>
+        </div>
     );
 };
 

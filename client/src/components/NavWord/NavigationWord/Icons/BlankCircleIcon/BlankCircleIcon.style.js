@@ -1,20 +1,15 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import Colors from '../../../../utils/Colors';
-
-const setColor = hover => {
-    return hover ? Colors.NAVIGATION_WORD_BACKGROUND_HOVER : Colors.NAVIGATION_WORD_BACKGROUND;
-};
 
 export const GreenCircleIcon = styled.div`
     color: ${Colors.GREEN_CIRCLE};
+`;
+
+export const Wrapper = styled.div`
     padding: 12px 12px;
-    width: 53.59px;
-    height: 53.9px;
+    width: 53px;
+    height: 53px;
     margin-right: 3px;
     border-radius: 5px;
-
-    ${({ hover }) =>
-        css`
-            background-color: ${setColor(hover)};
-        `}
+    background-color: ${Colors.NAVIGATION_WORD_BACKGROUND};
 `;

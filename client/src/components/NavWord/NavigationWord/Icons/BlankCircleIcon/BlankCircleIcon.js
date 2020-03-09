@@ -7,7 +7,7 @@ import { CheckCircle } from 'styled-icons/boxicons-solid/CheckCircle';
 import { connect } from 'react-redux';
 import { setKnowWord } from '../../../../../redux/wordsToRenderReducer';
 import { updateUserWords } from '../../../../../actions/users/updateUserWords';
-import { GreenCircleIcon } from './BlankCircleIcon.style';
+import { GreenCircleIcon, Wrapper } from './BlankCircleIcon.style';
 import { authProp, wordProp } from '../../../../utils/propTypes';
 
 const BlankCircleIcon = ({ word, updateUserWords, auth, setKnowWord }) => {
@@ -22,7 +22,16 @@ const BlankCircleIcon = ({ word, updateUserWords, auth, setKnowWord }) => {
         return blank ? Circle : CheckCircle;
     };
 
-    return <GreenCircleIcon as={selectIcon()} onClick={updateProgBar} title="Mark as known word" />;
+    return (
+        <Wrapper>
+            <GreenCircleIcon
+                size={25}
+                as={selectIcon()}
+                onClick={updateProgBar}
+                title="Mark as known word"
+            />
+        </Wrapper>
+    );
 };
 
 BlankCircleIcon.propTypes = {

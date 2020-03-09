@@ -7,7 +7,6 @@ import { wordProp } from '../utils/propTypes';
 
 const FlashCards = ({ word }) => {
     const [flippy, changeFlip] = useState(false);
-
     const handleClick = () => {
         changeFlip(!flippy);
     };

@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import Colors from '../../utils/Colors';
+import { Wrapper } from './Icons/BlankCircleIcon/BlankCircleIcon.style';
 
 const selectColor = (name, wordName) => {
     return name === wordName
@@ -7,23 +8,20 @@ const selectColor = (name, wordName) => {
         : Colors.NAVIGATION_WORD_BACKGROUND;
 };
 
+export const IconWrapper = styled.div`
+    display: none;
+`;
+
 export const WordName = styled.div`
     font-size: 20px;
+    height: 53px;
     width: 100%;
     cursor: pointer;
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
-    padding: 11.8px 11.8px 11.8px 11.8px;
+    padding: 12px 12px;
     background-color: ${Colors.NAVIGATION_WORD_BACKGROUND};
-
-    ${({ name, wordName }) => css`
-        background-color: ${selectColor(name, wordName)};
-    `}
-`;
-
-export const IconWrapper = styled.div`
-    display: none;
 `;
 
 export const NavigationWordComponent = styled.div`
@@ -31,10 +29,6 @@ export const NavigationWordComponent = styled.div`
     justify-content: center;
     align-items: center;
     margin-bottom: 3px;
-
-    &:nth-of-type(1) {
-        margin-top: 5px;
-    }
 
     p {
         margin: 0;
@@ -49,4 +43,14 @@ export const NavigationWordComponent = styled.div`
             background-color: ${Colors.NAVIGATION_WORD_BACKGROUND_HOVER};
         }
     }
+
+    ${({ name, wordName }) => css`
+        ${WordName} {
+            background-color: ${selectColor(name, wordName)};
+        }
+
+        ${Wrapper} {
+            background-color: ${selectColor(name, wordName)};
+        }
+    `}
 `;
