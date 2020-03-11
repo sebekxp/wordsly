@@ -10,7 +10,7 @@ import { updateUserWords } from '../../../../../actions/users/updateUserWords';
 import { FavElemIcon } from './FavElementIcon.style';
 import { authProp, wordProp } from '../../../../utils/propTypes';
 
-const FavElementIcon = ({ word, auth, setActive, updateUserWords }) => {
+const FavElementIcon = ({ word, auth, setActive, updateUserWords, position }) => {
     const [hover, setHover] = useState(false);
 
     const onMouseEnterHandler = () => {
@@ -33,6 +33,7 @@ const FavElementIcon = ({ word, auth, setActive, updateUserWords }) => {
 
     return (
         <FavElemIcon
+            position={position}
             as={selectIcon()}
             onMouseEnter={onMouseEnterHandler}
             onMouseLeave={onMouseLeaveHandler}

@@ -11,6 +11,7 @@ import Login from './components/Auth/Login';
 import Landing from './components/Auth/Landing';
 import { setCurrentUser } from './redux/authReducer';
 import WordContentWrapper from './components/WordContent/WordContentWrapper';
+import GlobalStyleWrapper from './components/utils/theme/ThemeWrapper';
 
 (function keepUserLoggedIn() {
     if (localStorage.jwtToken) {
@@ -28,10 +29,12 @@ const App = () => {
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/home">
-                    <div className="App">
-                        <Search />
-                        <WordContentWrapper />
-                    </div>
+                    <GlobalStyleWrapper>
+                        <div className="App">
+                            <Search />
+                            <WordContentWrapper />
+                        </div>
+                    </GlobalStyleWrapper>
                 </Route>
             </Router>
         </Provider>

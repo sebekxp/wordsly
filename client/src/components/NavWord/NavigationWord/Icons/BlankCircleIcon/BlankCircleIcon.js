@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 // noinspection ES6CheckImport
 import { withRouter } from 'react-router-dom';
@@ -10,13 +10,18 @@ import { updateUserWords } from '../../../../../actions/users/updateUserWords';
 import { GreenCircleIcon, Wrapper } from './BlankCircleIcon.style';
 import { authProp, wordProp } from '../../../../utils/propTypes';
 
-const BlankCircleIcon = ({ word, updateUserWords, auth, setKnowWord }) => {
-    const blank = !word.knowWord;
+const BlankCircleIcon = memo(({ word, updateUserWords, auth, setKnowWord }) => {
+    const [blank, setBlank] = useState(null);
 
     const updateProgBar = () => {
-        setKnowWord({ word, knowWord: !word.knowWord });
+        setKnowWord({ word, knowWord: blank });
+        setBlank(!blank);
         updateUserWords(auth.user.id, word, 'knowWord');
     };
+
+    useEffect(() => {
+        setBlank(!word.knowWord);
+    }, [word.knowWord]);
 
     const selectIcon = () => {
         return blank ? Circle : CheckCircle;
@@ -32,7 +37,7 @@ const BlankCircleIcon = ({ word, updateUserWords, auth, setKnowWord }) => {
             />
         </Wrapper>
     );
-};
+});
 
 BlankCircleIcon.propTypes = {
     word: PropTypes.oneOfType([wordProp, PropTypes.shape({})]).isRequired,

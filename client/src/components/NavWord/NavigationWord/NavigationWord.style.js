@@ -22,6 +22,7 @@ export const WordName = styled.div`
     justify-content: space-between;
     padding: 12px 12px;
     background-color: ${Colors.NAVIGATION_WORD_BACKGROUND};
+    color: ${Colors.DEFAULT_TEXT};
 `;
 
 export const NavigationWordComponent = styled.div`

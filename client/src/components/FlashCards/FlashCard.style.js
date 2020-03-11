@@ -6,7 +6,8 @@ export const flippyStyle = {
     borderRadius: '10px',
     padding: '0',
     margin: '0 auto',
-    marginTop: '50px'
+    marginTop: '50px',
+    color: Colors.DEFAULT_TEXT
 };
 
 export const frontSideStyle = {
@@ -16,7 +17,6 @@ export const frontSideStyle = {
     fontWeight: '500',
     fontSize: '45px',
     borderRadius: '10px',
-    boxShadow: Colors.BOX_SHADOW,
     backgroundColor: Colors.EXAMPLES_BACKGROUND
 };
 
@@ -27,6 +27,5 @@ export const backSideStyle = {
     fontWeight: '500',
     fontSize: '45px',
     borderRadius: '10px',
-    boxShadow: Colors.BOX_SHADOW,
     backgroundColor: Colors.EXAMPLES_BACKGROUND
 };

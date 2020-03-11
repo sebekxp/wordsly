@@ -11,6 +11,7 @@ export const Toggle = styled(DropdownToggle)`
     height: 100%;
     color: white
     background-color: ${Colors.BOOKMARKS_ELEMENT_BACKGROUND};
+    outline: none;
 
     &:focus {
         background-color: ${Colors.BOOKMARKS_ELEMENT_SELECTED_BACKGROUND};

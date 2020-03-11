@@ -6,6 +6,7 @@ export const Next = styled(NavigateNext)`
     width: 50px;
     height: 50px;
     user-select: none;
+    color: ${Colors.DEFAULT_VIOLET};
 `;
 
 export const Prev = styled(NavigateNext)`
@@ -13,6 +14,7 @@ export const Prev = styled(NavigateNext)`
     height: 50px;
     transform: rotate(180deg);
     user-select: none;
+    color: ${Colors.DEFAULT_VIOLET};
 `;
 
 export const IconWrapper = styled.div`
@@ -32,7 +34,7 @@ export const WordContentContainerComponent = styled.div`
     align-content: flex-start;
     background-color: ${Colors.EXAMPLES_CONTAINER_BACKGROUND}
     width: 100%;
-    height: 493.9px;
+    height: 498px;
     border-bottom-right-radius: 10px; 
     padding-bottom: 10px;
     overflow: auto;

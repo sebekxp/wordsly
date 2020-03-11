@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import memoize from 'memoize-one';
-import { FixedSizeList as List } from 'react-window';
 import { connect } from 'react-redux';
 import { bookmarkType as Type } from '../../utils/BookmarkType';
 import AddWordsInput from '../AddWordsInput';
-import { Container, listHeight } from './NavigationWordRenderer.style';
+import { Container, listHeight, ScrolledList } from './NavigationWordRenderer.style';
 import { authProp, wordProp } from '../../utils/propTypes';
 import NavigationWordItemRow from './NavigationWordItemRow';
 
@@ -38,9 +37,8 @@ const NavigationWordRenderer = ({ words, bookmark }) => {
     return (
         <div>
             <Container>
-                <List
+                <ScrolledList
                     useIsScrolling
-                    // overscanCount={20}
                     height={listHeight}
                     itemCount={bookmark === Type.EXAMPLES ? words.length : getFavorites().length}
                     itemData={itemData}
@@ -48,7 +46,7 @@ const NavigationWordRenderer = ({ words, bookmark }) => {
                     width={270}
                 >
                     {NavigationWordItemRow}
-                </List>
+                </ScrolledList>
             </Container>
             <AddWordsInput />
         </div>

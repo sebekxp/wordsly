@@ -12,9 +12,9 @@ export const updateUserWords = (userID, word, option) => dispatch => {
         body: JSON.stringify({ id: userID, word, option })
     };
 
-    fetch('/api/users/words', fetchOptions)
+    return fetch('/api/users/words', fetchOptions)
         .then(checkForError)
         .catch(err => {
-            console.error('Error during updating user preferences', err);
+            console.error(err.message);
         });
 };

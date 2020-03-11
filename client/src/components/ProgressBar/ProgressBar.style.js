@@ -10,7 +10,7 @@ const getCurrentProgress = (knownWords, length) => {
 
 export const ProgressBarComponent = styled.div`
     height: 15px;
-    background-color: ${Colors.PROGRESS_BAR_BLUE};
+    background-color: ${Colors.DEFAULT_VIOLET};
     border-radius: 8px;
     transition: width 1.5s;
 
@@ -24,11 +24,12 @@ export const Wrapper = styled.div`
     width: 275px;
     display: flex;
     padding: 5px;
-    background-color: ${Colors.DEFAULT_GREY};
+    background-color: #121212;
     color: ${Colors.PROGRESS_BAR_TEXT};
     flex-direction: column;
     text-align: center;
     border-radius: 10px 0 0 0;
+    border-bottom: 2px solid ${Colors.DEFAULT_VIOLET};
 `;
 
 export const ProgressBarWrapper = styled.div`

@@ -1,3 +1,4 @@
+import { FixedSizeList as List } from 'react-window';
 import styled from 'styled-components';
 import Colors from '../../utils/Colors';
 
@@ -12,4 +13,20 @@ export const Container = styled.div`
     box-sizing: border-box;
     background-color: ${Colors.NAVIGATION_WORD_CONTAINER_BACKGROUND};
     overflow: auto;
+`;
+export const ScrolledList = styled(List)`
+    &::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 2.5px grey;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        height: 40px;
+        background: ${Colors.DEFAULT_VIOLET};
+        border-radius: 10px;
+    }
 `;

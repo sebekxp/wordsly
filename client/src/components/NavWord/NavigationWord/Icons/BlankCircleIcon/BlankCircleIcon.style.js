@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Colors from '../../../../utils/Colors';
 
 export const GreenCircleIcon = styled.div`
-    color: ${Colors.GREEN_CIRCLE};
+    color: ${Colors.DEFAULT_VIOLET};
 `;
 
 export const Wrapper = styled.div`

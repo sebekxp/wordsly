@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { FormatQuote } from 'styled-icons/material/FormatQuote';
+import Colors from '../../utils/Colors';
 
 export const ExampleContentComponent = styled.div`
     height: auto;
@@ -16,6 +17,7 @@ export const Quote = styled(FormatQuote)`
     width: 5%;
     height: 24px;
     margin: 10px 5px;
+    color: ${Colors.DEFAULT_VIOLET};
 `;
 
 export const KeyWordHeader = styled.div`

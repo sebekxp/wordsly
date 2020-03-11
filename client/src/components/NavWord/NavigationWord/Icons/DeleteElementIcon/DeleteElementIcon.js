@@ -24,9 +24,7 @@ const DeleteElementIcon = ({ word, bookmark, auth, setActive, setDeleted, update
 
     const deleteNavigationWord = () => {
         updateUserWords(auth.user.id, word, 'deleted');
-
         if (bookmark === Type.FAV) setActive({ word, active: false });
-
         if (bookmark === Type.EXAMPLES) setDeleted({ word, deleted: true });
     };
 
