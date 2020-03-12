@@ -28,6 +28,18 @@ export const AddInput = styled.input`
     width: 100%;
     outline: none;
     border: 1px solid ${Colors.BOOKMARKS_ELEMENT_BACKGROUND};
+
+    font-size: 18px;
+    background-color: ${Colors.SEARCH_GREY};
+    color: ${Colors.DEFAULT_TEXT};
+
+    &::placeholder {
+        color: ${Colors.DEFAULT_TEXT};
+    }
+    
+     &:focus {
+        box-shadow::  0px 0px 0px 1px ${Colors.DEFAULT_VIOLET}inset;
+    }
 `;
 
 export const Add = styled.div`

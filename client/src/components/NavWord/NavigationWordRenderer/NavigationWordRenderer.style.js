@@ -12,7 +12,7 @@ export const Container = styled.div`
     border: 1px solid black;
     box-sizing: border-box;
     background-color: ${Colors.NAVIGATION_WORD_CONTAINER_BACKGROUND};
-    overflow: auto;
+    overflow: hidden;
 `;
 export const ScrolledList = styled(List)`
     &::-webkit-scrollbar {
