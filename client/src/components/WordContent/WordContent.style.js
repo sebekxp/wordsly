@@ -26,6 +26,7 @@ export const IconWrapper = styled.div`
 export const Wrapper = styled.div`
     display: flex;
     width: 100%;
+    height: 92%;
 `;
 
 export const WordContentContainerComponent = styled.div`
@@ -34,8 +35,7 @@ export const WordContentContainerComponent = styled.div`
     align-content: flex-start;
     background-color: ${Colors.EXAMPLES_CONTAINER_BACKGROUND}
     width: 100%;
-    height: 498px;
     border-bottom-right-radius: 10px; 
-    padding-bottom: 10px;
+    // padding-bottom: 10px;
     overflow: auto;
 `;

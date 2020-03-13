@@ -2,8 +2,6 @@ import { FixedSizeList as List } from 'react-window';
 import styled from 'styled-components';
 import Colors from '../../utils/Colors';
 
-export const listHeight = 437;
-
 export const Container = styled.div`
     padding-top: 3px;
     padding-left: 3px;

@@ -15,9 +15,9 @@ export const InputWrapper = styled.div`
     justify-content: flex-end;
     align-items: center;
     border-bottom-left-radius: 10px;
-    height: 57px;
-    width: 275px;
-    margin: auto;
+    height: 53px;
+    width: 346px;
+    margin-top: 3px;
 `;
 
 export const AddInput = styled.input`
@@ -38,13 +38,13 @@ export const AddInput = styled.input`
     }
     
      &:focus {
-        box-shadow::  0px 0px 0px 1px ${Colors.DEFAULT_VIOLET}inset;
+        box-shadow::  0px 0px 0px 1px ${Colors.DEFAULT_VIOLET} inset;
     }
 `;
 
 export const Add = styled.div`
     position: absolute;
-    color: ${Colors.GREEN_CIRCLE};
+    color: ${Colors.DEFAULT_VIOLET};
     right: 10px;
     width: 35px;
     height: 35px;

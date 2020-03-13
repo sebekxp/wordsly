@@ -12,8 +12,10 @@ export const Toggle = styled(DropdownToggle)`
     color: white
     background-color: ${Colors.BOOKMARKS_ELEMENT_BACKGROUND};
     outline: none;
+    border: 0;
+    box-shadow: 0 0 0 0;
 
     &:focus {
-        background-color: ${Colors.BOOKMARKS_ELEMENT_SELECTED_BACKGROUND};
+        box-shadow: 0 0 0 1px ${Colors.DEFAULT_VIOLET};
     }
 `;

@@ -4,7 +4,7 @@ import memoize from 'memoize-one';
 import { connect } from 'react-redux';
 import { bookmarkType as Type } from '../../utils/BookmarkType';
 import AddWordsInput from '../AddWordsInput';
-import { Container, listHeight, ScrolledList } from './NavigationWordRenderer.style';
+import { Container, ScrolledList } from './NavigationWordRenderer.style';
 import { authProp, wordProp } from '../../utils/propTypes';
 import NavigationWordItemRow from './NavigationWordItemRow';
 
@@ -39,11 +39,15 @@ const NavigationWordRenderer = ({ words, bookmark }) => {
             <Container>
                 <ScrolledList
                     useIsScrolling
-                    height={listHeight}
-                    itemCount={bookmark === Type.EXAMPLES ? words.length : getFavorites().length}
+                    height={695}
+                    itemCount={
+                        bookmark === Type.EXAMPLES || bookmark === Type.FLASH_CARDS
+                            ? words.length
+                            : getFavorites().length
+                    }
                     itemData={itemData}
                     itemSize={56} // 56px 53 height + 3 margin-bottom
-                    width={270}
+                    width={340}
                 >
                     {NavigationWordItemRow}
                 </ScrolledList>

@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { AddCircleOutline } from 'styled-icons/material/AddCircleOutline';
 import { AddCircle } from 'styled-icons/material/AddCircle';
 // noinspection ES6CheckImport
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addWord } from '../../../redux/wordsToRenderReducer';
-import Colors from '../../utils/Colors';
-import { AddingWordsInputComponent, AddInput, InputWrapper } from './AddWordsInput.style';
+import { Add, AddingWordsInputComponent, AddInput, InputWrapper } from './AddWordsInput.style';
 import AddWordModal from '../../Modals/AddWordModal/AddWordModal';
 
 const AddWordsInput = ({ addWordAction }) => {
@@ -26,14 +24,6 @@ const AddWordsInput = ({ addWordAction }) => {
     const selectIcon = () => {
         return !hover ? AddCircleOutline : AddCircle;
     };
-
-    const Add = styled(selectIcon())`
-        position: absolute;
-        color: ${Colors.GREEN_CIRCLE};
-        right: 10px;
-        width: 35px;
-        height: 35px;
-    `;
 
     const createNavWord = (wordName, wordTranslate) => {
         return {

@@ -31,7 +31,6 @@ const App = () => {
                 <Route exact path="/home">
                     <GlobalStyleWrapper>
                         <div className="App">
-                            <Search />
                             <WordContentWrapper />
                         </div>
                     </GlobalStyleWrapper>

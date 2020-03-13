@@ -21,7 +21,7 @@ export const ProgressBarComponent = styled.div`
 `;
 
 export const Wrapper = styled.div`
-    width: 275px;
+    width: 20%;
     display: flex;
     padding: 5px;
     background-color: #121212;

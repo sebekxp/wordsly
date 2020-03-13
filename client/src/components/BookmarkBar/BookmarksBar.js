@@ -6,6 +6,7 @@ import { bookmarkType as Type } from '../utils/BookmarkType';
 import Logout from '../Buttons/Logout';
 import { setBookmark } from '../../redux/bookmarkReducer';
 import { Wrap, Wrapper } from './BookmarksBar.style';
+import Search from '../Search';
 
 const BookmarksBar = ({ bookmark, setBookmark }) => {
     const nextBookmark = new Map([
@@ -47,6 +48,7 @@ const BookmarksBar = ({ bookmark, setBookmark }) => {
                 <BookmarksElement bbTitle={example} selected={getActiveBookmark(example)} />
                 <BookmarksElement bbTitle={flashCards} selected={getActiveBookmark(flashCards)} />
                 <BookmarksElement bbTitle={fav} selected={getActiveBookmark(fav)} />
+                <Search />
             </Wrap>
             <Logout />
         </Wrapper>

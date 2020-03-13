@@ -4,7 +4,7 @@ import Colors from '../utils/Colors';
 
 export const FormGroupWrapper = styled(FormGroup)`
     width: 360px;
-    margin: 100px auto;
+    margin-left: 50px;
     color: red;
 
     &:focus {
@@ -15,6 +15,7 @@ export const FormGroupWrapper = styled(FormGroup)`
 
 export const InputWrapper = styled(Input)`
     font-size: 18px;
+    // height: 54px;
     background-color: ${Colors.SEARCH_GREY};
     color: ${Colors.DEFAULT_TEXT};
     outline: none;
@@ -24,8 +25,7 @@ export const InputWrapper = styled(Input)`
     &:focus {
         background-color: ${Colors.SEARCH_GREY};
         color: ${Colors.DEFAULT_TEXT};
-        // outline: 2px solid ${Colors.DEFAULT_VIOLET};
-        box-shadow: 0 0 0 0;
+        box-shadow: 0 0 0 2px ${Colors.DEFAULT_VIOLET};
     }
 
     &::placeholder {
