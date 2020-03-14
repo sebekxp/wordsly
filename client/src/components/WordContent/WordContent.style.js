@@ -26,7 +26,6 @@ export const IconWrapper = styled.div`
 export const Wrapper = styled.div`
     display: flex;
     width: 100%;
-    height: 92%;
 `;
 
 export const WordContentContainerComponent = styled.div`

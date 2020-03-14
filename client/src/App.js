@@ -5,7 +5,6 @@ import jwtDecode from 'jwt-decode';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/reducers';
-import Search from './components/Search';
 import Register from './components/Auth/Register';
 import Login from './components/Auth/Login';
 import Landing from './components/Auth/Landing';

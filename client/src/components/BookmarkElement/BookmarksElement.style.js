@@ -3,8 +3,6 @@ import Colors from '../utils/Colors';
 
 export const Toggle = styled.button`
     width: 255px;
-    // width: 50%;
-    // flex-grow: 2;
     text-align: center;
     height: 68px;
     color: ${Colors.DEFAULT_TEXT};
@@ -22,11 +20,13 @@ export const Toggle = styled.button`
         outline: 0;
     }
 
+    &:hover {
+        background-color: ${Colors.BOOKMARKS_ELEMENT_SELECTED_BACKGROUND};
+    }
+
     ${({ selected }) =>
         selected &&
         css`
             background-color: ${Colors.BOOKMARKS_ELEMENT_SELECTED_BACKGROUND};
-            // border-left: 1.5px solid ${Colors.DEFAULT_VIOLET};
-            // border-right: 1.5px solid ${Colors.DEFAULT_VIOLET};
         `}
 `;

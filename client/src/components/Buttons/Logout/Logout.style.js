@@ -14,6 +14,12 @@ export const Toggle = styled(DropdownToggle)`
     outline: none;
     border: 0;
     box-shadow: 0 0 0 0;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+
+    &:hover {
+        background-color: ${Colors.BOOKMARKS_ELEMENT_SELECTED_BACKGROUND};
+    }
 
     &:focus {
         box-shadow: 0 0 0 1px ${Colors.DEFAULT_VIOLET};

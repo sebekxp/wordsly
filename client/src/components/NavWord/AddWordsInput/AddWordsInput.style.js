@@ -14,15 +14,15 @@ export const InputWrapper = styled.div`
     position: fixed;
     justify-content: flex-end;
     align-items: center;
-    border-bottom-left-radius: 10px;
+    // border-bottom-left-radius: 10px;
     height: 53px;
-    width: 346px;
+    width: 386px;
     margin-top: 3px;
 `;
 
 export const AddInput = styled.input`
     padding: 0 5px;
-    border-bottom-left-radius: 10px;
+    // border-bottom-left-radius: 10px;
     font-size: 18px;
     height: 100%;
     width: 100%;

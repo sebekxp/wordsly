@@ -39,7 +39,7 @@ const NavigationWordRenderer = ({ words, bookmark }) => {
             <Container>
                 <ScrolledList
                     useIsScrolling
-                    height={695}
+                    height={780}
                     itemCount={
                         bookmark === Type.EXAMPLES || bookmark === Type.FLASH_CARDS
                             ? words.length
@@ -47,7 +47,7 @@ const NavigationWordRenderer = ({ words, bookmark }) => {
                     }
                     itemData={itemData}
                     itemSize={56} // 56px 53 height + 3 margin-bottom
-                    width={340}
+                    width={380}
                 >
                     {NavigationWordItemRow}
                 </ScrolledList>
